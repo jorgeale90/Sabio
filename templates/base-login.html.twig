@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('page/login/fonts/icomoon/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('page/login/css/owl.carousel.min.css') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('page/login/css/bootstrap.min.css') }}">
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ asset('page/login/css/style.css') }}">
+    <!-- Notifications -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('page/dashboard/noty/animate/animate.css') }}"/>
+    <title>Sabio - {% block title %} {% endblock %}</title>
+    {% block head %}
+
+    {% endblock %}
+    {% block stylesheets %}
+
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+{% endblock %}
+<script src="{{ asset('page/login/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('page/login/js/popper.min.js') }}"></script>
+<script src="{{ asset('page/login/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('page/login/js/main.js') }}"></script>
+<!-- jQuery Notification Plugin 2.2.7 -->
+<script type="text/javascript" src="{{ asset('page/dashboard/noty/animate/jquery.noty.packaged.js') }}"></script>
+<script>
+    $(function () {
+        {% for notice_level in ['success','error','info', 'warning'] %}
+        {% set session_var = 'app_' ~ notice_level %}
+        {% if app.session.flashbag.has(session_var) %}
+        {% for flash in app.session.flashbag.get(session_var) %}
+        noty({
+            text: '{{ flash }}',
+            progressBar : true,
+            layout      : 'topRight',
+            dismissQueue: true,
+            timeout     : 5000,
+            closeWith   : ['click'],
+            theme       : 'relax',
+            type        : '{{ notice_level }}',
+            maxVisible  : 10,
+            animation   : {
+                open  : 'animated bounceInRight',
+                close : 'animated bounceOutRight',
+                easing: 'swing',
+                speed : 500
+            }
+        });
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+    });
+</script>
+{% block javascript %}
+
+{% endblock %}
+</body>
+</html>

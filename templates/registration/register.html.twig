@@ -1,0 +1,51 @@
+{% extends 'base-login.html.twig' %}
+{% block title %}Log up!{% endblock %}
+{% block body %}
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 order-md-2">
+                    <img src="{{ asset('page/login/images/undraw_file_sync_ot38.svg') }}" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="mb-4">
+                                <h3>Registrar en <strong>Sabio</strong></h3>
+                                <p class="mb-4">Por favor introducir los datos que le pide el formulario para crear su cuenta en el sistema.</p>
+                            </div>
+                            <form method="post">
+                                {{ form_start(registrationForm) }}
+
+                                <div class="form-group">
+                                    <label for="inputEmail">Email</label>
+                                    {{ form_widget(registrationForm.email, { 'attr': { 'class': 'form-control', 'required': 'required' } }) }}
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputPassword">Password</label>
+                                    {{ form_widget(registrationForm.plainPassword, { 'attr': { 'class': 'form-control', 'required': 'required', 'type': 'password' } }) }}
+
+                                </div>
+
+                                <div class="d-flex mb-5 align-items-center">
+                                    <label class="control control--checkbox mb-0"><span class="custom-control-label">&nbsp;Yo acepto <a href="#">Términos y condiciones</a></span>
+                                        {{ form_widget(registrationForm.agreeTerms, { 'attr': { 'type': 'checkbox' } }) }}
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                    <span class="ml-auto"><a href="{{ path('app_login') }}" class="forgot-pass">Ya tengo una cuenta.</a></span>
+                                </div>
+
+                                <button class="btn text-white btn-block btn-primary" type="submit">
+                                    Sign up
+                                </button>
+                                {{ form_end(registrationForm) }}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

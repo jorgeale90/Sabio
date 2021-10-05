@@ -1,0 +1,55 @@
+{% extends 'base-login.html.twig' %}
+{% block title %}Log in!{% endblock %}
+{% block body %}
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-2">
+                <img src="{{ asset('page/login/images/undraw_file_sync_ot38.svg') }}" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-6 contents">
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="mb-4">
+                            <h3>Autenticar en <strong>Sabio</strong></h3>
+                            <p class="mb-4">Por favor introducir su Email y Password para acceder al sistema.</p>
+                        </div>
+                            <form method="post">
+                                {% if app.user %}
+                                    <div class="mb-3">
+                                        Has iniciado sesión como {{ app.user.username }}, <a href="{{ path('app_logout') }}">Cerrar sesión</a>
+                                    </div>
+                                {% endif %}
+
+                                <div class="form-group first">
+                                    <label for="inputEmail">Email</label>
+                                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+
+                                </div>
+                                <div class="form-group last mb-4">
+                                    <label for="inputPassword">Password</label>
+                                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                                </div>
+
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                <div class="d-flex mb-5 align-items-center">
+                                    <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                                        <input type="checkbox"/>
+                                        <div class="control__indicator"></div>
+                                    </label>
+                                    <span class="ml-auto"><a href="{{ path('app_register') }}" class="forgot-pass">Deseo crear una cuenta !</a></span>
+                                </div>
+
+                                <button class="btn text-white btn-block btn-primary" type="submit">
+                                    Sign in
+                                </button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

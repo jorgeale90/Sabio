@@ -1,0 +1,18 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block navbar-klean" data-navbar-on-scroll="data-navbar-on-scroll">
+        <div class="container"><a class="navbar-brand" href="index.html"> <img class="me-3 d-inline-block" src="{{ asset('page/dashboard/public/assets/img/gallery/logo.png') }}" alt="" /></a>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto pt-2 pt-lg-0 font-base">
+                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link fw-medium active" aria-current="page" href="#home">Home</a></li>
+                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#service">Servicios</a></li>
+                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#feature">Features</a></li>
+                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#testimonial">Testimonios</a></li>
+                    <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#contact">Contacto</a></li>
+                </ul>
+                <form class="ps-lg-5">
+                    <a class="btn btn-light shadow-klean order-0" href="{{ path('app_login') }}"><span class="text-gradient fw-bold">Sign in</span></a>
+                    <a class="btn btn-light shadow-klean order-0" href="{{ path('app_register') }}"><span class="text-gradient fw-bold">Sign Up</span></a>
+                </form>
+            </div>
+        </div>
+    </nav>

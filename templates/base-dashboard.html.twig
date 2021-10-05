@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- index.html  21 Nov 2019 03:44:50 GMT -->
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Sabio - {% block title %} {% endblock %}</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{{ asset('page/dashboard/assets/css/app.min.css') }}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{{ asset('page/dashboard/assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('page/dashboard/assets/css/components.css') }}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{{ asset('page/dashboard/assets/css/custom.css') }}">
+  <link rel='shortcut icon' type='image/x-icon' href='{{ asset('page/dashboard/assets/img/favicon.ico') }}' />
+  {% block head %}
+
+  {% endblock %}
+  {% block stylesheets %}
+
+  {% endblock %}
+</head>
+<body>
+  <div class="loader"></div>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      {% block nav %}
+        {{ include ('blocks/dashboard/nav.html.twig') }}
+      {% endblock %}
+      {% block main_menu %}
+        {{ include ('blocks/dashboard/main-menu.html.twig') }}
+      {% endblock %}
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          {% block body %}
+            
+          {% endblock %}
+        </section>
+        {% block sidebar_setting %}
+            {{ include ('blocks/dashboard/sidebar-setting.html.twig') }}
+        {% endblock %}
+        {% block footer %}
+            {{ include ('blocks/dashboard/footer.html.twig') }}
+        {% endblock %}
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="{{ asset('page/dashboard/assets/js/app.min.js') }}"></script>
+  <!-- JS Libraies -->
+  <script src="{{ asset('page/dashboard/assets/bundles/apexcharts/apexcharts.min.js') }}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{{ asset('page/dashboard/assets/js/page/index.js') }}"></script>
+  <!-- Template JS File -->
+  <script src="{{ asset('page/dashboard/assets/js/scripts.js') }}"></script>
+  <!-- Custom JS File -->
+  <script src="{{ asset('page/dashboard/assets/js/custom.js') }}"></script>
+  <script>
+    $(function () {
+        {% for notice_level in ['success','error','info', 'warning'] %}
+        {% set session_var = 'app_' ~ notice_level %}
+        {% if app.session.flashbag.has(session_var) %}
+        {% for flash in app.session.flashbag.get(session_var) %}
+        noty({
+            text: '{{ flash }}',
+            progressBar : true,
+            layout      : 'topRight',
+            dismissQueue: true,
+            timeout     : 5000,
+            closeWith   : ['click'],
+            theme       : 'relax',
+            type        : '{{ notice_level }}',
+            maxVisible  : 10,
+            animation   : {
+                open  : 'animated bounceInRight',
+                close : 'animated bounceOutRight',
+                easing: 'swing',
+                speed : 500
+            }
+        });
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+    });
+</script>
+{% block javascript %}
+
+{% endblock %}
+</body>
+<!-- index.html  21 Nov 2019 03:47:04 GMT -->
+</html>
