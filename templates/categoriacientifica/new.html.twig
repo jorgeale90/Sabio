@@ -1,0 +1,22 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Añadir Categoría Docente{% endblock %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Categorías</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('categoriadocente_index') }}"><i class="far fa-file"></i> Listado Categoría Docente</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Categoría Docente</li>
+        </ol>
+    </nav>
+
+    <div class="col-12">
+       <div class="card">
+          <div class="card-header">
+             <h4><strong>Añadir</strong> Categoría Docente</h4>
+           </div>
+           {{ include('categoriadocente/_form.html.twig') }}
+       </div>
+    </div>
+{% endblock %}
