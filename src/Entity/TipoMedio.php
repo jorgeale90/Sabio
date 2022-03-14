@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TipoMedioRepository")
- * @UniqueEntity(fields={"nombre"},message="Ya existe este Tipo de Medio.")
+ * @UniqueEntity(fields={"nombre"},message="Ya existe este Tipo de Medio en nuestra Base de Datos.")
  */
 
 class TipoMedio

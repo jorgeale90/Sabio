@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SexoRepository")
- * @UniqueEntity(fields={"nombre"},message="Ya existe este Sexo.")
+ * @UniqueEntity(fields={"nombre"},message="Ya existe este Sexo en nuestra Base de Datos.")
  */
 
 class Sexo

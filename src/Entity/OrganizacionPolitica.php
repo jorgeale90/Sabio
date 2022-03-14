@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrganizacionPoliticaRepository")
- * @UniqueEntity(fields={"nombre"},message="Ya existe esta Organización Política.")
+ * @UniqueEntity(fields={"nombre"},message="Ya existe esta Organización Política en nuestra Base de Datos.")
  */
 
 class OrganizacionPolitica

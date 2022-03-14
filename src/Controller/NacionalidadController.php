@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Provincia;
-use App\Form\ProvinciaType;
-use App\Repository\ProvinciaRepository;
+use App\Entity\Nacionalidad;
+use App\Form\NacionalidadType;
+use App\Repository\NacionalidadRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,94 +12,94 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/provincia")
+ * @Route("/admin/nacionalidad")
  */
-class ProvinciaController extends AbstractController
+class NacionalidadController extends AbstractController
 {
     /**
-     * @Route("/", name="provincia_index", methods={"GET"})
+     * @Route("/", name="nacionalidad_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function index(ProvinciaRepository $provinciaRepository): Response
+    public function index(NacionalidadRepository $nacionalidadRepository): Response
     {
-        return $this->render('provincia/index.html.twig', [
-            'provincia' => $provinciaRepository->findAll(),
+        return $this->render('nacionalidad/index.html.twig', [
+            'nacionalidad' => $nacionalidadRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="provincia_new", methods={"GET","POST"})
+     * @Route("/new", name="nacionalidad_new", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function new(Request $request): Response
     {
-        $prov = new Provincia();
-        $form = $this->createForm(ProvinciaType::class, $prov);
+        $entity = new Nacionalidad();
+        $form = $this->createForm(NacionalidadType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($prov);
+            $entityManager->persist($entity);
             $entityManager->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_success','Se ha creado una Provincia satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('Provincia: %s', $prov->getNombre()));
+            $flashBag->add('app_success','Se ha creado una Nacionalidad satisfactoriamente!!!');
+            $flashBag->add('app_success', sprintf('Nacionalidad: %s', $entity->getNombre()));
 
-            return $this->redirectToRoute('provincia_index');
+            return $this->redirectToRoute('nacionalidad_index');
         }
 
-        return $this->render('provincia/new.html.twig', [
-            'prov' => $prov,
+        return $this->render('nacionalidad/new.html.twig', [
+            'entities' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="provincia_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="nacionalidad_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function edit(Request $request, Provincia $provincia): Response
+    public function edit(Request $request, Nacionalidad $entity): Response
     {
-        $form = $this->createForm(ProvinciaType::class, $provincia);
+        $form = $this->createForm(NacionalidadType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','Se ha actualizado una Provincia satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('Provincia: %s', $provincia->getNombre()));
+            $flashBag->add('app_warning','Se ha actualizado una Nacionalidad satisfactoriamente!!!');
+            $flashBag->add('app_warning', sprintf('Nacionalidad: %s', $entity->getNombre()));
 
-            return $this->redirectToRoute('provincia_index');
+            return $this->redirectToRoute('nacionalidad_index');
         }
 
-        return $this->render('provincia/edit.html.twig', [
-            'provi' => $provincia,
+        return $this->render('nacionalidad/edit.html.twig', [
+            'entities' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="provincia_remove")
+     * @Route("/{id}", name="nacionalidad_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository(Provincia::class)->find($id);
+        $entity = $em->getRepository(Nacionalidad::class)->find($id);
 
         if (!$entity) {
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','No se encuentra esta Provincia!!!');
+            $flashBag->add('app_warning','No se encuentra esta Nacionalidad!!!');
         } else {
             $em->remove($entity);
             $em->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_error','Se ha eliminado una Provincia satisfactoriamente!!!');
+            $flashBag->add('app_error','Se ha eliminado una Nacionalidad satisfactoriamente!!!');
         }
 
-        return $this->redirectToRoute('provincia_index');
+        return $this->redirectToRoute('nacionalidad_index');
     }
 }

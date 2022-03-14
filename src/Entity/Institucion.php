@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InstitucionRepository")
- * @UniqueEntity(fields={"nombre"},message="Ya existe esta Institución.")
+ * @UniqueEntity(fields={"nombre"},message="Ya existe esta Institución en nuestra Base de Datos.")
  */
 
 class Institucion
@@ -239,4 +239,5 @@ class Institucion
 
         return $this;
     }
+
 }

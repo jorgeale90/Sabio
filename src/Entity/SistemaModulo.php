@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SistemaModuloRepository")
- * @UniqueEntity(fields={"nombre"},message="Ya existe este Sistema de Mòdulo.")
+ * @UniqueEntity(fields={"nombre"},message="Ya existe este Sistema de Mòdulo en nuestra Base de Datos.")
  */
 
 class SistemaModulo

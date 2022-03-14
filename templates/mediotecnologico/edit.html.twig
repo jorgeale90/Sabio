@@ -1,0 +1,31 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Editar Medio Tecnológico{% endblock %}
+{% block head %}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
+{% endblock %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Medio Tecnológico</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('mediotecnologico_index') }}"><i class="far fa-file"></i> Listado Medios Tecnológicos</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Medio Tecnológico</li>
+        </ol>
+    </nav>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><strong>Editar</strong> Medio Tecnológico</h3></h4>
+            </div>
+            {{ include('mediotecnologico/_form.html.twig', {'button_label': 'Editar Medio Tecnológico'}) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <!-- Select2 -->
+    <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
+{% endblock %}

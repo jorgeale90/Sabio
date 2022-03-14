@@ -33,24 +33,24 @@ class PaisController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $pai = new Pais();
-        $form = $this->createForm(PaisType::class, $pai);
+        $entity = new Pais();
+        $form = $this->createForm(PaisType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($pai);
+            $entityManager->persist($entity);
             $entityManager->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
             $flashBag->add('app_success','Se ha creado un País satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('País: %s', $pai->getNombre()));
+            $flashBag->add('app_success', sprintf('País: %s', $entity->getNombre()));
 
             return $this->redirectToRoute('pais_index');
         }
 
         return $this->render('pais/new.html.twig', [
-            'pai' => $pai,
+            'pai' => $entity,
             'form' => $form->createView(),
         ]);
     }
@@ -59,9 +59,9 @@ class PaisController extends AbstractController
      * @Route("/{id}/edit", name="pais_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function edit(Request $request, Pais $pai): Response
+    public function edit(Request $request, Pais $entity): Response
     {
-        $form = $this->createForm(PaisType::class, $pai);
+        $form = $this->createForm(PaisType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,13 +69,13 @@ class PaisController extends AbstractController
 
             $flashBag = $this->get('session')->getFlashBag();
             $flashBag->add('app_warning','Se ha actualizado un País satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('País: %s', $pai->getNombre()));
+            $flashBag->add('app_warning', sprintf('País: %s', $entity->getNombre()));
 
             return $this->redirectToRoute('pais_index');
         }
 
         return $this->render('pais/edit.html.twig', [
-            'pai' => $pai,
+            'pai' => $entity,
             'form' => $form->createView(),
         ]);
     }

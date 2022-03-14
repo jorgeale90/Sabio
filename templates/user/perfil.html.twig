@@ -1,0 +1,351 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Perfil Usuario{% endblock %}
+{% block head %}
+    <!-- Select2 -->
+    <link href="{{ asset('dashboard/select2/dist/css/select2.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('dashboard/validation-engine/css/validationEngine.jquery.css') }}" type="text/css"/>
+{% endblock %}
+{% block content %}
+    <div class="page-header">
+        <div class="row align-items-end">
+            <div class="col-lg-8">
+                <div class="page-header-title">
+                    <i class="ik ik-users bg-blue"></i>
+                    <div class="d-inline">
+                        <h5>Perfil</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <nav class="breadcrumb-container" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{{ path('dashboard') }}"><i class="ik ik-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{{ path('user_index') }}">Usuario</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Perfil Usuario</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        {% for usua in perfilusers %}
+                            {% if usua.username == app.user.username %}
+                                {% if usua.imageName != null %}
+                                <img src="{{ vich_uploader_asset(app.user, 'imageFile', 'App\\Entity\\User') }}" class="rounded-circle" width="150" height="150"/>
+                                {% elseif usua.imageName == null %}
+                                <img src="{{ asset('dashboard/img/user.png') }}" class="rounded-circle" width="150" height="150" />
+                                {% endif %}
+                                <h4 class="card-title mt-10">{{ usua.nombrecompleto }}</h4>
+                                <p class="card-subtitle">{{ usua.roles ? usua.roles|json_encode : '' }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <div class="row text-center justify-content-md-center">
+                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="ik ik-box"></i> <font class="font-medium">
+                            {% set count = 0 %}
+                                {% for usersp in postss %}
+                                    {% if usersp.user.id == app.user.id %}
+                                         {% set count = count + 1 %}
+                                    {% endif%}
+                                {% endfor %}
+                            {{ count }}
+                            </font></a></div>
+                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="ik ik-image"></i> <font class="font-medium">
+                            {% set count = 0 %}
+                            {% for usersg in galeryss %}
+                                {% if usersg.user.id == app.user.id %}
+                                    {% set count = count + 1 %}
+                                {% endif%}
+                            {% endfor %}
+                            {{ count }}
+                             </font></a></div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-0">
+                <div class="card-body">
+                    {% for usua in perfilusers %}
+                    {% if usua.username == app.user.username %}
+                        <small class="text-muted d-block">Correo Electrónico </small>
+                        <h6>{{ usua.email }}</h6>
+{#                        <small class="text-muted d-block pt-10">Teléfono</small>#}
+{#                        <h6>(123) 456 7890</h6>#}
+{#                        <small class="text-muted d-block pt-10">Dirección</small>#}
+{#                        <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>#}
+{#                        <div class="map-box">#}
+{#                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.886539092!2d77.49085452149588!3d12.953959988118836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C+Karnataka!5e0!3m2!1sen!2sin!4v1542005497600" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>#}
+{#                        </div>#}
+{#                        <small class="text-muted d-block pt-30">Perfil Social</small>#}
+{#                        <br/>#}
+{#                        <button class="btn btn-icon btn-facebook"><i class="fab fa-facebook-f"></i></button>#}
+{#                        <button class="btn btn-icon btn-twitter"><i class="fab fa-twitter"></i></button>#}
+{#                        <button class="btn btn-icon btn-instagram"><i class="fab fa-instagram"></i></button>#}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-7">
+            <div class="card">
+                <ul class="nav nav-pills custom-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-timeline-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-timeline" aria-selected="true">Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#last-month" role="tab" aria-controls="pills-profile" aria-selected="false">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-setting-tab" data-toggle="pill" href="#previous-month" role="tab" aria-controls="pills-setting" aria-selected="false">Datos Personal</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="current-month" role="tabpanel" aria-labelledby="pills-timeline-tab">
+                        <div class="card-body">
+                            {% set break = false %}
+                            <div class="profiletimeline mt-0">
+                                {% for usersp in postss %}
+                                    {% if usersp.user.id == app.user.id %}
+                                        {% if not break %}
+                                            <div class="sl-item">
+                                                <div class="sl-left">
+                                                    {% if usersp.user.imageName != null %}
+                                                        <img src="{{ vich_uploader_asset(usersp.user, 'imageFile', 'App\\Entity\\User') }}" alt="user" class="rounded-circle" />
+                                                    {% elseif usersp.user.imageName == null %}
+                                                        <img src="{{ asset('dashboard/img/user.png') }}" alt="user" class="rounded-circle" />
+                                                    {% endif %}
+                                                </div>
+                                                <div class="sl-right">
+                                                    <div>
+                                                        <a href="javascript:void(0)" class="link">
+                                                            {{ usersp.user.nombre }}
+                                                        </a> <span class="sl-date">{{ usersp.dateCreated | time_ago }}</span>
+                                                        <p class="mt-10">
+                                                            <a class="text-dark" href="{{ path('post_single', {'slug': usersp.slug}) }}">{{ usersp.title }}</a>
+                                                        </p>
+                                                        <p class="mt-10">
+                                                            {{ usersp.content | raw | excerpt (40, '...') }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="like-comm mt-20">
+                                                        <a href="javascript:void(0)" class="link mr-10">
+                                                            {% set count = 0 %}
+                                                            {% for usersc in usersp.comments %}
+                                                                {% if usersc.user.id == app.user.id %}
+                                                                    {% set count = count + 1 %}
+                                                                {% endif%}
+                                                            {% endfor %}
+                                                            {{ count }} comentarios</a>
+                                                        <a href="javascript:void(0)" class="link mr-10"><i class="fa fa-heart text-danger"></i>
+                                                            {% set count = 0 %}
+                                                            {% for pm in usersp.postMarks %}
+                                                                {% if pm.user.id == app.user.id and pm.mark > 0 %}
+                                                                    {% set count = count + 1 %}
+                                                                {% endif%}
+                                                            {% endfor %}
+                                                            {{ count }} Me gusta</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            {% if loop.index == 10 %}
+                                                {% set break = true %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="last-month" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        <div class="card-body">
+                            {% set break = false %}
+                            <div class="profiletimeline mt-0">
+                                {% for usersg in galeryss %}
+                                    {% if usersg.user.id == app.user.id %}
+                                        {% if not break %}
+                                            <div class="sl-item">
+                                                <div class="sl-left">
+                                                    {% if usersg.user.imageName != null %}
+                                                        <img src="{{ vich_uploader_asset(usersg.user, 'imageFile', 'App\\Entity\\User') }}" alt="user" class="rounded-circle" />
+                                                    {% elseif usersg.user.imageName == null %}
+                                                        <img src="{{ asset('dashboard/img/user.png') }}" alt="user" class="rounded-circle" />
+                                                    {% endif %}
+                                                </div>
+                                                <div class="sl-right">
+                                                    <div><a href="javascript:void(0)" class="link">{{ usersg.user.nombre }}</a>
+                                                        <p>{{ usersg.descripcion | raw | excerpt (40, '...') }}</p>
+                                                        <div class="row">
+                                                            {% for gf in usersg.file %}
+                                                                <div class="col-lg-3 col-md-6 mb-20"><img src="{{ asset('/MkaRestaurante/public/uploads/restaurante/restaurante/galeria/' ~ gf.link) }}" class="img-fluid rounded" /></div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            {% if loop.index == 10 %}
+                                                {% set break = true %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="previous-month" role="tabpanel" aria-labelledby="pills-setting-tab">
+                        <div class="card-body">
+                            {{ form_start(form) }}
+                                <div class="form-group">
+                                    <label for="example-name">Nombre</label>
+                                    {% if(form_errors(form.nombre)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.nombre) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control validate[required]', 'required': 'required' } }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="example-name">Apellidos</label>
+                                    {% if(form_errors(form.apellidos)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.apellidos) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.apellidos, { 'attr': { 'class': 'form-control validate[required]', 'required': 'required' } }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="example-name">Username</label>
+                                    {% if(form_errors(form.username)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.username) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.username, { 'attr': { 'class': 'form-control validate[required]', 'required': 'required' } }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="example-email">Email</label>
+                                    {% if(form_errors(form.email)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.email) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.email, { 'attr': { 'class': 'form-control validate[required]', 'required': 'required' } }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="example-password">Contraseña</label>
+                                    {% if(form_errors(form.password.first)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.password.first) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.password.first, { 'attr': { 'class': 'form-control validate[required]', 'required': 'required' } }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="example-password">Confirmar Contraseña</label>
+                                    {% if(form_errors(form.password.second)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.password.second) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.password.second, { 'attr': { 'class': 'form-control validate[required]', 'required': 'required' } }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Rol</label>
+                                    {% if(form_errors(form.roles)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.roles) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.roles, { 'attr': { 'class': 'form-control col-md-7 col-xs-12 js-example-basic-single'} }) }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="example-phone">Imagen</label>
+                                    {% if app.request.attributes.get('_route') == 'perfil_user' and user.imageName != null %}
+                                        {% if(form_errors(form.imageFile)) %}
+                                            <div class="col-sm-7 alert alert-danger">
+                                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                <strong>{{ form_errors(form.imageFile) }}</strong>
+                                            </div>
+                                        {% endif %}
+                                        {{ form_widget(form.imageFile, { 'attr': { 'class': 'form-control'} }) }}
+                                        <img src="{{ vich_uploader_asset(user, 'imageFile', 'App\\Entity\\User') }}" width="260" height="210">
+                                    {% elseif app.request.attributes.get('_route') == 'perfil_user' and user.imageName == null %}
+                                        {% if(form_errors(form.imageFile)) %}
+                                            <div class="col-sm-7 alert alert-danger">
+                                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                                <strong>{{ form_errors(form.imageFile) }}</strong>
+                                            </div>
+                                        {% endif %}
+                                        {{ form_widget(form.imageFile, { 'attr': { 'class': 'form-control'} }) }}
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="example-captcha">Captcha</label>
+                                    {% if(form_errors(form.captcha)) %}
+                                        <div class="col-sm-7 alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            <strong>{{ form_errors(form.captcha) }}</strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_widget(form.captcha, { 'attr': { 'class': 'form-control validate[required]', 'required': 'required' } }) }}
+                                </div>
+                                <button class="btn btn-success" type="submit">Actualizar Perfil</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <!-- Select2 -->
+    <script src="{{ asset('dashboard/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/form-advanced.js') }}"></script>
+    <!-- Validación -->
+    <script src="{{ asset('dashboard/validation-engine/js/languages/jquery.validationEngine-es.js') }}"></script>
+    <script src="{{ asset('dashboard/validation-engine/js/jquery.validationEngine.min.js') }}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+
+        $(document).ready(function () {
+            $('form[name="{{ form.vars.id }}"]').validationEngine('attach', {promptPosition: "bottomLeft"});
+            $('#send-form').on('click', function () {
+                let formValidated = $('form[name="{{ form.vars.id }}"]').validationEngine('validate');
+                if (!formValidated) {
+                    return false;
+                }
+            })
+        })
+    </script>
+{% endblock %}

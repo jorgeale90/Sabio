@@ -11,6 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,31 +21,52 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Debe aceptar nuestros términos.',
                     ]),
                 ],
             ])
-            ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],
-            ])
+
+            ->add('plainPassword', RepeatedType::class, array(
+                    'type'        => PasswordType::class,
+                    'mapped'      => false,
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Por favor introduce la contraseña',
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Tu contraseña debe tener al menos {{ limit }} caracteres',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                    'invalid_message' => 'Debe de coincidir las contraseña',
+                    'first_options' => array('attr' => array('class' => 'form-control')),
+                    'second_options' => array('attr' => array('class' => 'form-control')))
+            )
+
+            ->add('imageFile', VichImageType::class, [
+                        'required' => false,
+                        'allow_delete' => true,
+                        'download_uri' => true,
+                        'image_uri' => true,
+                        'constraints' => [
+                            new File([
+                                'maxSize' => '5M',
+                                'mimeTypes' => [
+                                    'image/jpeg',
+                                    'image/jpg',
+                                    'image/gif',
+                                    'image/png',
+                                ]
+                            ])
+                        ]
+                    ])
         ;
     }
 

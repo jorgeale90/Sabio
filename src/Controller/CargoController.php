@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Pais;
-use App\Form\PaisType;
-use App\Repository\PaisRepository;
+use App\Entity\Cargo;
+use App\Form\CargoType;
+use App\Repository\CargoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,29 +12,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/pais")
+ * @Route("/admin/cargo")
  */
-class PaisController extends AbstractController
+class CargoController extends AbstractController
 {
     /**
-     * @Route("/", name="pais_index", methods={"GET"})
+     * @Route("/", name="cargo_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function index(PaisRepository $paisRepository): Response
+    public function index(CargoRepository $cargoRepository): Response
     {
-        return $this->render('pais/index.html.twig', [
-            'pais' => $paisRepository->findAll(),
+        return $this->render('cargo/index.html.twig', [
+            'cargo' => $cargoRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="pais_new", methods={"GET","POST"})
+     * @Route("/new", name="cargo_new", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function new(Request $request): Response
     {
-        $entity = new Pais();
-        $form = $this->createForm(PaisType::class, $entity);
+        $entity = new Cargo();
+        $form = $this->createForm(CargoType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,63 +43,63 @@ class PaisController extends AbstractController
             $entityManager->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_success','Se ha creado un País satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('País: %s', $entity->getNombre()));
+            $flashBag->add('app_success','Se ha creado un Cargo satisfactoriamente!!!');
+            $flashBag->add('app_success', sprintf('Cargo: %s', $entity->getNombre()));
 
-            return $this->redirectToRoute('pais_index');
+            return $this->redirectToRoute('cargo_index');
         }
 
-        return $this->render('pais/new.html.twig', [
-            'pai' => $entity,
+        return $this->render('cargo/new.html.twig', [
+            'carg' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="pais_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="cargo_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function edit(Request $request, Pais $entity): Response
+    public function edit(Request $request, Cargo $entity): Response
     {
-        $form = $this->createForm(PaisType::class, $entity);
+        $form = $this->createForm(CargoType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','Se ha actualizado un País satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('País: %s', $entity->getNombre()));
+            $flashBag->add('app_warning','Se ha actualizado un Cargo satisfactoriamente!!!');
+            $flashBag->add('app_warning', sprintf('Cargo: %s', $entity->getNombre()));
 
-            return $this->redirectToRoute('pais_index');
+            return $this->redirectToRoute('cargo_index');
         }
 
-        return $this->render('pais/edit.html.twig', [
-            'pai' => $entity,
+        return $this->render('cargo/edit.html.twig', [
+            'carg' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="pais_remove")
+     * @Route("/{id}", name="cargo_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository(Pais::class)->find($id);
+        $entity = $em->getRepository(Cargo::class)->find($id);
 
         if (!$entity) {
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','No se encuentra este País!!!');
+            $flashBag->add('app_warning','No se encuentra este Cargo!!!');
         } else {
             $em->remove($entity);
             $em->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_error','Se ha eliminado un País satisfactoriamente!!!');
+            $flashBag->add('app_error','Se ha eliminado un Cargo satisfactoriamente!!!');
         }
 
-        return $this->redirectToRoute('pais_index');
+        return $this->redirectToRoute('cargo_index');
     }
 }

@@ -1,7 +1,7 @@
 <div class="main-sidebar sidebar-style-2">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="index.html"> <img alt="image" src="{{ asset('page/dashboard/assets/img/server.png') }}" class="header-logo" /> <span
+      <a href="{{ path('dashboard') }}"> <img alt="image" src="{{ asset('page/dashboard/assets/img/server.png') }}" class="header-logo" /> <span
                 class="logo-name">Sabio</span>
       </a>
     </div>
@@ -9,7 +9,8 @@
       <li class="menu-header">Menú</li>
       <li class="dropdown">
         <a href="{{ path('dashboard') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
-        <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Usuarios</span></a>
+        <a href="{{ path('user_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Usuarios</span></a>
+        <a href="{{ path('personalmedico_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Personal Médico</span></a>
         <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Auditoría</span></a>
         <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Manager File</span></a>
       </li>
@@ -19,7 +20,48 @@
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ path('pais_index') }}">País</a></li>
           <li><a class="nav-link" href="{{ path('provincia_index') }}">Provincia</a></li>
-          <li><a class="nav-link" href="#">Municipio</a></li>
+          <li><a class="nav-link" href="{{ path('municipio_index') }}">Municipio</a></li>
+          <li><a class="nav-link" href="{{ path('nacionalidad_index') }}">Nacionalidad</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Categorías</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ path('categoriadocente_index') }}">Categoría Docente</a></li>
+          <li><a class="nav-link" href="{{ path('categoriacientifica_index') }}">Categoría Científica</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Generales</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ path('cargo_index') }}">Cargo u Ocupación</a></li>
+          <li><a class="nav-link" href="{{ path('especialidad_index') }}">Especialidad</a></li>
+          <li><a class="nav-link" href="{{ path('organizacionpolitica_index') }}">Organización Política</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Sistema Contabilidad</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ path('sistemacontable_index') }}">Sistema Contable</a></li>
+          <li><a class="nav-link" href="{{ path('sistemamodulo_index') }}">Sistema Módulo</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Medios Tecnológicos</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ path('marca_index') }}">Marca</a></li>
+          <li><a class="nav-link" href="{{ path('modelo_index') }}">Modelo</a></li>
+          <li><a class="nav-link" href="{{ path('tipomedio_index') }}">Tipo Medio</a></li>
+          <li><a class="nav-link" href="{{ path('mediotecnologico_index') }}">Medio Tecnológico</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Contratos</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="#">Contrato Correo</a></li>
+          <li><a class="nav-link" href="#">Contrato Anclaje</a></li>
+          <li><a class="nav-link" href="#">Contrato Internet</a></li>
+          <li><a class="nav-link" href="#">Contrato Tecnología</a></li>
         </ul>
       </li>
     </ul>

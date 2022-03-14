@@ -24,7 +24,17 @@ class GlobalExtension extends AbstractExtension implements GlobalsInterface
             'municipioss' => $this->em->getRepository('App:Municipio')->findAll(),
             'nacionalidadess' => $this->em->getRepository('App:Nacionalidad')->findAll(),
             'categoriasdocentess' => $this->em->getRepository('App:CategoriaDocente')->findAll(),
-            'categoriascientificass' => $this->em->getRepository('App:CategoriaCientifica')->findAll()
+            'categoriascientificass' => $this->em->getRepository('App:CategoriaCientifica')->findAll(),
+            'cargoss' => $this->em->getRepository('App:Cargo')->findAll(),
+            'especialidadess' => $this->em->getRepository('App:Especialidad')->findAll(),
+            'organizacionpoliticass' => $this->em->getRepository('App:OrganizacionPolitica')->findAll(),
+            'sistemacontabless' => $this->em->getRepository('App:SistemaContable')->findAll(),
+            'sistemamoduloss' => $this->em->getRepository('App:SistemaModulo')->findAll(),
+            'marcass' => $this->em->getRepository('App:Marca')->findAll(),
+            'medeloss' => $this->em->getRepository('App:Modelo')->findAll(),
+            'tipomedioss' => $this->em->getRepository('App:TipoMedio')->findAll(),
+            'mediotecnologicoss' => $this->em->getRepository('App:MedioTecnologico')->findAll(),
+            'personalmedicoss' => $this->em->getRepository('App:PersonalMedico')->findAll(),
         ];
 
         return $globalVars;

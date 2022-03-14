@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoriaCientificaRepository")
- * @UniqueEntity(fields={"nombre"},message="Ya existe esta Categoría Científica.")
+ * @UniqueEntity(fields={"nombre"},message="Ya existe esta Categoría Científica en nuestra Base de Datos.")
  */
 
 class CategoriaCientifica

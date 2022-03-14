@@ -1,9 +1,9 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">País <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Nacionalidad <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del País' } }) }}
+            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre de la Nacionalidad' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.nombre)) %}
@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir País') }}</button>
-    <a class="btn btn-light" href="{{ path('pais_index') }}">Volver al Listado</a>
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Nacionalidad') }}</button>
+    <a class="btn btn-light" href="{{ path('nacionalidad_index') }}">Volver al Listado</a>
 </div>
 {{ form_end(form) }}

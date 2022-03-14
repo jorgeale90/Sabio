@@ -7,13 +7,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonalMedicoRepository")
- * @UniqueEntity(fields={"ci"},message="Ya existe este Personal Médico.")
- * @Vich\Uploadable
+ * @UniqueEntity(fields={"ci"},message="Ya existe este Personal Médico en nuestra Base de Datos.")
  */
 
 class PersonalMedico
@@ -62,24 +59,6 @@ class PersonalMedico
     private $apellidos;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @var string
-     */
-    private $image;
-
-    /**
-     * @Vich\UploadableField(mapping="personal_images", fileNameProperty="image")
-     * @var File
-     */
-    private $imageFile;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\Column(type = "text", nullable=true)
      * @Assert\Length(min=1, max=1000, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
@@ -118,7 +97,7 @@ class PersonalMedico
      * @ORM\JoinTable(name="organizacionp_personal",
      *           joinColumns={@ORM\JoinColumn(name="personal_id", referencedColumnName="id")},
      *           inverseJoinColumns={@ORM\JoinColumn(name="organizacionp_id",referencedColumnName="id")})
-     * @Assert\Count(min=1, max=10, minMessage="Debe seleccionar al menos {{ limit }} Organización", maxMessage="Debe  seleccionar a lo sumo {{ limit }} Organizaciones")*
+     * @Assert\Count(min=1, max=10, minMessage="Debe seleccionar al menos {{ limit }} Organización", maxMessage="Debe seleccionar a lo sumo {{ limit }} Organizaciones")*
      */
     protected $organizacionpolitica;
 
@@ -291,30 +270,6 @@ class PersonalMedico
     public function setApellidos(string $apellidos): self
     {
         $this->apellidos = $apellidos;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

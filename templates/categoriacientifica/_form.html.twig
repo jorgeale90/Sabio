@@ -1,9 +1,9 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Categoría Docente <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Categoría Científica <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Categoría Docente' } }) }}
+            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Categoría Científica' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.nombre)) %}
@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Categoría Docente') }}</button>
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Categoría Científica') }}</button>
     <a class="btn btn-light" href="{{ path('categoriadocente_index') }}">Volver al Listado</a>
 </div>
 {{ form_end(form) }}

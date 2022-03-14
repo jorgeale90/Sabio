@@ -8,8 +8,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContratoAnclajeRepository")
- * @UniqueEntity(fields={"codigo"},message="Ya existe este Código para este Contrato.")
- * @UniqueEntity(fields={"login"},message="Ya existe este Login para este Contrato.")
+ * @UniqueEntity(fields={"codigo"},message="Ya existe este Código para este Contrato en nuestra Base de Datos.")
+ * @UniqueEntity(fields={"login"},message="Ya existe este Login para este Contrato en nuestra Base de Datos.")
  */
 
 class ContratoAnclaje

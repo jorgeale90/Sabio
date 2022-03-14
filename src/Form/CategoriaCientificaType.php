@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\CategoriaDocente;
+use App\Entity\CategoriaCientifica;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CategoriaDocenteType extends AbstractType
+class CategoriaCientificaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,7 +19,7 @@ class CategoriaDocenteType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CategoriaDocente::class,
+            'data_class' => CategoriaCientifica::class,
         ]);
     }
 }

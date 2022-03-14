@@ -13,8 +13,9 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-             <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Localización</a></li>
-             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado País</li>
+            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado País</li>
         </ol>
     </nav>
 
@@ -29,7 +30,7 @@
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th>Nombre País</th>
+                            <th>País</th>
                             <th>Provincias</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
@@ -42,8 +43,8 @@
                                 <td>{{ pa.provincia | length }}</td>
                                 <td>
                                     <center>
-                                        <button class="btn btn-primary editar" value="{{ path('pais_edit', {'id': pa.id}) }}" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('pais_remove', {'id': pa.id}) }}" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                        <button class="btn btn-primary editar" value="{{ path('pais_edit', {'id': pa.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('pais_remove', {'id': pa.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
                                     </center>
                                 </td>
                             </tr>

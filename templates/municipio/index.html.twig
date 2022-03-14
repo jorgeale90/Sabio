@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Provincia{% endblock %}
+{% block title %}Listado Municipio{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -13,15 +13,16 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-             <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
-             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Provincia</li>
+            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Municipio</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> Provincia</h4>
+                <h4><strong>Listado</strong> Municipio</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -29,23 +30,23 @@
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th>Provincia</th>
                             <th>Municipio</th>
+                            <th>Provincia</th>
                             <th>País</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for prov in provincia %}
+                        {% for munici in municipios %}
                             <tr>
-                                <td>{{ prov.id }}</td>
-                                <td>{{ prov.nombre }}</td>
-                                <td>{{ prov.municipio | length }}</td>
-                                <td>{{ prov.pais }}</td>
+                                <td>{{ munici.id }}</td>
+                                <td>{{ munici.nombre }}</td>
+                                <td>{{ munici.provincia }}</td>
+                                <td>{{ munici.provincia.pais }}</td>
                                 <td>
                                     <center>
-                                        <button class="btn btn-primary editar" value="{{ path('provincia_edit', {'id': prov.id}) }}" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('provincia_remove', {'id': prov.id}) }}" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                        <button class="btn btn-primary editar" value="{{ path('municipio_edit', {'id': munici.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('municipio_remove', {'id': munici.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
                                     </center>
                                 </td>
                             </tr>
@@ -54,10 +55,9 @@
                     </table>
                 </div>
             </div>
-
         </div>
-        <a class="btn btn-primary" type="button" href="{{ path('provincia_new') }}"><i class="fa fa-plus"></i> Añadir Provincia</a>
-        <a class="btn btn-warning" type="button" href="{{ path('provincia_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+        <a class="btn btn-primary" type="button" href="{{ path('municipio_new') }}"><i class="fa fa-plus"></i> Añadir Municipio</a>
+        <a class="btn btn-warning" type="button" href="{{ path('municipio_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
     </div>
 
     <div class="md-modal md-effect-1" id="modal-19">
@@ -124,7 +124,7 @@
         $('.editar').on('click', function () {
             var link = $(this).val();
             $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres editar esta Provincia?');
+            $('#mensaje').text('Estas seguro que quieres editar este Municipio?');
             $('.aceptar').on('click', function () {
                 window.location = link;
             });
@@ -133,7 +133,7 @@
         $('.eliminar').on('click', function () {
             var link = $(this).val();
             $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres eliminar esta Provincia?');
+            $('#mensaje').text('Estas seguro que quieres eliminar este Municipio?');
             $('.aceptar').on('click', function () {
                 window.location = link;
             });

@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Pais{% endblock %}
+{% block title %}Listado Cargo{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -14,15 +14,15 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
             <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado País</li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Cargos</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> País</h4>
+                <h4><strong>Listado</strong> Cargos</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -30,21 +30,21 @@
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th>País</th>
-                            <th>Provincias</th>
+                            <th>Cargo</th>
+                            <th>Personal Médico</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for pa in pais %}
+                        {% for ca in cargo %}
                             <tr>
-                                <td>{{ pa.id }}</td>
-                                <td>{{ pa.nombre }}</td>
-                                <td>{{ pa.provincia | length }}</td>
+                                <td>{{ ca.id }}</td>
+                                <td>{{ ca.nombre }}</td>
+                                <td>{{ ca.personal | length }}</td>
                                 <td>
                                     <center>
-                                        <button class="btn btn-primary editar" value="{{ path('pais_edit', {'id': pa.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('pais_remove', {'id': pa.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                        <button class="btn btn-primary editar" value="{{ path('cargo_edit', {'id': ca.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('cargo_remove', {'id': ca.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
                                     </center>
                                 </td>
                             </tr>
@@ -55,8 +55,8 @@
             </div>
 
         </div>
-        <a class="btn btn-primary" type="button" href="{{ path('pais_new') }}"><i class="fa fa-plus"></i> Añadir País</a>
-        <a class="btn btn-warning" type="button" href="{{ path('pais_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+        <a class="btn btn-primary" type="button" href="{{ path('cargo_new') }}"><i class="fa fa-plus"></i> Añadir Cargo</a>
+        <a class="btn btn-warning" type="button" href="{{ path('cargo_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
     </div>
 
     <div class="md-modal md-effect-1" id="modal-19">
@@ -123,7 +123,7 @@
         $('.editar').on('click', function () {
             var link = $(this).val();
             $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres editar este País?');
+            $('#mensaje').text('Estas seguro que quieres editar este Cargo?');
             $('.aceptar').on('click', function () {
                 window.location = link;
             });
@@ -132,7 +132,7 @@
         $('.eliminar').on('click', function () {
             var link = $(this).val();
             $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres eliminar este País?');
+            $('#mensaje').text('Estas seguro que quieres eliminar este Cargo?');
             $('.aceptar').on('click', function () {
                 window.location = link;
             });

@@ -10,8 +10,12 @@
                     <li class="nav-item px-2" data-anchor="data-anchor"><a class="nav-link" href="#contact">Contacto</a></li>
                 </ul>
                 <form class="ps-lg-5">
+                    {% if app.user == false %}
                     <a class="btn btn-light shadow-klean order-0" href="{{ path('app_login') }}"><span class="text-gradient fw-bold">Sign in</span></a>
                     <a class="btn btn-light shadow-klean order-0" href="{{ path('app_register') }}"><span class="text-gradient fw-bold">Sign Up</span></a>
+                    {% else %}
+                    <a class="btn btn-light shadow-klean order-0" href="{{ path('app_logout') }}"><span class="text-gradient fw-bold">Logout</span></a>
+                    {% endif %}
                 </form>
             </div>
         </div>

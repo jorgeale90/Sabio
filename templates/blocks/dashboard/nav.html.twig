@@ -130,8 +130,16 @@
             </div>
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown"
-              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{{ asset('page/dashboard/assets/img/user.png') }}"
-                class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> 
+              {% for use in usuarios%}
+                {% if use.image != null and app.user.email == use.email %}  
+                <img alt="image" src="{{ vich_uploader_asset(use, 'imageFile', 'App\\Entity\\User') }}" class="user-img-radious-style">
+                {% elseif use.image == null and app.user.email == use.email %}
+                <img alt="image" src="{{ asset('page/dashboard/assets/img/user.png') }}"
+                class="user-img-radious-style">
+                {% endif %}
+               {% endfor %} 
+                 <span class="d-sm-none d-lg-inline-block"></span></a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">Hello Sarah Smith</div>
               <a href="profile.html" class="dropdown-item has-icon"> <i class="far

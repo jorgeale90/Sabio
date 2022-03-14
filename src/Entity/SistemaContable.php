@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SistemaContableRepository")
+ * @UniqueEntity(fields={"codigo"},message="Ya existe este Código del Sistema Contable en nuestra Base de Datos.")
  */
 
 class SistemaContable
@@ -17,6 +19,14 @@ class SistemaContable
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var string
+     * @ORM\Column(name="codigo", type="string",  nullable=false, length=50, unique=true)
+     * @Assert\NotBlank(message="No debe estar vacío")
+     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
+     */
+    private $codigo;
 
     /**
      * @var string $permisos
@@ -82,6 +92,18 @@ class SistemaContable
     public function setPersonal(?PersonalMedico $personal): self
     {
         $this->personal = $personal;
+
+        return $this;
+    }
+
+    public function getCodigo(): ?string
+    {
+        return $this->codigo;
+    }
+
+    public function setCodigo(string $codigo): self
+    {
+        $this->codigo = $codigo;
 
         return $this;
     }

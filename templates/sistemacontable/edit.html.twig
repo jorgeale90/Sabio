@@ -1,0 +1,31 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Editar Sistema Contable{% endblock %}
+{% block head %}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
+{% endblock %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Sistema Contabilidad</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('sistemacontable_index') }}"><i class="far fa-file"></i> Listado Sistemas Contables</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Sistema Contable</li>
+        </ol>
+    </nav>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><strong>Editar</strong> Sistema Contable</h3></h4>
+            </div>
+            {{ include('sistemacontable/_form.html.twig', {'button_label': 'Editar Sistema Contable'}) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <!-- Select2 -->
+    <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
+{% endblock %}

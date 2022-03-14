@@ -11,7 +11,7 @@ use DH\Auditor\Provider\Doctrine\Auditing\Annotation\Auditable;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CargoRepository")
- * @UniqueEntity(fields={"nombre"},message="Ya existe este Cargo u Ocupación.")
+ * @UniqueEntity(fields={"nombre"},message="Ya existe este Cargo u Ocupación en nuestra Base de Datos.")
  * @Auditable()
  */
 
@@ -130,5 +130,4 @@ class Cargo
 
         return $this;
     }
-
 }

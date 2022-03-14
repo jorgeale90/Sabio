@@ -1,0 +1,149 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Listado Medio Tecnológico{% endblock %}
+{% block head %}
+    <!-- modal efect css -->
+    <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
+    <!-- Data Table Css -->
+    <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/datatables/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    <!-- Notifications -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('page/dashboard/noty/animate/animate.css') }}"/>
+{% endblock %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Medio Tecnológico</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Medios Tecnológicos</li>
+        </ol>
+    </nav>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><strong>Listado</strong> Medio Tecnológico</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-1">
+                        <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Tipo Medio</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Cliente</th>
+                            <th class="nosort">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entities in mediotecn %}
+                            <tr>
+                                <td>{{ entities.id }}</td>
+                                <td>{{ entities.tipomedio }}</td>
+                                <td>{{ entities.marca }}</td>
+                                <td>{{ entities.modelo }}</td>
+                                <td>{{ entities.personal2 }}</td>
+                                <td>
+                                    <center>
+                                        <button class="btn btn-primary editar" value="{{ path('mediotecnologico_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('mediotecnologico_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                    </center>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <a class="btn btn-primary" type="button" href="{{ path('mediotecnologico_new') }}"><i class="fa fa-plus"></i> Añadir Medio Tecnológico</a>
+        <a class="btn btn-warning" type="button" href="{{ path('mediotecnologico_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+    </div>
+
+    <div class="md-modal md-effect-1" id="modal-19">
+        <div class="md-content md-content-white">
+            <h3><i class="icofont icofont-warning"></i> Advertencia</h3>
+            <div>
+                <h4 id="mensaje"></h4>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <button class="btn btn-primary aceptar">Aceptar</button>
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-danger cancelar" onclick="$('#modal-19').removeClass('md-show')">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="md-overlay"></div>
+{% endblock %}
+{% block javascript %}
+    <!-- JS Libraies -->
+    <script src="{{ asset('page/dashboard/assets/bundles/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('page/dashboard/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('page/dashboard/assets/bundles/jquery-ui/jquery-ui.min.js') }}"></script>
+    <!-- Page Specific JS File -->
+    <script src="{{ asset('page/dashboard/assets/js/page/datatables.js') }}"></script>
+    <!-- modal efect js -->
+    <script src="{{ asset('page/dashboard/modal/js/modalEffects.js') }}"></script>
+    <script src="{{ asset('page/dashboard/modal/js/classie.js') }}"></script>
+    <!-- jQuery Notification Plugin 2.2.7 -->
+    <script type="text/javascript" src="{{ asset('page/dashboard/noty/animate/jquery.noty.packaged.js') }}"></script>
+    <script>
+        $(function () {
+            {% for notice_level in ['success','error','info', 'warning'] %}
+            {% set session_var = 'app_' ~ notice_level %}
+            {% if app.session.flashbag.has(session_var) %}
+            {% for flash in app.session.flashbag.get(session_var) %}
+            noty({
+                text: '{{ flash }}',
+                progressBar : true,
+                layout      : 'topRight',
+                dismissQueue: true,
+                timeout     : 5000,
+                closeWith   : ['click'],
+                theme       : 'relax',
+                type        : '{{ notice_level }}',
+                maxVisible  : 10,
+                animation   : {
+                    open  : 'animated bounceInRight',
+                    close : 'animated bounceOutRight',
+                    easing: 'swing',
+                    speed : 500
+                }
+            });
+            {% endfor %}
+            {% endif %}
+            {% endfor %}
+        });
+
+        $('.editar').on('click', function () {
+            var link = $(this).val();
+            $('#modal-19').addClass('md-show');
+            $('#mensaje').text('Estas seguro que quieres editar este Medio Tecnológico?');
+            $('.aceptar').on('click', function () {
+                window.location = link;
+            });
+        });
+
+        $('.eliminar').on('click', function () {
+            var link = $(this).val();
+            $('#modal-19').addClass('md-show');
+            $('#mensaje').text('Estas seguro que quieres eliminar este Medio Tecnológico?');
+            $('.aceptar').on('click', function () {
+                window.location = link;
+            });
+        });
+
+        $('.mostrar').on('click', function () {
+            window.location = $(this).val();
+        });
+    </script>
+{% endblock %}

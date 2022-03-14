@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Nacionalidad;
-use App\Form\NacionalidadType;
-use App\Repository\NacionalidadRepository;
+use App\Entity\CategoriaDocente;
+use App\Form\CategoriaDocenteType;
+use App\Repository\CategoriaDocenteRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,29 +12,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/nacionalidad")
+ * @Route("/admin/categoriadocente")
  */
-class NacionalidadController extends AbstractController
+class CategoriaDocenteController extends AbstractController
 {
     /**
-     * @Route("/", name="nacionalidad_index", methods={"GET"})
+     * @Route("/", name="categoriadocente_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function index(NacionalidadRepository $nacionalidadRepository): Response
+    public function index(CategoriaDocenteRepository $categoriaDocenteRepository): Response
     {
-        return $this->render('nacionalidad/index.html.twig', [
-            'nacionalidad' => $nacionalidadRepository->findAll(),
+        return $this->render('categoriadocente/index.html.twig', [
+            'categoriadocente' => $categoriaDocenteRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="nacionalidad_new", methods={"GET","POST"})
+     * @Route("/new", name="categoriadocente_new", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function new(Request $request): Response
     {
-        $entity = new Nacionalidad();
-        $form = $this->createForm(NacionalidadType::class, $entity);
+        $entity = new CategoriaDocente();
+        $form = $this->createForm(CategoriaDocenteType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,63 +43,63 @@ class NacionalidadController extends AbstractController
             $entityManager->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_success','Se ha creado una Nacionalidad satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('Nacionalidad: %s', $entity->getNombre()));
+            $flashBag->add('app_success','Se ha creado una Categoría Docente satisfactoriamente!!!');
+            $flashBag->add('app_success', sprintf('Categoría Docente: %s', $entity->getNombre()));
 
-            return $this->redirectToRoute('nacionalidad_index');
+            return $this->redirectToRoute('categoriadocente_index');
         }
 
-        return $this->render('nacionalidad/new.html.twig', [
+        return $this->render('categoriadocente/new.html.twig', [
             'entities' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="nacionalidad_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="categoriadocente_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function edit(Request $request, Nacionalidad $entity): Response
+    public function edit(Request $request, CategoriaDocente $entity): Response
     {
-        $form = $this->createForm(NacionalidadType::class, $entity);
+        $form = $this->createForm(CategoriaDocenteType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','Se ha actualizado una Nacionalidad satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('Nacionalidad: %s', $entity->getNombre()));
+            $flashBag->add('app_warning','Se ha actualizado una Categoría Docente satisfactoriamente!!!');
+            $flashBag->add('app_warning', sprintf('Categoría Docente: %s', $entity->getNombre()));
 
-            return $this->redirectToRoute('nacionalidad_index');
+            return $this->redirectToRoute('categoriadocente_index');
         }
 
-        return $this->render('nacionalidad/edit.html.twig', [
+        return $this->render('categoriadocente/edit.html.twig', [
             'entities' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="nacionalidad_remove")
+     * @Route("/{id}", name="categoriadocente_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository(Nacionalidad::class)->find($id);
+        $entity = $em->getRepository(CategoriaDocente::class)->find($id);
 
         if (!$entity) {
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','No se encuentra esta Nacionalidad!!!');
+            $flashBag->add('app_warning','No se encuentra esta Categoría Docente!!!');
         } else {
             $em->remove($entity);
             $em->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_error','Se ha eliminado una Nacionalidad satisfactoriamente!!!');
+            $flashBag->add('app_error','Se ha eliminado una Categoría Docente satisfactoriamente!!!');
         }
 
-        return $this->redirectToRoute('nacionalidad_index');
+        return $this->redirectToRoute('categoriadocente_index');
     }
 }

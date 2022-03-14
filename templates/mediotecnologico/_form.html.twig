@@ -1,0 +1,142 @@
+{{ form_start(form) }}
+<div class="card-body">
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Mac <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.mac, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Mac del dispositivo' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.mac)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.mac)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Serie <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.serie, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Serie del dispositivo' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.serie)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.serie)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Fecha <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.fecha, { 'attr': { 'class': 'form-control', 'type': 'date' }}) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.fecha)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.fecha)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Descripción :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.descripcion, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Descripción del documento' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.descripcion)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.descripcion)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Tipo de Medio <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.tipomedio, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.tipomedio)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.tipomedio)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Marca <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.marca, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.marca)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.marca)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Modelo <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.modelo, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.modelo)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.modelo)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Administrador <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.personal1, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.personal1)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.personal1)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Cliente <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.personal2, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.personal2)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.personal2)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="card-footer text-right">
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Medio Tecnológico') }}</button>
+    <a class="btn btn-light" href="{{ path('mediotecnologico_index') }}">Volver al Listado</a>
+</div>
+{{ form_end(form) }}

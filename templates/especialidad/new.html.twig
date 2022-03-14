@@ -1,0 +1,22 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Añadir Especialidad{% endblock %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('especialidad_index') }}"><i class="far fa-file"></i> Listado Especialidad</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Especialidad</li>
+        </ol>
+    </nav>
+
+    <div class="col-12">
+       <div class="card">
+          <div class="card-header">
+             <h4><strong>Añadir</strong> Especialidad</h4>
+           </div>
+           {{ include('especialidad/_form.html.twig') }}
+       </div>
+    </div>
+{% endblock %}

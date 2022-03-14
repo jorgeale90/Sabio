@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Categoría Docente{% endblock %}
+{% block title %}Listado Categoría Científica{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -15,14 +15,14 @@
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
             <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
              <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Categorías</a></li>
-             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Categoría Docente</li>
+             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Categoría Científica</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> Categoría Docente</h4>
+                <h4><strong>Listado</strong> Categoría Científica</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -30,21 +30,21 @@
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
-                            <th>Categoría Docente</th>
+                            <th>Categoría Científica</th>
                             <th>Personal Médico</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for entity in categoriadocente %}
+                        {% for entity in categoriacientifica %}
                             <tr>
                                 <td>{{ entity.id }}</td>
                                 <td>{{ entity.nombre }}</td>
                                 <td>{{ entity.personal | length }}</td>
                                 <td>
                                     <center>
-                                        <button class="btn btn-primary editar" value="{{ path('categoriadocente_edit', {'id': entity.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('categoriadocente_remove', {'id': entity.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                        <button class="btn btn-primary editar" value="{{ path('categoriacientifica_edit', {'id': entity.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('categoriacientifica_remove', {'id': entity.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
                                     </center>
                                 </td>
                             </tr>
@@ -55,8 +55,8 @@
             </div>
 
         </div>
-        <a class="btn btn-primary" type="button" href="{{ path('categoriadocente_new') }}"><i class="fa fa-plus"></i> Añadir Categoría Docente</a>
-        <a class="btn btn-warning" type="button" href="{{ path('categoriadocente_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+        <a class="btn btn-primary" type="button" href="{{ path('categoriacientifica_new') }}"><i class="fa fa-plus"></i> Añadir Categoría Científica</a>
+        <a class="btn btn-warning" type="button" href="{{ path('categoriacientifica_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
     </div>
 
     <div class="md-modal md-effect-1" id="modal-19">
@@ -123,7 +123,7 @@
         $('.editar').on('click', function () {
             var link = $(this).val();
             $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres editar esta Categoría Docente?');
+            $('#mensaje').text('Estas seguro que quieres editar esta Categoría Científica?');
             $('.aceptar').on('click', function () {
                 window.location = link;
             });
@@ -132,7 +132,7 @@
         $('.eliminar').on('click', function () {
             var link = $(this).val();
             $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres eliminar esta Categoría Docente?');
+            $('#mensaje').text('Estas seguro que quieres eliminar esta Categoría Científica?');
             $('.aceptar').on('click', function () {
                 window.location = link;
             });

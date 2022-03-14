@@ -8,7 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContratoInternetRepository")
- * @UniqueEntity(fields={"folio","login"},message="Ya existe este Folio de este Contrato.")
+ * @UniqueEntity(fields={"folio","login"},message="Ya existe este Folio de este Contrato en nuestra Base de Datos.")
  */
 
 class ContratoInternet

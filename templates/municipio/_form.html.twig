@@ -1,9 +1,9 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre de la Provincia' } }) }}
+            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Municipio' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.nombre)) %}
@@ -16,14 +16,14 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">País <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.pais, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+            {{ form_widget(form.provincia, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.pais)) %}
+            {% if(form_errors(form.provincia)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.pais)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.provincia)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -31,7 +31,7 @@
     </div>
 </div>
 <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Provincia') }}</button>
-    <a class="btn btn-light" href="{{ path('pais_index') }}">Volver al Listado</a>
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Municipio') }}</button>
+    <a class="btn btn-light" href="{{ path('municipio_index') }}">Volver al Listado</a>
 </div>
 {{ form_end(form) }}
