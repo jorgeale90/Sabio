@@ -2,23 +2,29 @@
 
 namespace App\Form;
 
-use App\Entity\Provincia;
+use App\Entity\Institucion;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProvinciaType extends AbstractType
+class InstitucionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('nombre')
 
-            ->add('pais', EntityType::class, array(
-                'label' => 'País :',
+            ->add('codpostal')
+
+            ->add('telefono')
+
+            ->add('direccion')
+
+            ->add('municipio', EntityType::class, array(
+                'label' => 'Municipio :',
                 'placeholder' => 'Seleccione una opción',
-                'class' => 'App\Entity\Pais',
+                'class' => 'App\Entity\Municipio',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
         ;
@@ -27,7 +33,7 @@ class ProvinciaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Provincia::class,
+            'data_class' => Institucion::class,
         ]);
     }
 }

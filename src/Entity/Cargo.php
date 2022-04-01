@@ -14,7 +14,6 @@ use DH\Auditor\Provider\Doctrine\Auditing\Annotation\Auditable;
  * @UniqueEntity(fields={"nombre"},message="Ya existe este Cargo u Ocupación en nuestra Base de Datos.")
  * @Auditable()
  */
-
 class Cargo
 {
     /**

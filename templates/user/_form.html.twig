@@ -1,6 +1,21 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Nombre Completo <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.fullname, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre Completo' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.fullname)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.fullname)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
         <label class="col-sm-3 col-form-label">Email <span class="required">*</span> :</label>
         <div class="col-sm-7">
             {{ form_widget(form.email, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del País' } }) }}
@@ -67,6 +82,9 @@
         <label class="col-sm-3 col-form-label">Imagen :</label>
         <div class="col-sm-7">
             {{ form_widget(form.imageFile) }}
+            {% if user.image != null %}
+                <img src="{{ vich_uploader_asset(user, 'imageFile', 'App\\Entity\\User') }}" width="260" height="210">
+            {% endif %}
         </div>
         <div class="col-2">
             {% if(form_errors(form.imageFile)) %}

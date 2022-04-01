@@ -21,9 +21,9 @@ class SistemaContableType extends AbstractType
                 'placeholder' => 'Seleccione una opción',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required'),
                 'choices' => [
-                    'ESCRITURA' => 'Escritura',
-                    'LECTURA' => 'Lectura',
-                    'CONTROL TOTAL' => 'Control Total'
+                    'Escritura' => 'Escritura',
+                    'Lectura' => 'Lectura',
+                    'Control Total' => 'Control Total'
                 ],
             ])
 

@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Provincia{% endblock %}
+{% block title %}Editar Institución{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -9,18 +9,18 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
             <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('provincia_index') }}"><i class="far fa-file"></i> Listado Provincia</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Provincia</li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('institucion_index') }}"><i class="far fa-file"></i> Listado Institución</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Institución</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Provincia</h3></h4>
+                <h4><strong>Editar</strong> Institución</h4>
             </div>
-            {{ include('provincia/_form.html.twig', {'button_label': 'Editar Provincia'}) }}
+            {{ include('institucion/_form.html.twig', {'button_label': 'Editar Institución'}) }}
         </div>
     </div>
 {% endblock %}

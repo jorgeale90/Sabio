@@ -1,22 +1,31 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Añadir Cargo{% endblock %}
+{% block title %}Añadir Personal Médico{% endblock %}
+{% block head %}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
+{% endblock %}
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
             <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
             <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('cargo_index') }}"><i class="far fa-file"></i> Listado Cargo</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Cargo</li>
+            <li class="breadcrumb-item"><a href="{{ path('personalmedico_index') }}"><i class="far fa-file"></i> Listado Personal Médico</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Personal Médico</li>
         </ol>
     </nav>
 
     <div class="col-12">
        <div class="card">
           <div class="card-header">
-             <h4><strong>Añadir</strong> Cargo</h3></h4>
+             <h4><strong>Añadir</strong> Personal Médico</h3></h4>
            </div>
-           {{ include('cargo/_form.html.twig') }}
+           {{ include('personalmedico/_form.html.twig') }}
        </div>
     </div>
+{% endblock %}
+{% block javascript %}
+    <!-- Select2 -->
+    <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
 {% endblock %}

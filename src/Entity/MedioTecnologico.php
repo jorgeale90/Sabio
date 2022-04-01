@@ -8,9 +8,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MedioTecnologicoRepository")
- * @UniqueEntity(fields={"mac","serie"},message="Ya existe este Medio Tecnologico en nuestra Base de Datos.")
+ * @UniqueEntity(fields={"mac"},message="Ya existe este Medio Tecnologico en nuestra Base de Datos.")
+ * @UniqueEntity(fields={"serie"},message="Ya existe este Medio Tecnologico en nuestra Base de Datos.")
  */
-
 class MedioTecnologico
 {
     /**
@@ -85,7 +85,7 @@ class MedioTecnologico
 
     public function getNombreCompleto() {
 
-        return $this->getTipomedio() . " " . $this->getMarca();
+        return $this->getTipomedio() . " de marca " . $this->getMarca(). " del propietario " . $this->getPersonal2();
 
     }
 

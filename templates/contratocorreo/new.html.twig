@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Añadir Provincia{% endblock %}
+{% block title %}Añadir Contrato Correo{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -9,18 +9,18 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
             <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('provincia_index') }}"><i class="far fa-file"></i> Listado Provincia</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Provincia</li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Contratos</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('contratocorreo_index') }}"><i class="far fa-file"></i> Listado Provincia</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Contrato Correo</li>
         </ol>
     </nav>
 
     <div class="col-12">
        <div class="card">
           <div class="card-header">
-             <h4><strong>Añadir</strong> Provincia</h3></h4>
+             <h4><strong>Añadir</strong> Correo Correo</h4>
            </div>
-           {{ include('provincia/_form.html.twig') }}
+           {{ include('contratocorreo/_form.html.twig') }}
        </div>
     </div>
 {% endblock %}

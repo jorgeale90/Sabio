@@ -36,6 +36,7 @@ class PersonalMedicoType extends AbstractType
                 'label' => 'Organización Política :',
                 'placeholder' => 'Seleccione una opción',
                 'class' => 'App\Entity\OrganizacionPolitica',
+                'multiple' => 'true',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
 
@@ -89,7 +90,6 @@ class PersonalMedicoType extends AbstractType
                     'choices'=>[
                         'Si'=>'Si',
                         'No'=>'No',
-                        'None'=>'None',
                     ],
                 ])
         ;
@@ -98,7 +98,7 @@ class PersonalMedicoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Cargo::class,
+            'data_class' => PersonalMedico::class,
         ]);
     }
 }

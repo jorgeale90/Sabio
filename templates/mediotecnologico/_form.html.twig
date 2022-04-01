@@ -48,7 +48,7 @@
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Descripción :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.descripcion, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Descripción del documento' } }) }}
+            {{ form_widget(form.descripcion, { 'attr': { 'class': 'form-control', 'placeholder': 'Descripción del medio' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.descripcion)) %}

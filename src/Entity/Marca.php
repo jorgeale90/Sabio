@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\MarcaRepository")
  * @UniqueEntity(fields={"nombre"},message="Ya existe esta Marca en nuestra Base de Datos.")
  */
-
 class Marca
 {
     /**

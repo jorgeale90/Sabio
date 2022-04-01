@@ -1,22 +1,22 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Añadir País{% endblock %}
+{% block title %}Añadir Sexo{% endblock %}
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
             <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('pais_index') }}"><i class="far fa-file"></i> Listado País</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir País</li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
+            <li class="breadcrumb-item"><a href="{{ path('pais_index') }}"><i class="far fa-file"></i> Listado Sexo</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Sexo</li>
         </ol>
     </nav>
 
     <div class="col-12">
        <div class="card">
           <div class="card-header">
-             <h4><strong>Añadir</strong> País</h3></h4>
+             <h4><strong>Añadir</strong> Sexo</h3></h4>
            </div>
-           {{ include('pais/_form.html.twig') }}
+           {{ include('sexo/_form.html.twig') }}
        </div>
     </div>
 {% endblock %}

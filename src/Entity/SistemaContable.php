@@ -8,9 +8,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SistemaContableRepository")
- * @UniqueEntity(fields={"codigo"},message="Ya existe este Código del Sistema Contable en nuestra Base de Datos.")
+ * @UniqueEntity(fields={"codigo"},message="Ya existe este Código del Sistema Contable o Personal añadido en nuestra Base de Datos.")
+ * @UniqueEntity(fields={"personal"},message="Ya existe este Personal añadido en nuestra Base de Datos.")
  */
-
 class SistemaContable
 {
     /**
@@ -31,7 +31,7 @@ class SistemaContable
     /**
      * @var string $permisos
      * @ORM\Column(name="permisos", type="string", nullable=false, length=30)
-     * @Assert\Choice(choices={"ESCRITURA","LECTURA","CONTROL TOTAL"},  message="Debe seleccionar una Opción")
+     * @Assert\Choice(choices={"Escritura","Lectura","Control Total"},  message="Debe seleccionar una Opción")
      */
     private $permisos;
 

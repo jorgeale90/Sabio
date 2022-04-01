@@ -11,7 +11,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity(fields={"codigo"},message="Ya existe este Código para este Contrato en nuestra Base de Datos.")
  * @UniqueEntity(fields={"login"},message="Ya existe este Login para este Contrato en nuestra Base de Datos.")
  */
-
 class ContratoAnclaje
 {
     /**

@@ -11,8 +11,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonalMedicoRepository")
  * @UniqueEntity(fields={"ci"},message="Ya existe este Personal Médico en nuestra Base de Datos.")
+ * @UniqueEntity(fields={"noregistro"},message="Ya existe este No. de Registro en nuestra Base de Datos.")
  */
-
 class PersonalMedico
 {
     /**
@@ -146,7 +146,7 @@ class PersonalMedico
     /**
      * @var string $mision
      * @ORM\Column(name="mision", type="string", nullable=false, length=30)
-     * @Assert\Choice(choices={"Si","No","None"},  message="Debe seleccionar una Opción")
+     * @Assert\Choice(choices={"Si","No"},  message="Debe seleccionar una Opción")
      */
     protected $mision;
 

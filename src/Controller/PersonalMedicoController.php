@@ -61,7 +61,7 @@ class PersonalMedicoController extends AbstractController
      */
     public function edit(Request $request, PersonalMedico $entity): Response
     {
-        $form = $this->createForm(CargoType::class, $entity);
+        $form = $this->createForm(PersonalMedicoType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Nombre Personal <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Nombre <span class="required">*</span> :</label>
         <div class="col-sm-7">
             {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Personal Médico' } }) }}
         </div>
@@ -63,7 +63,7 @@
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Dirección Particular <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.direccionparticular) }}
+            {{ form_widget(form.direccionparticular, { 'attr': { 'class': 'form-control' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.direccionparticular)) %}
@@ -76,9 +76,9 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Teléfono Fijo <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Teléfono Fijo :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.telefonofijo, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Teléfono Fijo' } }) }}
+            {{ form_widget(form.telefonofijo, { 'attr': { 'class': 'form-control', 'placeholder': 'Teléfono Fijo' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.telefonofijo)) %}
@@ -91,14 +91,74 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Cargo <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Móvil :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Cargo' } }) }}
+            {{ form_widget(form.movil, { 'attr': { 'class': 'form-control', 'placeholder': 'Móvil' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
+            {% if(form_errors(form.movil)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.movil)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Correo Electrónico :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.email, { 'attr': { 'class': 'form-control', 'placeholder': 'Correo Electrónico' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.email)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.email)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Autobliografía :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.autobliografia, { 'attr': { 'class': 'form-control' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.autobliografia)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.autobliografia)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Organización Política <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.organizacionpolitica) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.organizacionpolitica)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.organizacionpolitica)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Sexo <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.sexo, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Sexo' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.sexo)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.sexo)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -108,12 +168,12 @@
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Cargo <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Cargo' } }) }}
+            {{ form_widget(form.cargo, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Nombre del Cargo' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
+            {% if(form_errors(form.cargo)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.cargo)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -121,14 +181,14 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Cargo <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Nacionalidad <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Cargo' } }) }}
+            {{ form_widget(form.nacionalidad, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Nacionalidad' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
+            {% if(form_errors(form.nacionalidad)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nacionalidad)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -136,14 +196,14 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Cargo <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Especialidad <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Cargo' } }) }}
+            {{ form_widget(form.especialidad, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Nombre de la Especialidad' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
+            {% if(form_errors(form.especialidad)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.especialidad)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -151,14 +211,14 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Cargo <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Categoría Docente <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Cargo' } }) }}
+            {{ form_widget(form.categoriadocente, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Categoría Docente' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
+            {% if(form_errors(form.categoriadocente)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.categoriadocente)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -166,14 +226,29 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Cargo <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Categoría Científica <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Cargo' } }) }}
+            {{ form_widget(form.categoriacientifica, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Categoría Científica' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
+            {% if(form_errors(form.categoriacientifica)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.categoriacientifica)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Misión <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.mision, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Misión' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.mision)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.mision)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}

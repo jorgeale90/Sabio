@@ -12,7 +12,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"fullname"}, message="Ya existe este nombre completo en nuestra Base de Datos en nuestra Base de Datos.")
+ * @UniqueEntity(fields={"email"}, message="Ya existe una cuenta con este correo.")
  * @Vich\Uploadable
  */
 class User implements UserInterface
@@ -23,6 +24,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $fullname;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -51,6 +57,26 @@ class User implements UserInterface
      * @var File
      */
     private $imageFile;
+
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->image,
+        ));
+    }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            $this->image,
+            ) = unserialize($serialized);
+    }
 
     public function setImageFile(File $image = null)
     {
@@ -154,6 +180,18 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getFullname(): ?string
+    {
+        return $this->fullname;
+    }
+
+    public function setFullname(string $fullname): self
+    {
+        $this->fullname = $fullname;
 
         return $this;
     }

@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\PaisRepository")
  * @UniqueEntity(fields={"nombre"}, message="Ya existe este País en nuestra Base de Datos en nuestra Base de Datos.")
  */
-
 class Pais
 {
     /**

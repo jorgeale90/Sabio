@@ -44,7 +44,7 @@ class MedioTecnologicoController extends AbstractController
 
             $flashBag = $this->get('session')->getFlashBag();
             $flashBag->add('app_success','Se ha creado un Medio Tecnológico satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('Medio Tecnológico: %s', $entity->getNombre()));
+            $flashBag->add('app_success', sprintf('Medio Tecnológico: %s', $entity->getNombreCompleto()));
 
             return $this->redirectToRoute('mediotecnologico_index');
         }
@@ -69,7 +69,7 @@ class MedioTecnologicoController extends AbstractController
 
             $flashBag = $this->get('session')->getFlashBag();
             $flashBag->add('app_warning','Se ha actualizado un Medio Tecnológico satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('Medio Tecnológico: %s', $entity->getNombre()));
+            $flashBag->add('app_warning', sprintf('Medio Tecnológico: %s', $entity->getNombreCompleto()));
 
             return $this->redirectToRoute('mediotecnologico_index');
         }

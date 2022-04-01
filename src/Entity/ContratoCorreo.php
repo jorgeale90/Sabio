@@ -10,7 +10,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\ContratoCorreoRepository")
  * @UniqueEntity(fields={"codigo"},message="Ya existe este Código de este Contrato en nuestra Base de Datos.")
  */
-
 class ContratoCorreo
 {
     /**
@@ -92,9 +91,15 @@ class ContratoCorreo
      */
     protected $personal;
 
+    public function getNombreCompleto() {
+
+        return $this->getCodigo() . " para el solicitante " . $this->getPersonal2();
+
+    }
+
     public function __toString() {
 
-        return $this->getCodigo();
+        return $this->getNombreCompleto();
 
     }
 
