@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Nacionalidad;
-use App\Form\NacionalidadType;
-use App\Repository\NacionalidadRepository;
+use App\Entity\AuditoriaInterna;
+use App\Form\AuditoriaInternaType;
+use App\Repository\AuditoriaInternaRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,29 +12,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/nacionalidad")
+ * @Route("/admin/auditoriainterna")
  */
-class NacionalidadController extends AbstractController
+class AuditoriaInternaController extends AbstractController
 {
     /**
-     * @Route("/", name="nacionalidad_index", methods={"GET"})
+     * @Route("/", name="auditoriainterna_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function index(NacionalidadRepository $nacionalidadRepository): Response
+    public function index(AuditoriaInternaRepository $auditoriaInternaRepository): Response
     {
-        return $this->render('nacionalidad/index.html.twig', [
-            'nacionalidad' => $nacionalidadRepository->findAll(),
+        return $this->render('auditoriainterna/index.html.twig', [
+            'auditoria' => $auditoriaInternaRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="nacionalidad_new", methods={"GET","POST"})
+     * @Route("/new", name="auditoriainterna_new", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function new(Request $request): Response
     {
-        $entity = new Nacionalidad();
-        $form = $this->createForm(NacionalidadType::class, $entity);
+        $entity = new AuditoriaInterna();
+        $form = $this->createForm(AuditoriaInternaType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,63 +43,63 @@ class NacionalidadController extends AbstractController
             $entityManager->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_success','Se ha creado una Nacionalidad satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('Nacionalidad: %s', $entity->getNombre()));
+            $flashBag->add('app_success','Se ha creado una Auditoría Interna satisfactoriamente!!!');
+            $flashBag->add('app_success', sprintf('Auditoría Interna: %s', $entity->getNoidentificacion()));
 
-            return $this->redirectToRoute('nacionalidad_index');
+            return $this->redirectToRoute('auditoriainterna_index');
         }
 
-        return $this->render('nacionalidad/new.html.twig', [
+        return $this->render('auditoriainterna/new.html.twig', [
             'entities' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="nacionalidad_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="auditoriainterna_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function edit(Request $request, Nacionalidad $entity): Response
+    public function edit(Request $request, AuditoriaInterna $entity): Response
     {
-        $form = $this->createForm(NacionalidadType::class, $entity);
+        $form = $this->createForm(AuditoriaInternaType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','Se ha actualizado una Nacionalidad satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('Nacionalidad: %s', $entity->getNombre()));
+            $flashBag->add('app_warning','Se ha actualizado una Auditoría Interna satisfactoriamente!!!');
+            $flashBag->add('app_warning', sprintf('Auditoría Interna: %s', $entity->getNoidentificacion()));
 
-            return $this->redirectToRoute('nacionalidad_index');
+            return $this->redirectToRoute('auditoriainterna_index');
         }
 
-        return $this->render('nacionalidad/edit.html.twig', [
+        return $this->render('auditoriainterna/edit.html.twig', [
             'entities' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="nacionalidad_remove")
+     * @Route("/delete/{id}", name="auditoriainterna_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository(Nacionalidad::class)->find($id);
+        $entity = $em->getRepository(AuditoriaInterna::class)->find($id);
 
         if (!$entity) {
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','No se encuentra esta Nacionalidad!!!');
+            $flashBag->add('app_warning','No se encuentra esta Auditoría Interna!!!');
         } else {
             $em->remove($entity);
             $em->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_error','Se ha eliminado una Nacionalidad satisfactoriamente!!!');
+            $flashBag->add('app_error','Se ha eliminado una Auditoría Interna satisfactoriamente!!!');
         }
 
-        return $this->redirectToRoute('nacionalidad_index');
+        return $this->redirectToRoute('auditoriainterna_index');
     }
 }

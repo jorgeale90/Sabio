@@ -7,6 +7,7 @@ use App\Form\MedioTecnologicoType;
 use App\Repository\MedioTecnologicoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -81,7 +82,7 @@ class MedioTecnologicoController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="mediotecnologico_remove")
+     * @Route("/mediotecnologico/{id}", name="mediotecnologico_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
@@ -101,5 +102,16 @@ class MedioTecnologicoController extends AbstractController
         }
 
         return $this->redirectToRoute('mediotecnologico_index');
+    }
+
+    /**
+     * @Route("/getmodeloxmarca", name="modelo_x_marca", methods={"GET","POST"})
+     */
+    public function getMarcaxModelo(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $marca_id = $request->get('marca_id');
+        $modelo = $em->getRepository('App:Modelo')->findByMarca($marca_id);
+        return new JsonResponse($modelo);
     }
 }

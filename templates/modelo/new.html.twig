@@ -7,10 +7,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Medios Tecnológico</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('modelo_index') }}"><i class="far fa-file"></i> Listado Modelos</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Modelo</li>
         </ol>
     </nav>
@@ -18,7 +14,7 @@
     <div class="col-12">
        <div class="card">
           <div class="card-header">
-             <h4><strong>Añadir</strong> Modelo</h3></h4>
+             <h4><strong>Añadir</strong> Modelo</h4>
            </div>
            {{ include('modelo/_form.html.twig') }}
        </div>

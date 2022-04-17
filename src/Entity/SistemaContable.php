@@ -5,11 +5,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SistemaContableRepository")
  * @UniqueEntity(fields={"codigo"},message="Ya existe este Código del Sistema Contable o Personal añadido en nuestra Base de Datos.")
  * @UniqueEntity(fields={"personal"},message="Ya existe este Personal añadido en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class SistemaContable
 {

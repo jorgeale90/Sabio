@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Sistema Contable{% endblock %}
+{% block title %}Editar Control Sistema Contable{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -7,10 +7,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Sistema Contabilidad</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('sistemacontable_index') }}"><i class="far fa-file"></i> Listado Sistemas Contables</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Sistema Contable</li>
         </ol>
     </nav>
@@ -18,7 +14,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Sistema Contable</h3></h4>
+                <h4><strong>Editar</strong> Control Sistema Contable</h4>
             </div>
             {{ include('sistemacontable/_form.html.twig', {'button_label': 'Editar Sistema Contable'}) }}
         </div>

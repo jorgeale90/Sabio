@@ -75,9 +75,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             throw new CustomUserMessageAuthenticationException('No se pudo encontrar el correo electrónico.');
         }
 
-//        if (!$user->getState()) {
-//            throw new CustomUserMessageAuthenticationException('El usuario esta desactivado.');
-//        }
+        if ($user->getEsDenegar() == true) {
+            throw new CustomUserMessageAuthenticationException('Lo siento su cuenta está deshabilitada, por favor consulte su duda con el Administrador.');
+        }
 
         return $user;
     }

@@ -2,39 +2,40 @@
 
 namespace App\Controller;
 
-use App\Entity\ContratoAnclaje;
-use App\Form\ContratoAnclajeType;
-use App\Repository\ContratoAnclajeRepository;
+use App\Entity\ContratoInternet;
+use App\Form\ContratoInternetType;
+use App\Repository\ContratoInternetRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/contratoanclaje")
+ * @Route("/admin/contratointernet")
  */
-class ContratoAnclajeController extends AbstractController
+class ContratoInternetController extends AbstractController
 {
     /**
-     * @Route("/", name="contratoanclaje_index", methods={"GET"})
+     * @Route("/", name="contratointernet_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function index(ContratoAnclajeRepository $contratoAnclajeRepository): Response
+    public function index(ContratoInternetRepository $contratoInternetRepository): Response
     {
-        return $this->render('contratoanclaje/index.html.twig', [
-            'contrato' => $contratoAnclajeRepository->findAll(),
+        return $this->render('contratointernet/index.html.twig', [
+            'contrato' => $contratoInternetRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="contratoanclaje_new", methods={"GET","POST"})
+     * @Route("/new", name="contratointernet_new", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function new(Request $request): Response
     {
-        $entity = new ContratoAnclaje();
-        $form = $this->createForm(ContratoAnclajeType::class, $entity);
+        $entity = new ContratoInternet();
+        $form = $this->createForm(ContratoInternetType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,63 +44,85 @@ class ContratoAnclajeController extends AbstractController
             $entityManager->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_success','Se ha creado un Contrato de Anclaje satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('Contrato de Anclaje: %s', $entity->getNombreCompleto()));
+            $flashBag->add('app_success','Se ha creado un Contrato de Internet satisfactoriamente!!!');
+            $flashBag->add('app_success', sprintf('Contrato de Internet: %s', $entity->getNombreCompleto()));
 
-            return $this->redirectToRoute('contratoanclaje_index');
+            return $this->redirectToRoute('contratointernet_index');
         }
 
-        return $this->render('contratoanclaje/new.html.twig', [
+        return $this->render('contratointernet/new.html.twig', [
             'contrato' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="contratoanclaje_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="contratointernet_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function edit(Request $request, ContratoAnclaje $entity): Response
+    public function edit(Request $request, ContratoInternet $entity): Response
     {
-        $form = $this->createForm(ContratoAnclajeType::class, $entity);
+        $form = $this->createForm(ContratoInternetType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','Se ha actualizado un Contrato de Anclaje satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('Contrato de Anclaje: %s', $entity->getNombreCompleto()));
+            $flashBag->add('app_warning','Se ha actualizado un Contrato de Internet satisfactoriamente!!!');
+            $flashBag->add('app_warning', sprintf('Contrato de Internet: %s', $entity->getNombreCompleto()));
 
-            return $this->redirectToRoute('contratoanclaje_index');
+            return $this->redirectToRoute('contratointernet_index');
         }
 
-        return $this->render('contratoanclaje/edit.html.twig', [
+        return $this->render('contratointernet/edit.html.twig', [
             'contrato' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="contratoanclaje_remove")
+     * @Route("/delete/{id}", name="contratointernet_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository(ContratoAnclaje::class)->find($id);
+        $entity = $em->getRepository(ContratoInternet::class)->find($id);
 
         if (!$entity) {
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','No se encuentra este Contrato de Anclaje!!!');
+            $flashBag->add('app_warning','No se encuentra este Contrato de Internet!!!');
         } else {
             $em->remove($entity);
             $em->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_error','Se ha eliminado un Contrato de Aclaje satisfactoriamente!!!');
+            $flashBag->add('app_error','Se ha eliminado un Contrato de Internet satisfactoriamente!!!');
         }
 
-        return $this->redirectToRoute('contratoanclaje_index');
+        return $this->redirectToRoute('contratointernet_index');
+    }
+
+    /**
+     * @Route("/getmunicipiocixprovinciaci", name="municipioci_x_provinciaci", methods={"GET","POST"})
+     */
+    public function getMunicipiocixProvinciaci(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $provincia_id = $request->get('provincia_id');
+        $muni = $em->getRepository('App:Municipio')->findByProvinciaci($provincia_id);
+        return new JsonResponse($muni);
+    }
+
+    /**
+     * @Route("/getinstitucioncixmunicipioci", name="institucionci_x_municipioci", methods={"GET","POST"})
+     */
+    public function getInstitucionxMunicipioci(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $municipio_id = $request->get('municipio_id');
+        $institucion = $em->getRepository('App:Institucion')->findByMunicipioci($municipio_id);
+        return new JsonResponse($institucion);
     }
 }

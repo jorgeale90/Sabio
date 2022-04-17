@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Medio Tecnológico{% endblock %}
+{% block title %}Editar Control Medio Tecnológico{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -7,18 +7,14 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Medio Tecnológico</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('mediotecnologico_index') }}"><i class="far fa-file"></i> Listado Medios Tecnológicos</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Medio Tecnológico</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Control Medio Tecnológico</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Medio Tecnológico</h3></h4>
+                <h4><strong>Editar</strong> Control Medio Tecnológico</h4>
             </div>
             {{ include('mediotecnologico/_form.html.twig', {'button_label': 'Editar Medio Tecnológico'}) }}
         </div>
@@ -28,4 +24,40 @@
     <!-- Select2 -->
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
+    <script>
+    $('#{{ form.marca.vars.id }}').on('change', function (e) {
+            var data = {
+                marca_id: $(this).val()
+            };
+            $('#{{ form.modelo.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.modelo.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('modelo_x_marca') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Modelo</option>';
+                        $.each(response, function (i, modelo) {
+                            option += '<option value='+ modelo.id +'>'+ modelo.nombre +'</option>'
+                        });
+                        $('#{{ form.modelo.vars.id }}').html(option);
+                        $('#{{ form.modelo.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Modelos en esta Marca.</option>';
+                        $('#{{ form.modelo.vars.id }}').html(option);
+                        $('#{{ form.modelo.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Modelos en la Marca seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+    });
+    </script>
 {% endblock %}

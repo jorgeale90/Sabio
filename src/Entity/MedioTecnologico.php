@@ -5,11 +5,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MedioTecnologicoRepository")
  * @UniqueEntity(fields={"mac"},message="Ya existe este Medio Tecnologico en nuestra Base de Datos.")
  * @UniqueEntity(fields={"serie"},message="Ya existe este Medio Tecnologico en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class MedioTecnologico
 {

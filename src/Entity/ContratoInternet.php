@@ -5,10 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContratoInternetRepository")
  * @UniqueEntity(fields={"folio","login"},message="Ya existe este Folio de este Contrato en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class ContratoInternet
 {
@@ -27,6 +30,20 @@ class ContratoInternet
      * @Assert\Length(min=1, max=11, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $folio;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "contratointernet")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Provincia")
+     */
+    protected $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Municipio", inversedBy = "contratointernet")
+     * @ORM\JoinColumn(name="municipio_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar un Municipio")
+     */
+    protected $municipio;
 
     /**
      * @ORM\ManyToOne(targetEntity = "Institucion", inversedBy = "contratointernet")
@@ -93,9 +110,15 @@ class ContratoInternet
      */
     private $pass;
 
+    public function getNombreCompleto() {
+
+        return $this->getFolio() . " para el usuario " . $this->getPersonal1();
+
+    }
+
     public function __toString() {
 
-        return $this->getFolio();
+        return $this->getNombreCompleto();
 
     }
 
@@ -220,6 +243,30 @@ class ContratoInternet
     public function setPersonal2(?PersonalMedico $personal2): self
     {
         $this->personal2 = $personal2;
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getMunicipio(): ?Municipio
+    {
+        return $this->municipio;
+    }
+
+    public function setMunicipio(?Municipio $municipio): self
+    {
+        $this->municipio = $municipio;
 
         return $this;
     }

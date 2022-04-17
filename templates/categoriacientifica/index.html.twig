@@ -12,10 +12,7 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-             <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Categorías</a></li>
-             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Categoría Científica</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Categoría Científica</li>
         </ol>
     </nav>
 
@@ -26,7 +23,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="table-1">
+                    <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
@@ -120,26 +117,40 @@
             {% endfor %}
         });
 
-        $('.editar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres editar esta Categoría Científica?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+        var dataTable = $('#simpletablet').DataTable({
+            language: {
+                oPaginate: {
+                    sNext: '<i class="fa fa-forward"></i>',
+                    sPrevious: '<i class="fa fa-backward"></i>',
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            },
 
-        $('.eliminar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres eliminar esta Categoría Científica?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+            drawCallback: function (row, data, dataIndex) {
 
-        $('.mostrar').on('click', function () {
-            window.location = $(this).val();
+                $('.editar').on('click', function () {
+                    var link = $(this).val();
+                    $('#modal-19').addClass('md-show');
+                    $('#mensaje').text('¿Estas seguro que quieres editar esta Categoría Científica?');
+                    $('.aceptar').on('click', function () {
+                        window.location = link;
+                    });
+                });
+
+                $('.eliminar').on('click', function () {
+                    var link = $(this).val();
+                    $('#modal-19').addClass('md-show');
+                    $('#mensaje').text('¿Estas seguro que quieres eliminar esta Categoría Científica?');
+                    $('.aceptar').on('click', function () {
+                        window.location = link;
+                    });
+                });
+
+                $('.mostrar').on('click', function () {
+                    window.location = $(this).val();
+                });
+            }
         });
     </script>
 {% endblock %}

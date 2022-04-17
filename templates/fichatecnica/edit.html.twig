@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Contrato Anclaje{% endblock %}
+{% block title %}Editar Ficha Técnica{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -7,20 +7,16 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Contratos</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('contratoanclaje_index') }}"><i class="far fa-file"></i> Listado Anclaje</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Anclaje</li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Editar Ficha Técnica</a></li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Contrato Anclaje</h4>
+                <h4><strong>Editar</strong> Ficha Técnica</h4>
             </div>
-            {{ include('contratoanclaje/_form.html.twig', {'button_label': 'Editar Contrato Anclaje'}) }}
+            {{ include('fichatecnica/_form.html.twig', {'button_label': 'Editar Ficha Técnica'}) }}
         </div>
     </div>
 {% endblock %}
@@ -28,4 +24,55 @@
     <!-- Select2 -->
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
+    <script>
+        // Script para el manejo de Añadir o Eliminar Hardware
+        var $container = $('ul.hardware');
+        // botón para agregar un nuevo ram
+        var $addSportParamLink = $('<a href="#" id="hardware_param" class="btn btn-primary btn-xs">Añadir Elemento</a>');
+        var $newLinkLi = $('<li></li>').append($addSportParamLink);
+
+        $(document).ready(function() {
+            //botón eliminar en cada Hardware q exista
+            $container.find('li').each(function() {
+                addParamFormDeleteLink($(this));
+            });
+
+            //añadir boton
+            $container.append($newLinkLi);
+
+            // agregando un nuevo formulario al hacer clic en el botón Agregar
+            $addSportParamLink.on('click',function(e) {
+                e.preventDefault();
+                var index = $container.children().length-1;
+
+                addParamForm($container,$newLinkLi);
+
+                var bAffiche;
+
+                return false;
+            });
+
+            // añadir un nuevo formulario Hardware
+            function addParamForm($container, $newLinkLi) {
+
+                var $prototype = $container.attr('data-prototype');
+
+                var newForm = $prototype.replace(/__name__/g, $container.children().length-1);
+
+                var $newFormLi = $('<li></li>').append(newForm);
+                $newLinkLi.before($newFormLi);
+
+                addParamFormDeleteLink($newFormLi);
+            }
+
+            function addParamFormDeleteLink($paramFormLi){
+                var $removeFormA = $('<a href="#" class="btn btn-danger  btn-xs">Eliminar Elemento</a>');
+                $paramFormLi.append($removeFormA);
+                $removeFormA.on('click', function(e) {
+                    e.preventDefault();
+                    $paramFormLi.remove();
+                });
+            }
+        });
+    </script>
 {% endblock %}

@@ -7,6 +7,7 @@ use App\Form\InstitucionType;
 use App\Repository\InstitucionRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -81,7 +82,7 @@ class InstitucionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="institucion_remove")
+     * @Route("/institucion/{id}", name="institucion_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
@@ -101,5 +102,16 @@ class InstitucionController extends AbstractController
         }
 
         return $this->redirectToRoute('institucion_index');
+    }
+
+    /**
+     * @Route("/getmunicipioxprovincia", name="municipio_x_provincia", methods={"GET","POST"})
+     */
+    public function getMunicipioxProvincia(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $provincia_id = $request->get('provincia_id');
+        $muni = $em->getRepository('App:Municipio')->findByProvincia($provincia_id);
+        return new JsonResponse($muni);
     }
 }

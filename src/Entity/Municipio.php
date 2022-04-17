@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MunicipioRepository")
- * @UniqueEntity(fields={"nombre"}, message="Ya existe este Municipio en nuestra Base de Datos..")
+ * @UniqueEntity(fields={"nombre"}, message="Ya existe este Municipio en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class Municipio
 {
@@ -34,20 +37,44 @@ class Municipio
     private $nombre;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "Provincia", inversedBy = "municipio")
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "municipio")
      * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
      * @Assert\NotBlank(message="Debe seleccionar una Provincia")
      */
     protected $provincia;
 
     /**
-     * @ORM\OneToMany(targetEntity="Institucion", mappedBy="municipio")
+     * @ORM\OneToMany(targetEntity="App\Entity\Institucion", mappedBy="municipio")
      */
     protected $institucion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FichaTecnica", mappedBy="municipio")
+     */
+    protected $fichatecnica;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ContratoAnclaje", mappedBy="municipio")
+     */
+    protected $contratoanclaje;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ContratoCorreo", mappedBy="municipio")
+     */
+    protected $contratocorreo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ContratoInternet", mappedBy="municipio")
+     */
+    protected $contratointernet;
 
     public function __construct()
     {
         $this->institucion = new ArrayCollection();
+        $this->fichatecnica = new ArrayCollection();
+        $this->contratoanclaje = new ArrayCollection();
+        $this->contratocorreo = new ArrayCollection();
+        $this->contratointernet = new ArrayCollection();
     }
 
     public function __toString() {
@@ -109,6 +136,126 @@ class Municipio
             // set the owning side to null (unless already changed)
             if ($institucion->getMunicipio() === $this) {
                 $institucion->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FichaTecnica[]
+     */
+    public function getFichatecnica(): Collection
+    {
+        return $this->fichatecnica;
+    }
+
+    public function addFichatecnica(FichaTecnica $fichatecnica): self
+    {
+        if (!$this->fichatecnica->contains($fichatecnica)) {
+            $this->fichatecnica[] = $fichatecnica;
+            $fichatecnica->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFichatecnica(FichaTecnica $fichatecnica): self
+    {
+        if ($this->fichatecnica->removeElement($fichatecnica)) {
+            // set the owning side to null (unless already changed)
+            if ($fichatecnica->getMunicipio() === $this) {
+                $fichatecnica->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContratoAnclaje[]
+     */
+    public function getContratoanclaje(): Collection
+    {
+        return $this->contratoanclaje;
+    }
+
+    public function addContratoanclaje(ContratoAnclaje $contratoanclaje): self
+    {
+        if (!$this->contratoanclaje->contains($contratoanclaje)) {
+            $this->contratoanclaje[] = $contratoanclaje;
+            $contratoanclaje->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContratoanclaje(ContratoAnclaje $contratoanclaje): self
+    {
+        if ($this->contratoanclaje->removeElement($contratoanclaje)) {
+            // set the owning side to null (unless already changed)
+            if ($contratoanclaje->getMunicipio() === $this) {
+                $contratoanclaje->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContratoCorreo[]
+     */
+    public function getContratocorreo(): Collection
+    {
+        return $this->contratocorreo;
+    }
+
+    public function addContratocorreo(ContratoCorreo $contratocorreo): self
+    {
+        if (!$this->contratocorreo->contains($contratocorreo)) {
+            $this->contratocorreo[] = $contratocorreo;
+            $contratocorreo->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContratocorreo(ContratoCorreo $contratocorreo): self
+    {
+        if ($this->contratocorreo->removeElement($contratocorreo)) {
+            // set the owning side to null (unless already changed)
+            if ($contratocorreo->getMunicipio() === $this) {
+                $contratocorreo->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ContratoInternet[]
+     */
+    public function getContratointernet(): Collection
+    {
+        return $this->contratointernet;
+    }
+
+    public function addContratointernet(ContratoInternet $contratointernet): self
+    {
+        if (!$this->contratointernet->contains($contratointernet)) {
+            $this->contratointernet[] = $contratointernet;
+            $contratointernet->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContratointernet(ContratoInternet $contratointernet): self
+    {
+        if ($this->contratointernet->removeElement($contratointernet)) {
+            // set the owning side to null (unless already changed)
+            if ($contratointernet->getMunicipio() === $this) {
+                $contratointernet->setMunicipio(null);
             }
         }
 

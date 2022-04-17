@@ -2,24 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\ContratoAnclaje;
+use App\Entity\FichaTecnica;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContratoAnclajeType extends AbstractType
+class FichaTecnicaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('codigo')
+            ->add('provincia', EntityType::class, array(
+                'label' => 'Provincia :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Provincia',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
 
-            ->add('fecha', DateType::class, array(
-                'html5' => true,
-                'widget' => 'single_text',
-                'required' => true
+            ->add('municipio', EntityType::class, array(
+                'label' => 'Municipio :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Municipio',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
 
             ->add('institucion', EntityType::class, array(
@@ -30,31 +36,56 @@ class ContratoAnclajeType extends AbstractType
             ))
 
             ->add('personal1', EntityType::class, array(
-                'label' => 'Nombre y Apellidos del Solicitante :',
+                'label' => 'Responsable :',
                 'placeholder' => 'Seleccione una opción',
                 'class' => 'App\Entity\PersonalMedico',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
-
-            ->add('login')
-
-            ->add('contrasenna')
-
-            ->add('accesotelefonico')
 
             ->add('personal2', EntityType::class, array(
-                'label' => 'Director de la Institución: Nombre y Apellidos :',
+                    'label' => 'Creado por :',
                 'placeholder' => 'Seleccione una opción',
                 'class' => 'App\Entity\PersonalMedico',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
+
+            ->add('tipoequipo')
+
+            ->add('noinventario')
+
+            ->add('proyecto')
+
+            ->add('area')
+
+            ->add('modeloboard')
+
+            ->add('socketboard')
+
+            ->add('serieboard')
+
+            ->add('tipocpu')
+
+            ->add('marcacpu')
+
+            ->add('velicidadcpu')
+
+            ->add('seriecpu')
+
+            ->add('hardware', CollectionType::class, [
+                'entry_type' => HardwareType::class,
+                'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'prototype' => true
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ContratoAnclaje::class,
+            'data_class' => FichaTecnica::class,
         ]);
     }
 }

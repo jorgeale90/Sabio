@@ -7,8 +7,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('user_index') }}"><i class="far fa-file"></i> Listado Usuarios</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Usuario</li>
         </ol>
     </nav>
@@ -16,7 +14,7 @@
     <div class="col-12">
        <div class="card">
           <div class="card-header">
-             <h4><strong>Añadir</strong> Usuario</h3></h4>
+             <h4><strong>Añadir</strong> Usuario</h4>
            </div>
            {{ include('user/_form.html.twig') }}
        </div>

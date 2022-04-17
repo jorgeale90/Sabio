@@ -27,6 +27,13 @@ class InstitucionType extends AbstractType
                 'class' => 'App\Entity\Municipio',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
+
+            ->add('provincia', EntityType::class, array(
+                'label' => 'Provincia :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Provincia',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
         ;
     }
 

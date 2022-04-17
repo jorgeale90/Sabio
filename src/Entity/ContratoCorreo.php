@@ -5,10 +5,13 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ContratoCorreoRepository")
  * @UniqueEntity(fields={"codigo"},message="Ya existe este Código de este Contrato en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class ContratoCorreo
 {
@@ -90,6 +93,20 @@ class ContratoCorreo
      * @Assert\Choice(choices={"Si","No"},  message="Debe seleccionar una Opción")
      */
     protected $personal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "contratocorreo")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Provincia")
+     */
+    protected $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Municipio", inversedBy = "contratocorreo")
+     * @ORM\JoinColumn(name="municipio_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar un Municipio")
+     */
+    protected $municipio;
 
     public function getNombreCompleto() {
 
@@ -224,6 +241,30 @@ class ContratoCorreo
     public function setPersonal2(?PersonalMedico $personal2): self
     {
         $this->personal2 = $personal2;
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getMunicipio(): ?Municipio
+    {
+        return $this->municipio;
+    }
+
+    public function setMunicipio(?Municipio $municipio): self
+    {
+        $this->municipio = $municipio;
 
         return $this;
     }

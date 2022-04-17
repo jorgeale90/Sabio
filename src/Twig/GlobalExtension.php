@@ -38,6 +38,9 @@ class GlobalExtension extends AbstractExtension implements GlobalsInterface
             'personalmedicoss' => $this->em->getRepository('App:PersonalMedico')->findAll(),
             'contratoscorreo' => $this->em->getRepository('App:ContratoCorreo')->findAll(),
             'instituciones' => $this->em->getRepository('App:Institucion')->findAll(),
+            'contratosanclaje' => $this->em->getRepository('App:ContratoAnclaje')->findAll(),
+            'contratosinternet' => $this->em->getRepository('App:ContratoInternet')->findAll(),
+            'fichastecnica' => $this->em->getRepository('App:FichaTecnica')->findAll(),
         ];
 
         return $globalVars;

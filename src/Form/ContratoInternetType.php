@@ -2,24 +2,39 @@
 
 namespace App\Form;
 
-use App\Entity\ContratoAnclaje;
+use App\Entity\ContratoInternet;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContratoAnclajeType extends AbstractType
+class ContratoInternetType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('codigo')
+            ->add('folio')
 
             ->add('fecha', DateType::class, array(
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => true
+            ))
+
+            ->add('provincia', EntityType::class, array(
+                'label' => 'Provincia :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Provincia',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
+
+            ->add('municipio', EntityType::class, array(
+                'label' => 'Municipio :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Municipio',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
 
             ->add('institucion', EntityType::class, array(
@@ -36,11 +51,7 @@ class ContratoAnclajeType extends AbstractType
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
 
-            ->add('login')
-
-            ->add('contrasenna')
-
-            ->add('accesotelefonico')
+            ->add('telefono')
 
             ->add('personal2', EntityType::class, array(
                 'label' => 'Director de la Institución: Nombre y Apellidos :',
@@ -48,13 +59,37 @@ class ContratoAnclajeType extends AbstractType
                 'class' => 'App\Entity\PersonalMedico',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
+
+            ->add('serviciocorreo', ChoiceType::class, [
+                'required' => false,
+                'placeholder' => 'Seleccione una opción',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required'),
+                'choices' => [
+                    'Si' => 'Si',
+                    'No' => 'No'
+                ],
+            ])
+
+            ->add('accesoredes', ChoiceType::class, [
+                'required' => false,
+                'placeholder' => 'Seleccione una opción',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required'),
+                'choices' => [
+                    'Si' => 'Si',
+                    'No' => 'No'
+                ],
+            ])
+
+            ->add('login')
+
+            ->add('pass')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ContratoAnclaje::class,
+            'data_class' => ContratoInternet::class,
         ]);
     }
 }

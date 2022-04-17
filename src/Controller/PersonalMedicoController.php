@@ -7,6 +7,7 @@ use App\Form\PersonalMedicoType;
 use App\Repository\PersonalMedicoRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,6 +17,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PersonalMedicoController extends AbstractController
 {
+    public $personalmRepository;
+
+    public function __construct(PersonalMedicoRepository $personalmRepository)
+    {
+        $this->personalmRepository = $personalmRepository;
+    }
+
     /**
      * @Route("/", name="personalmedico_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
@@ -75,13 +83,13 @@ class PersonalMedicoController extends AbstractController
         }
 
         return $this->render('personalmedico/edit.html.twig', [
-            'personalme' => $entity,
+            'personalmed' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="personalmedico_remove")
+     * @Route("/delete/{id}", name="personalmedico_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
@@ -101,5 +109,33 @@ class PersonalMedicoController extends AbstractController
         }
 
         return $this->redirectToRoute('personalmedico_index');
+    }
+
+    /**
+     * @Route("/change/personalmdenegar", name="change_personal_denegar", methods={"GET","POST"})
+     */
+    public function changeEnDenegarPersonal(Request $request): JsonResponse
+    {
+        $value = $request->get('value') == 'false' ? false : true;
+        $id = $request->get('id');
+        $entity = $this->personalmRepository->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $action = 'esDenegar';
+        $entity->setEsDenegar($value);
+        $entityManager->persist($entity);
+        $entityManager->flush();
+
+        return new JsonResponse(array('response' => $action));
+    }
+
+    /**
+     * @Route("/getespecialidadxcargo", name="especialidad_x_cargo", methods={"GET","POST"})
+     */
+    public function getEspecialidadxCargo(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $cargo_id = $request->get('cargo_id');
+        $especialidad = $em->getRepository('App:Especialidad')->findByCargo($cargo_id);
+        return new JsonResponse($especialidad);
     }
 }

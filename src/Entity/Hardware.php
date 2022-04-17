@@ -2,16 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\RamRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
- * @ORM\Entity(repositoryClass=RamRepository::class)
- * @UniqueEntity(fields={"codigo"},message="Ya existe este Número de RAM en nuestra Base de Datos.")
+ * @ORM\Entity(repositoryClass="App\Repository\HardwareRepository")
+ * @UniqueEntity(fields={"serie"},message="Ya existe este Número de Hardware en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
-class Ram
+class Hardware
 {
     /**
      * @ORM\Id
@@ -21,9 +23,16 @@ class Ram
     private $id;
 
     /**
+     * @var string $accesoredes
+     * @ORM\Column(name="componentes", type="string", nullable=false, length=30)
+     * @Assert\Choice(choices={"Memoria RAM","Fuente de alimentación","Módem","Memoria Cache","Disco Duro","Lectora de CD/DVD","Disqueteras","Tarjetas de video","Teclado","Mouse","Bocinas","Tarjeta de Sonido","Otros"},  message="Debe seleccionar una Opción")
+     */
+    private $componentes;
+
+    /**
      * @var string
      * @Assert\Regex(pattern="/\w/", match=true, message="Debe contener solo números")
-     * @ORM\Column(name="numero", type="string",  nullable=true, length=80, unique=true)
+     * @ORM\Column(name="numero", type="string",  nullable=true, length=80)
      * @Assert\Length(min=1, max=11, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $numero;
@@ -58,13 +67,20 @@ class Ram
 
     /**
      * @var string
-     * @ORM\Column(name="serie", type="string",  nullable=true, length=80)
+     * @ORM\Column(name="serie", type="string",  nullable=true, length=80, unique=true)
      * @Assert\Length(min=1, max=80, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $serie;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "App\Entity\FichaTecnica", inversedBy = "ram")
+     * @var string
+     * @ORM\Column(name="modelo", type="string",  nullable=true, length=80, unique=true)
+     * @Assert\Length(min=1, max=80, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
+     */
+    private $modelo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\FichaTecnica", inversedBy = "hardware")
      * @ORM\JoinColumn(nullable=true)
      */
     private $fichatecnica;
@@ -79,21 +95,9 @@ class Ram
         return $this->numero;
     }
 
-    public function setNumero(string $numero): self
+    public function setNumero(?string $numero): self
     {
         $this->numero = $numero;
-
-        return $this;
-    }
-
-    public function getFichatecnica(): ?FichaTecnica
-    {
-        return $this->fichatecnica;
-    }
-
-    public function setFichatecnica(?FichaTecnica $fichatecnica): self
-    {
-        $this->fichatecnica = $fichatecnica;
 
         return $this;
     }
@@ -134,6 +138,18 @@ class Ram
         return $this;
     }
 
+    public function getVelocidad(): ?string
+    {
+        return $this->velocidad;
+    }
+
+    public function setVelocidad(?string $velocidad): self
+    {
+        $this->velocidad = $velocidad;
+
+        return $this;
+    }
+
     public function getSerie(): ?string
     {
         return $this->serie;
@@ -146,15 +162,40 @@ class Ram
         return $this;
     }
 
-    public function getVelocidad(): ?string
+    public function getFichatecnica(): ?FichaTecnica
     {
-        return $this->velocidad;
+        return $this->fichatecnica;
     }
 
-    public function setVelocidad(?string $velocidad): self
+    public function setFichatecnica(?FichaTecnica $fichatecnica): self
     {
-        $this->velocidad = $velocidad;
+        $this->fichatecnica = $fichatecnica;
 
         return $this;
     }
+
+    public function getComponentes(): ?string
+    {
+        return $this->componentes;
+    }
+
+    public function setComponentes(string $componentes): self
+    {
+        $this->componentes = $componentes;
+
+        return $this;
+    }
+
+    public function getModelo(): ?string
+    {
+        return $this->modelo;
+    }
+
+    public function setModelo(?string $modelo): self
+    {
+        $this->modelo = $modelo;
+
+        return $this;
+    }
+
 }

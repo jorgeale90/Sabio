@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\Type\UserPerfilType;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -115,5 +117,51 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index');
+    }
+
+    /**
+     * @Route("/change/userdenegar", name="change_user_denegar", methods={"GET","POST"})
+     */
+    public function changeEnDenegarUser(Request $request): JsonResponse
+    {
+        $value = $request->get('value') == 'false' ? false : true;
+        $id = $request->get('id');
+        $entity = $this->usuarioRepository->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $action = 'esDenegar';
+        $entity->setEsDenegar($value);
+        $entityManager->persist($entity);
+        $entityManager->flush();
+
+        return new JsonResponse(array('response' => $action));
+    }
+
+    /**
+     * @Route("/perfil/mostrar", name="user_perfil", methods={"GET","POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     */
+    public function perfilUser(Request $request): Response
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $form = $this->createForm(UserPerfilType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $plainpwd = $user->getPassword();
+            $encoded = $this->passwordEncoder->encodePassword($user,$plainpwd);
+            $user->setPassword($encoded);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->render('user/perfil.html.twig', [
+            'user'    => $user,
+            'form' => $form->createView(),
+        ]);
     }
 }

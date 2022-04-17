@@ -3,6 +3,8 @@
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="{{ asset('page/dashboard/switchery/dist/switchery.min.css') }}" rel="stylesheet">
     <!-- Data Table Css -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/datatables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
@@ -12,7 +14,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Usuarios</li>
         </ol>
     </nav>
@@ -36,20 +37,20 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="table-1">
+                    <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
                             <th>Imagen</th>
+                            <th>Fullname</th>
                             <th>Email</th>
                             <th>Role</th>
+                            <th><center>Denegar Acceso</center></th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for use in user %}
                             <tr>
-                                <td>{{ use.id }}</td>
                                 <td>
                                     {% if use.image != null %}
                                     <img src="{{ vich_uploader_asset(use, 'imageFile', 'App\\Entity\\User') }}" alt="user" data-toggle="tooltip" title="" data-original-title="{{ use.email }}" width="35">    
@@ -57,8 +58,13 @@
                                     <img src="{{ asset('page/dashboard/assets/img/users/user-0.png') }}" alt="user" data-toggle="tooltip" title="" data-original-title="{{ use.email }}" width="35">
                                     {% endif %}
                                 </td>
+                                <td>{{ use.fullname }}</td>
                                 <td>{{ use.email }}</td>
                                 <td>{{ use.roles ? use.roles|json_encode : '' }}</td>
+                                <td>
+                                    <center><input type="checkbox" data-value="{{ use.id }}"
+                                                   class="js-small-portero" {% if use.esDenegar %} checked {% endif %}></center>
+                                </td>
                                 <td>
                                     <center>
                                         <button class="btn btn-primary mostrar" value="#" data-toggle="tooltip" title="Mostrar"><i class="fa fa-eye"></i> Mostrar</button>
@@ -102,6 +108,8 @@
     <div class="md-overlay"></div>
 {% endblock %}
 {% block javascript %}
+    <!-- Switchery -->
+    <script src="{{ asset('page/dashboard/switchery/dist/switchery.min.js') }}"></script>
     <!-- JS Libraies -->
     <script src="{{ asset('page/dashboard/assets/bundles/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -141,26 +149,63 @@
             {% endfor %}
         });
 
-        $('.editar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres editar este Usuario?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+        var dataTable = $('#simpletablet').DataTable({
+            language: {
+                oPaginate: {
+                    sNext: '<i class="fa fa-forward"></i>',
+                    sPrevious: '<i class="fa fa-backward"></i>',
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            },
 
-        $('.eliminar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres eliminar este Usuario?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+            drawCallback: function (row, data, dataIndex) {
 
-        $('.mostrar').on('click', function () {
-            window.location = $(this).val();
+            $('.editar').on('click', function () {
+                var link = $(this).val();
+                $('#modal-19').addClass('md-show');
+                $('#mensaje').text('¿Estas seguro que quieres editar este Usuario?');
+                $('.aceptar').on('click', function () {
+                    window.location = link;
+                });
+            });
+
+            $('.eliminar').on('click', function () {
+                var link = $(this).val();
+                $('#modal-19').addClass('md-show');
+                $('#mensaje').text('¿Estas seguro que quieres eliminar este Usuario?');
+                $('.aceptar').on('click', function () {
+                    window.location = link;
+                });
+            });
+
+            $('.mostrar').on('click', function () {
+                window.location = $(this).val();
+            });
+
+            var elemst = Array.prototype.slice.call(document.querySelectorAll('.js-small-portero'));
+
+                elemst.forEach(function (html) {
+                    if (!html.dataset.switchery) {
+                        var switchery = new Switchery(html, {color: '#4680ff', jackColor: '#fff', size: 'small'});
+                        $(html).on('change', function () {
+                            $.ajax({
+                                url: '{{ path('change_user_denegar') }}',
+                                path: 'post',
+                                data: {value: html.checked, id: $(this).data('value')},
+                                success: function (res) {
+                                    if (res.response === 'esDenegar') {
+                                           window.location = "{{ path('user_index') }}";
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log(error)
+                                }
+                            })
+                        })
+                    }
+                });
+            }
         });
     </script>
 {% endblock %}

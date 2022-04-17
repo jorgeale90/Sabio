@@ -19,6 +19,46 @@ class MunicipioRepository extends ServiceEntityRepository
         parent::__construct($registry, Municipio::class);
     }
 
+    public function findByProvincia($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciaca($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciacc($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciaci($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciaft($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return Municipio[] Returns an array of Municipio objects
     //  */

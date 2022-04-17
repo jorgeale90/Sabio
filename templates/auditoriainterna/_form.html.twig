@@ -1,14 +1,89 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Nacionalidad <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">No. Identificación <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre de la Nacionalidad' } }) }}
+            {{ form_widget(form.noidentificacion, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Número de Identificación' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
+            {% if(form_errors(form.noidentificacion)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.noidentificacion)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Acción Realizada <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.accionrealizada, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Acción Realizada' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.accionrealizada)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.accionrealizada)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Fecha <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.fecha, { 'attr': { 'class': 'form-control', 'type': 'date' }}) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.fecha)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.fecha)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Area <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.area, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Area Auditada' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.area)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.area)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Participantes <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.user) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.user)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.user)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Situaciones <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.situaciones, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Situaciones Auditada' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.situaciones)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.situaciones)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -16,7 +91,7 @@
     </div>
 </div>
 <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Nacionalidad') }}</button>
-    <a class="btn btn-light" href="{{ path('nacionalidad_index') }}">Volver al Listado</a>
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Auditoría Interna') }}</button>
+    <a class="btn btn-light" href="{{ path('auditoriainterna_index') }}">Volver al Listado</a>
 </div>
 {{ form_end(form) }}

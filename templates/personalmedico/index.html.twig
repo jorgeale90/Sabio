@@ -3,6 +3,8 @@
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
+    <!-- Switchery -->
+    <link href="{{ asset('page/dashboard/switchery/dist/switchery.min.css') }}" rel="stylesheet">
     <!-- Data Table Css -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/datatables/datatables.min.css') }}">
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
@@ -12,9 +14,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Personal Médico</li>
         </ol>
     </nav>
@@ -26,27 +25,28 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="table-1">
+                    <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
                             <th>No. Registro</th>
+                            <th>CI</th>
                             <th>Nombre y Apellidos</th>
-                            <th>Teléfono Fijo</th>
-                            <th>Teléfono Móvil</th>
-                            <th>Email</th>
+                            <th>Cargo</th>
+                            <th><center>Denegar Acceso</center></th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for ca in personalmedico %}
                             <tr>
-                                <td>{{ ca.id }}</td>
                                 <td>{{ ca.noregistro }}</td>
+                                <td>{{ ca.ci }}</td>
                                 <td>{{ ca.nombreCompleto }}</td>
-                                <td>{{ ca.telefonofijo }}</td>
-                                <td>{{ ca.movil }}</td>
-                                <td>{{ ca.email }}</td>
+                                <td>{{ ca.cargo }}</td>
+                                <td>
+                                    <center><input type="checkbox" data-value="{{ ca.id }}"
+                                                   class="js-small-personal" {% if ca.esDenegar %} checked {% endif %}></center>
+                                </td>
                                 <td>
                                     <center>
                                         <button class="btn btn-primary editar" value="{{ path('personalmedico_edit', {'id': ca.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
@@ -87,6 +87,8 @@
     <div class="md-overlay"></div>
 {% endblock %}
 {% block javascript %}
+    <!-- Switchery -->
+    <script src="{{ asset('page/dashboard/switchery/dist/switchery.min.js') }}"></script>
     <!-- JS Libraies -->
     <script src="{{ asset('page/dashboard/assets/bundles/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -126,26 +128,63 @@
             {% endfor %}
         });
 
-        $('.editar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres editar este Personal Médico?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+        var dataTable = $('#simpletablet').DataTable({
+            language: {
+                oPaginate: {
+                    sNext: '<i class="fa fa-forward"></i>',
+                    sPrevious: '<i class="fa fa-backward"></i>',
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            },
 
-        $('.eliminar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres eliminar este Personal Médico?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+            drawCallback: function (row, data, dataIndex) {
 
-        $('.mostrar').on('click', function () {
-            window.location = $(this).val();
+            $('.editar').on('click', function () {
+                var link = $(this).val();
+                $('#modal-19').addClass('md-show');
+                $('#mensaje').text('¿Estas seguro que quieres editar este Personal Médico?');
+                $('.aceptar').on('click', function () {
+                    window.location = link;
+                });
+            });
+
+            $('.eliminar').on('click', function () {
+                var link = $(this).val();
+                $('#modal-19').addClass('md-show');
+                $('#mensaje').text('¿Estas seguro que quieres eliminar este Personal Médico?');
+                $('.aceptar').on('click', function () {
+                    window.location = link;
+                });
+            });
+
+            $('.mostrar').on('click', function () {
+                window.location = $(this).val();
+            });
+
+            var elemst = Array.prototype.slice.call(document.querySelectorAll('.js-small-personal'));
+
+                elemst.forEach(function (html) {
+                    if (!html.dataset.switchery) {
+                        var switchery = new Switchery(html, {color: '#4680ff', jackColor: '#fff', size: 'small'});
+                        $(html).on('change', function () {
+                            $.ajax({
+                                url: '{{ path('change_personal_denegar') }}',
+                                path: 'post',
+                                data: {value: html.checked, id: $(this).data('value')},
+                                success: function (res) {
+                                    if (res.response === 'esDenegar') {
+                                           window.location = "{{ path('personalmedico_index') }}";
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log(error)
+                                }
+                            })
+                        })
+                    }
+                });
+            }
         });
     </script>
 {% endblock %}

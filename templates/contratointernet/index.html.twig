@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Contrato Anclaje{% endblock %}
+{% block title %}Listado Contrato Internet{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -12,24 +12,21 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Contratos</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Contrato Anclaje</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Contrato Internet</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> Contrato Anclaje</h4>
+                <h4><strong>Listado</strong> Contrato Internet</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="table-1">
+                    <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
-                            <th>Código</th>
+                            <th>Folio</th>
                             <th>Fecha</th>
                             <th>Login</th>
                             <th>Solicitante</th>
@@ -40,15 +37,15 @@
                         <tbody>
                         {% for entities in contrato %}
                             <tr>
-                                <td>{{ entities.codigo }}</td>
+                                <td>{{ entities.folio }}</td>
                                 <td>{{ entities.fecha | date('d/m/Y') }}</td>
                                 <td>{{ entities.login }}</td>
                                 <td>{{ entities.personal1 }}</td>
                                 <td>{{ entities.institucion }}</td>
                                 <td>
                                     <center>
-                                        <button class="btn btn-primary editar" value="{{ path('contratoanclaje_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('contratoanclaje_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                        <button class="btn btn-primary editar" value="{{ path('contratointernet_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('contratointernet_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
                                     </center>
                                 </td>
                             </tr>
@@ -59,8 +56,8 @@
             </div>
 
         </div>
-        <a class="btn btn-primary" type="button" href="{{ path('contratoanclaje_new') }}"><i class="fa fa-plus"></i> Añadir Contrato Anclaje</a>
-        <a class="btn btn-warning" type="button" href="{{ path('contratoanclaje_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+        <a class="btn btn-primary" type="button" href="{{ path('contratointernet_new') }}"><i class="fa fa-plus"></i> Añadir Contrato Internet</a>
+        <a class="btn btn-warning" type="button" href="{{ path('contratointernet_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
     </div>
 
     <div class="md-modal md-effect-1" id="modal-19">
@@ -124,26 +121,40 @@
             {% endfor %}
         });
 
-        $('.editar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres editar esta Contrato de Anclaje?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+        var dataTable = $('#simpletablet').DataTable({
+            language: {
+                oPaginate: {
+                    sNext: '<i class="fa fa-forward"></i>',
+                    sPrevious: '<i class="fa fa-backward"></i>',
+                    sFirst: '<i class="fa fa-step-backward"></i>',
+                    sLast: '<i class="fa fa-step-forward"></i>'
+                }
+            },
 
-        $('.eliminar').on('click', function () {
-            var link = $(this).val();
-            $('#modal-19').addClass('md-show');
-            $('#mensaje').text('Estas seguro que quieres eliminar esta Contrato de Anclaje?');
-            $('.aceptar').on('click', function () {
-                window.location = link;
-            });
-        });
+            drawCallback: function (row, data, dataIndex) {
 
-        $('.mostrar').on('click', function () {
-            window.location = $(this).val();
+                $('.editar').on('click', function () {
+                    var link = $(this).val();
+                    $('#modal-19').addClass('md-show');
+                    $('#mensaje').text('¿Estas seguro que quieres editar este Contrato de Internet?');
+                    $('.aceptar').on('click', function () {
+                        window.location = link;
+                    });
+                });
+
+                $('.eliminar').on('click', function () {
+                    var link = $(this).val();
+                    $('#modal-19').addClass('md-show');
+                    $('#mensaje').text('¿Estas seguro que quieres eliminar este Contrato de Internet?');
+                    $('.aceptar').on('click', function () {
+                        window.location = link;
+                    });
+                });
+
+                $('.mostrar').on('click', function () {
+                    window.location = $(this).val();
+                });
+            }
         });
     </script>
 {% endblock %}

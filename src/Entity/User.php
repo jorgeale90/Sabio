@@ -9,14 +9,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"fullname"}, message="Ya existe este nombre completo en nuestra Base de Datos en nuestra Base de Datos.")
  * @UniqueEntity(fields={"email"}, message="Ya existe una cuenta con este correo.")
  * @Vich\Uploadable
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -26,7 +29,10 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
+     * @Assert\Regex(pattern="/\d/", match=false, message="Debe contener solo letras")
+     * @ORM\Column(name="fullname", type="string", length=80)
+     * @Assert\Length(min=2, max=80, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $fullname;
 
@@ -47,7 +53,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $image;
@@ -57,6 +63,23 @@ class User implements UserInterface
      * @var File
      */
     private $imageFile;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $esDenegar;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Institucion", inversedBy = "user")
+     * @ORM\JoinColumn(name="institucion_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Institución")
+     */
+    protected $institucion;
+
+    public function __toString()
+    {
+        return $this->getFullname();
+    }
 
     public function serialize()
     {
@@ -192,6 +215,30 @@ class User implements UserInterface
     public function setFullname(string $fullname): self
     {
         $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    public function getEsDenegar(): ?bool
+    {
+        return $this->esDenegar;
+    }
+
+    public function setEsDenegar(?bool $esDenegar): self
+    {
+        $this->esDenegar = $esDenegar;
+
+        return $this;
+    }
+
+    public function getInstitucion(): ?Institucion
+    {
+        return $this->institucion;
+    }
+
+    public function setInstitucion(?Institucion $institucion): self
+    {
+        $this->institucion = $institucion;
 
         return $this;
     }

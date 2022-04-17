@@ -7,11 +7,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonalMedicoRepository")
  * @UniqueEntity(fields={"ci"},message="Ya existe este Personal Médico en nuestra Base de Datos.")
  * @UniqueEntity(fields={"noregistro"},message="Ya existe este No. de Registro en nuestra Base de Datos.")
+ * @Vich\Uploadable
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class PersonalMedico
 {
@@ -195,6 +201,49 @@ class PersonalMedico
      */
     protected $contratointernet2;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FichaTecnica", mappedBy="personal1")
+     */
+    protected $fichatecnica1;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FichaTecnica", mappedBy="personal2")
+     */
+    protected $fichatecnica2;
+
+    /**
+     * @Vich\UploadableField(mapping="personal_image", fileNameProperty="imageName", size="imageSize")
+     *
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string",  nullable=true)
+     *
+     * @var string|null
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="integer",  nullable=true)
+     *
+     * @var int|null
+     */
+    private $imageSize;
+
+    /**
+     * @ORM\Column(type="datetime",  nullable=true)
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $esDenegar;
+
     public function __construct()
     {
         $this->organizacionpolitica = new ArrayCollection();
@@ -207,6 +256,8 @@ class PersonalMedico
         $this->contratoanclaje2 = new ArrayCollection();
         $this->contratointernet1 = new ArrayCollection();
         $this->contratointernet2 = new ArrayCollection();
+        $this->fichatecnica1 = new ArrayCollection();
+        $this->fichatecnica2 = new ArrayCollection();
     }
 
     public function getNombreCompleto() {
@@ -219,6 +270,43 @@ class PersonalMedico
 
         return $this->getNombreCompleto();
 
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageSize(?int $imageSize): void
+    {
+        $this->imageSize = $imageSize;
+    }
+
+    public function getImageSize(): ?int
+    {
+        return $this->imageSize;
     }
 
     public function getId(): ?int
@@ -708,6 +796,90 @@ class PersonalMedico
                 $contratointernet2->setPersonal2(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FichaTecnica[]
+     */
+    public function getFichatecnica1(): Collection
+    {
+        return $this->fichatecnica1;
+    }
+
+    public function addFichatecnica1(FichaTecnica $fichatecnica1): self
+    {
+        if (!$this->fichatecnica1->contains($fichatecnica1)) {
+            $this->fichatecnica1[] = $fichatecnica1;
+            $fichatecnica1->setPersonal1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFichatecnica1(FichaTecnica $fichatecnica1): self
+    {
+        if ($this->fichatecnica1->removeElement($fichatecnica1)) {
+            // set the owning side to null (unless already changed)
+            if ($fichatecnica1->getPersonal1() === $this) {
+                $fichatecnica1->setPersonal1(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FichaTecnica[]
+     */
+    public function getFichatecnica2(): Collection
+    {
+        return $this->fichatecnica2;
+    }
+
+    public function addFichatecnica2(FichaTecnica $fichatecnica2): self
+    {
+        if (!$this->fichatecnica2->contains($fichatecnica2)) {
+            $this->fichatecnica2[] = $fichatecnica2;
+            $fichatecnica2->setPersonal2($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFichatecnica2(FichaTecnica $fichatecnica2): self
+    {
+        if ($this->fichatecnica2->removeElement($fichatecnica2)) {
+            // set the owning side to null (unless already changed)
+            if ($fichatecnica2->getPersonal2() === $this) {
+                $fichatecnica2->setPersonal2(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getEsDenegar(): ?bool
+    {
+        return $this->esDenegar;
+    }
+
+    public function setEsDenegar(?bool $esDenegar): self
+    {
+        $this->esDenegar = $esDenegar;
 
         return $this;
     }

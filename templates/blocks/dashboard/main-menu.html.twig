@@ -11,6 +11,7 @@
         <a href="{{ path('dashboard') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
         <a href="{{ path('user_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Usuarios</span></a>
         <a href="{{ path('personalmedico_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Personal Médico</span></a>
+        <a href="{{ path('fichatecnica_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Ficha Técnica</span></a>
         <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Auditoría</span></a>
         <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Manager File</span></a>
       </li>
@@ -21,6 +22,7 @@
           <li><a class="nav-link" href="{{ path('pais_index') }}">País</a></li>
           <li><a class="nav-link" href="{{ path('provincia_index') }}">Provincia</a></li>
           <li><a class="nav-link" href="{{ path('municipio_index') }}">Municipio</a></li>
+          <li><a class="nav-link" href="{{ path('institucion_index') }}">Institución</a></li>
           <li><a class="nav-link" href="{{ path('nacionalidad_index') }}">Nacionalidad</a></li>
         </ul>
       </li>
@@ -35,7 +37,6 @@
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Generales</span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ path('sexo_index') }}">Sexo</a></li>
-          <li><a class="nav-link" href="{{ path('institucion_index') }}">Institución</a></li>
           <li><a class="nav-link" href="{{ path('cargo_index') }}">Cargo u Ocupación</a></li>
           <li><a class="nav-link" href="{{ path('especialidad_index') }}">Especialidad</a></li>
           <li><a class="nav-link" href="{{ path('organizacionpolitica_index') }}">Organización Política</a></li>
@@ -44,7 +45,7 @@
       <li class="dropdown">
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Sistema Contabilidad</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('sistemacontable_index') }}">Sistema Contable</a></li>
+          <li><a class="nav-link" href="{{ path('sistemacontable_index') }}">Control Sistema Contable</a></li>
           <li><a class="nav-link" href="{{ path('sistemamodulo_index') }}">Sistema Módulo</a></li>
         </ul>
       </li>
@@ -54,16 +55,27 @@
           <li><a class="nav-link" href="{{ path('marca_index') }}">Marca</a></li>
           <li><a class="nav-link" href="{{ path('modelo_index') }}">Modelo</a></li>
           <li><a class="nav-link" href="{{ path('tipomedio_index') }}">Tipo Medio</a></li>
-          <li><a class="nav-link" href="{{ path('mediotecnologico_index') }}">Medio Tecnológico</a></li>
+          <li><a class="nav-link" href="{{ path('mediotecnologico_index') }}">Control Medio Tecnológico</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Contratos</span></a>
         <ul class="dropdown-menu">
           <li><a class="nav-link" href="{{ path('contratocorreo_index') }}">Contrato Correo</a></li>
-          <li><a class="nav-link" href="#">Contrato Anclaje</a></li>
-          <li><a class="nav-link" href="#">Contrato Internet</a></li>
-          <li><a class="nav-link" href="#">Contrato Tecnología</a></li>
+          <li><a class="nav-link" href="{{ path('contratoanclaje_index') }}">Contrato Anclaje</a></li>
+          <li><a class="nav-link" href="{{ path('contratointernet_index') }}">Contrato Internet</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Registros</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ path('auditoriainterna_index') }}">Auditoría Interna</a></li>
+          <li><a class="nav-link" href="#">Entrada/Salidas Equipos</a></li>
+          <li><a class="nav-link" href="#">Control Soporte</a></li>
+          <li><a class="nav-link" href="#">Incidencias</a></li>
+          <li><a class="nav-link" href="#">Mantenimiento - Reparación</a></li>
+          <li><a class="nav-link" href="#">Memorias</a></li>
+          <li><a class="nav-link" href="#">Salvas</a></li>
         </ul>
       </li>
     </ul>

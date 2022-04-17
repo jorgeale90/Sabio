@@ -7,10 +7,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Localización</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('municipio_index') }}"><i class="far fa-file"></i> Listado Municipio</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Municipio</li>
         </ol>
     </nav>
@@ -18,7 +14,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Municipio</h3></h4>
+                <h4><strong>Editar</strong> Municipio</h4>
             </div>
             {{ include('municipio/_form.html.twig', {'button_label': 'Editar Municipio'}) }}
         </div>

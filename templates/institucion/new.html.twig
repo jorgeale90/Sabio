@@ -7,10 +7,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('institucion_index') }}"><i class="far fa-file"></i> Listado Institución</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Institución</li>
         </ol>
     </nav>
@@ -28,4 +24,40 @@
     <!-- Select2 -->
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
+    <script>
+    $('#{{ form.provincia.vars.id }}').on('change', function (e) {
+            var data = {
+                provincia_id: $(this).val()
+            };
+            $('#{{ form.municipio.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('municipio_x_provincia') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Municipio</option>';
+                        $.each(response, function (i, municipio) {
+                            option += '<option value='+ municipio.id +'>'+ municipio.nombre +'</option>'
+                        });
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Municipios en esta Provincia.</option>';
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Municipios de la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+    });
+    </script>
 {% endblock %}

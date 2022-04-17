@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PaisRepository")
  * @UniqueEntity(fields={"nombre"}, message="Ya existe este País en nuestra Base de Datos en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class Pais
 {
@@ -34,7 +37,7 @@ class Pais
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity="Provincia", mappedBy="pais")
+     * @ORM\OneToMany(targetEntity="App\Entity\Provincia", mappedBy="pais")
      */
     protected $provincia;
 

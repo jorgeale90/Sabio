@@ -19,6 +19,14 @@ class EspecialidadRepository extends ServiceEntityRepository
         parent::__construct($registry, Especialidad::class);
     }
 
+    public function findByCargo($cargo_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Especialidad m WHERE m.cargo = :cargo_id');
+        $consulta->setParameter('cargo_id', $cargo_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return Especialidad[] Returns an array of Especialidad objects
     //  */

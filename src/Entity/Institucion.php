@@ -7,10 +7,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\InstitucionRepository")
  * @UniqueEntity(fields={"nombre"},message="Ya existe esta Institución en nuestra Base de Datos.")
+ * @Audit\Auditable()
+ * @Audit\Security(view={"ROLE_ADMIN"})
  */
 class Institucion
 {
@@ -50,32 +53,51 @@ class Institucion
     private $direccion;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "Municipio", inversedBy = "institucion")
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "institucion")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Provincia")
+     */
+    protected $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Municipio", inversedBy = "institucion")
      * @ORM\JoinColumn(name="municipio_id", referencedColumnName="id", onDelete = "CASCADE")
      * @Assert\NotBlank(message="Debe seleccionar un Municipio")
      */
     protected $municipio;
 
     /**
-     * @ORM\OneToMany(targetEntity="ContratoCorreo", mappedBy="institucion")
+     * @ORM\OneToMany(targetEntity="App\Entity\ContratoCorreo", mappedBy="institucion")
      */
     protected $contratocorreo;
 
     /**
-     * @ORM\OneToMany(targetEntity="ContratoAnclaje", mappedBy="institucion")
+     * @ORM\OneToMany(targetEntity="App\Entity\ContratoAnclaje", mappedBy="institucion")
      */
     protected $contratoanclaje;
 
     /**
-     * @ORM\OneToMany(targetEntity="ContratoInternet", mappedBy="institucion")
+     * @ORM\OneToMany(targetEntity="App\Entity\ContratoInternet", mappedBy="institucion")
      */
     protected $contratointernet;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FichaTecnica", mappedBy="institucion")
+     */
+    protected $fichatecnica;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="institucion")
+     */
+    protected $user;
 
     public function __construct()
     {
         $this->contratocorreo = new ArrayCollection();
         $this->contratoanclaje = new ArrayCollection();
         $this->contratointernet = new ArrayCollection();
+        $this->fichatecnica = new ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     public function __toString() {
@@ -233,6 +255,78 @@ class Institucion
             // set the owning side to null (unless already changed)
             if ($contratointernet->getInstitucion() === $this) {
                 $contratointernet->setInstitucion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FichaTecnica[]
+     */
+    public function getFichatecnica(): Collection
+    {
+        return $this->fichatecnica;
+    }
+
+    public function addFichatecnica(FichaTecnica $fichatecnica): self
+    {
+        if (!$this->fichatecnica->contains($fichatecnica)) {
+            $this->fichatecnica[] = $fichatecnica;
+            $fichatecnica->setInstitucion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFichatecnica(FichaTecnica $fichatecnica): self
+    {
+        if ($this->fichatecnica->removeElement($fichatecnica)) {
+            // set the owning side to null (unless already changed)
+            if ($fichatecnica->getInstitucion() === $this) {
+                $fichatecnica->setInstitucion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setInstitucion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getInstitucion() === $this) {
+                $user->setInstitucion(null);
             }
         }
 

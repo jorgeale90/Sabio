@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -15,7 +16,6 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Validator\Constraints\File;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\CallbackTransformer;
-use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 class UserType extends AbstractType
 {
@@ -32,6 +32,13 @@ class UserType extends AbstractType
             ->add('fullname')
 
             ->add('email')
+
+            ->add('institucion', EntityType::class, array(
+                'label' => 'Institución :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Institucion',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
 
             ->add('password', RepeatedType::class, array(
                     'type' => PasswordType::class,
@@ -55,7 +62,7 @@ class UserType extends AbstractType
             ->add('imageFile', VichFileType::class, [
                 'required' => false,
                 'allow_delete' => true,
-                'download_uri' => true,
+                'download_uri' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '5M',

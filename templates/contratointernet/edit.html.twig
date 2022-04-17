@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Contrato Anclaje{% endblock %}
+{% block title %}Editar Contrato Internet{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -7,20 +7,16 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Contratos</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('contratoanclaje_index') }}"><i class="far fa-file"></i> Listado Anclaje</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Anclaje</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Contrato Internet</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Contrato Anclaje</h4>
+                <h4><strong>Editar</strong> Contrato Internet</h4>
             </div>
-            {{ include('contratoanclaje/_form.html.twig', {'button_label': 'Editar Contrato Anclaje'}) }}
+            {{ include('contratointernet/_form.html.twig', {'button_label': 'Editar Contrato Internet'}) }}
         </div>
     </div>
 {% endblock %}
@@ -28,4 +24,75 @@
     <!-- Select2 -->
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
+    <script>
+    $('#{{ form.provincia.vars.id }}').on('change', function (e) {
+            var data = {
+                provincia_id: $(this).val()
+            };
+            $('#{{ form.municipio.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('municipioci_x_provinciaci') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Municipio</option>';
+                        $.each(response, function (i, municipio) {
+                            option += '<option value='+ municipio.id +'>'+ municipio.nombre +'</option>'
+                        });
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Municipios en esta Provincia.</option>';
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Municipios de la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+    });
+
+    $('#{{ form.municipio.vars.id }}').on('change', function (e) {
+            var data = {
+                municipio_id: $(this).val()
+            };
+            $('#{{ form.institucion.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('institucionci_x_municipioci') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione la Institución</option>';
+                        $.each(response, function (i, institucion) {
+                            option += '<option value='+ institucion.id +'>'+ institucion.nombre +'</option>'
+                        });
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Instituciones en este Municipio.</option>';
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Instituciones en la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+    });
+    </script>
 {% endblock %}

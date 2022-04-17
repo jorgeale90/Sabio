@@ -18,12 +18,42 @@
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Código <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.codigo, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Código del Contrato' } }) }}
+            {{ form_widget(form.codigo, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Código del Anclaje' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.codigo)) %}
                 <div class="buttons">
                     <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.codigo)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.provincia, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.provincia)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.provincia)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.municipio, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.municipio)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.municipio)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -46,7 +76,7 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Nombre y Apellidos del Solicitante <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Solicitante <span class="required">*</span> :</label>
         <div class="col-sm-7">
             {{ form_widget(form.personal1, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Nombre y Apellidos del Solicitante' } }) }}
         </div>
@@ -76,59 +106,29 @@
     </div>
 
     <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Contraseña <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.contrasenna, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Contraseña del Solicitante' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.contrasenna)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.contrasenna)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
         <label class="col-sm-3 col-form-label">Acceso Telefónico <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.accesotelefonico, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Acceso Telefónico' } }) }}
+            {{ form_widget(form.accesotelefonico, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Acceso Telefónico del Solicitante' } }) }}
         </div>
         <div class="col-2">
             {% if(form_errors(form.accesotelefonico)) %}
                 <div class="buttons">
                     <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.accesotelefonico)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Salida Internacional <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.salidainternacional, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Autorización de Salida Internacional' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.salidainternacional)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.salidainternacional)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Personal <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.personal, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Personal' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.personal)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.personal)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Internet <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.internet, { 'attr': { 'class': 'form-control select2', 'required': 'required', 'placeholder': 'Internet' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.internet)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.internet)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -151,7 +151,7 @@
     </div>
 </div>
 <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Contrato Correo') }}</button>
-    <a class="btn btn-light" href="{{ path('contratocorreo_index') }}">Volver al Listado</a>
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Contrato Anclaje') }}</button>
+    <a class="btn btn-light" href="{{ path('contratoanclaje_index') }}">Volver al Listado</a>
 </div>
 {{ form_end(form) }}

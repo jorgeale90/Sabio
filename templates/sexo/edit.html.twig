@@ -3,10 +3,6 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ path('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('datos_general') }}"><i class="far fa-file"></i> Datos Generales</a></li>
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Generales</a></li>
-            <li class="breadcrumb-item"><a href="{{ path('sexo_index') }}"><i class="far fa-file"></i> Listado Sexo</a></li>
             <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Sexo</li>
         </ol>
     </nav>
@@ -14,7 +10,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Sexo</h3></h4>
+                <h4><strong>Editar</strong> Sexo</h4>
             </div>
             {{ include('sexo/_form.html.twig', {'button_label': 'Editar Sexo'}) }}
         </div>
