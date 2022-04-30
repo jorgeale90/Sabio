@@ -33,7 +33,7 @@ class FichaTecnica
     /**
      * @ORM\ManyToOne(targetEntity = "App\Entity\Municipio", inversedBy = "fichatecnica")
      * @ORM\JoinColumn(name="municipio_id", referencedColumnName="id", onDelete = "CASCADE")
-     * @Assert\NotBlank(message="Debe seleccionar una Municipio")
+     * @Assert\NotBlank(message="Debe seleccionar un Municipio")
      */
     protected $municipio;
 
@@ -60,7 +60,7 @@ class FichaTecnica
 
     /**
      * @var string
-     * @ORM\Column(name="tipoequipo", type="string",  nullable=false, length=50)
+     * @ORM\Column(name="tipoequipo", type="string", nullable=false, length=50)
      * @Assert\NotBlank(message="No debe estar vacío")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9 ]*$/",
@@ -72,31 +72,23 @@ class FichaTecnica
 
     /**
      * @var string
-     * @ORM\Column(name="noinventario", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
-     * @Assert\Regex(
-     *     pattern="/^[0-9 ]*$/",
-     *     message="Debe de contener solo números"
-     * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
+     * @ORM\Column(name="noinventario", type="string", nullable=true, length=50)
      */
     private $noinventario;
 
     /**
      * @var string
-     * @ORM\Column(name="proyecto", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
+     * @ORM\Column(name="proyecto", type="string", nullable=true, length=50)
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9 ]*$/",
      *     message="Debe de contener solo letras o números"
      * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $proyecto;
 
     /**
      * @var string
-     * @ORM\Column(name="area", type="string",  nullable=false, length=50)
+     * @ORM\Column(name="area", type="string", nullable=false, length=50)
      * @Assert\NotBlank(message="No debe estar vacío")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9 ]*$/",
@@ -108,80 +100,59 @@ class FichaTecnica
 
     /**
      * @var string
-     * @ORM\Column(name="modeloboard", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
+     * @ORM\Column(name="modeloboard", type="string", nullable=true, length=50)
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9 ]*$/",
      *     message="Debe de contener solo letras o números"
      * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $modeloboard;
 
     /**
      * @var string
-     * @ORM\Column(name="socketboard", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
+     * @ORM\Column(name="socketboard", type="string", nullable=true, length=50)
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9 ]*$/",
      *     message="Debe de contener solo letras o números"
      * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $socketboard;
 
     /**
      * @var string
-     * @ORM\Column(name="serieboard", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
-     * @Assert\Regex(
-     *     pattern="/^[a-zA-Z0-9 ]*$/",
-     *     message="Debe de contener solo letras o números"
-     * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
+     * @ORM\Column(name="serieboard", type="string", nullable=true, length=50)
      */
     private $serieboard;
 
     /**
      * @var string
-     * @ORM\Column(name="tipocpu", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
+     * @ORM\Column(name="tipocpu", type="string", nullable=true, length=50)
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9 ]*$/",
      *     message="Debe de contener solo letras o números"
      * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $tipocpu;
 
     /**
      * @var string
-     * @ORM\Column(name="marcacpu", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
+     * @ORM\Column(name="marcacpu", type="string", nullable=true, length=50)
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9 ]*$/",
      *     message="Debe de contener solo letras o números"
      * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $marcacpu;
 
     /**
      * @var string
-     * @ORM\Column(name="velocidadcpu", type="string",  nullable=true, length=50)
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
+     * @ORM\Column(name="velocidadcpu", type="string", nullable=true, length=50)
      */
     private $velicidadcpu;
 
     /**
      * @var string
-     * @ORM\Column(name="seriecpu", type="string",  nullable=false, length=50)
-     * @Assert\NotBlank(message="No debe estar vacío")
-     * @Assert\Regex(
-     *     pattern="/^[a-zA-Z0-9 ]*$/",
-     *     message="Debe de contener solo letras o números"
-     * )
-     * @Assert\Length(min=2, max=50, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
+     * @ORM\Column(name="seriecpu", type="string",  nullable=true, length=50)
      */
     private $seriecpu;
 
@@ -190,11 +161,17 @@ class FichaTecnica
      */
     private $hardware;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MantenimientoReparacion", mappedBy="fichatecnica")
+     */
+    protected $mantenimiento;
+
     public function __construct()
     {
         $this->ram = new ArrayCollection();
         $this->discoduro = new ArrayCollection();
         $this->hardware = new ArrayCollection();
+        $this->mantenimiento = new ArrayCollection();
     }
 
     public function getNombreCompleto() {
@@ -430,6 +407,36 @@ class FichaTecnica
             // set the owning side to null (unless already changed)
             if ($hardware->getFichatecnica() === $this) {
                 $hardware->setFichatecnica(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MantenimientoReparacion>
+     */
+    public function getMantenimiento(): Collection
+    {
+        return $this->mantenimiento;
+    }
+
+    public function addMantenimiento(MantenimientoReparacion $mantenimiento): self
+    {
+        if (!$this->mantenimiento->contains($mantenimiento)) {
+            $this->mantenimiento[] = $mantenimiento;
+            $mantenimiento->setFichatecnica($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMantenimiento(MantenimientoReparacion $mantenimiento): self
+    {
+        if ($this->mantenimiento->removeElement($mantenimiento)) {
+            // set the owning side to null (unless already changed)
+            if ($mantenimiento->getFichatecnica() === $this) {
+                $mantenimiento->setFichatecnica(null);
             }
         }
 

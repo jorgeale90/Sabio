@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Personal Médico{% endblock %}
+{% block title %}Listado Personal Entidad{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -14,14 +14,14 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Personal Médico</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Personal Entidad</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> Personales Médicos</h4>
+                <h4><strong>Listado</strong> Personales Entidad</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -48,10 +48,17 @@
                                                    class="js-small-personal" {% if ca.esDenegar %} checked {% endif %}></center>
                                 </td>
                                 <td>
-                                    <center>
-                                        <button class="btn btn-primary editar" value="{{ path('personalmedico_edit', {'id': ca.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('personalmedico_remove', {'id': ca.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
-                                    </center>
+                                    <div class="dropdown d-inline">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Acción
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item mostrar" value="{{ path('personalmedico_show', {'id': ca.id}) }}" data-toggle="tooltip" title="Mostrar"><i class="far fa-eye"></i> Mostrar</button>
+                                            <button class="dropdown-item editar" value="{{ path('personalmedico_edit', {'id': ca.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                            <button class="dropdown-item eliminar" value="{{ path('personalmedico_remove', {'id': ca.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-alt"></i> Eliminar</button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -85,6 +92,24 @@
         </div>
     </div>
     <div class="md-overlay"></div>
+
+    <div class="modal fade" id="modal-mostrar-entity" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="demoModalLabel"><strong>Mostrar</strong> Categoría Plato</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="modal-form-mostrar-entity">
+                    <div class="item" ld="spinner" data-name="dual-ring">
+                        <div class="lds-dual-ring">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block javascript %}
     <!-- Switchery -->
@@ -143,7 +168,7 @@
             $('.editar').on('click', function () {
                 var link = $(this).val();
                 $('#modal-19').addClass('md-show');
-                $('#mensaje').text('¿Estas seguro que quieres editar este Personal Médico?');
+                $('#mensaje').text('¿Estas seguro que quieres editar este Personal de la Entidad?');
                 $('.aceptar').on('click', function () {
                     window.location = link;
                 });
@@ -152,7 +177,7 @@
             $('.eliminar').on('click', function () {
                 var link = $(this).val();
                 $('#modal-19').addClass('md-show');
-                $('#mensaje').text('¿Estas seguro que quieres eliminar este Personal Médico?');
+                $('#mensaje').text('¿Estas seguro que quieres eliminar este Personal de la Entidad?');
                 $('.aceptar').on('click', function () {
                     window.location = link;
                 });

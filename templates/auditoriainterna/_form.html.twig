@@ -63,12 +63,12 @@
     <div class="form-group row">
         <label class="col-sm-3 col-form-label">Participantes <span class="required">*</span> :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.user) }}
+            {{ form_widget(form.personalmedico) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.user)) %}
+            {% if(form_errors(form.personalmedico)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.user)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.personalmedico)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}

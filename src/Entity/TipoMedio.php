@@ -33,7 +33,7 @@ class TipoMedio
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity="MedioTecnologico", mappedBy="tipomedio")
+     * @ORM\OneToMany(targetEntity="App\Entity\MedioTecnologico", mappedBy="tipomedio")
      */
     protected $mediotecnologico;
 

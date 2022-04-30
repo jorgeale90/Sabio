@@ -51,25 +51,52 @@ class FichaTecnicaType extends AbstractType
 
             ->add('tipoequipo')
 
-            ->add('noinventario')
+            ->add('noinventario', null, [
+                'label' => 'No. Inventario :',
+                'empty_data' => ''
+            ])
 
-            ->add('proyecto')
+            ->add('proyecto', null, [
+                'label' => 'Proyecto :',
+                'empty_data' => ''
+            ])
 
             ->add('area')
 
-            ->add('modeloboard')
+            ->add('modeloboard', null, [
+                'label' => 'Modelo de la Motherboard :',
+                'empty_data' => ''
+            ])
 
-            ->add('socketboard')
+            ->add('socketboard', null, [
+                'label' => 'Socket de la Motherboard :',
+                'empty_data' => ''
+            ])
 
-            ->add('serieboard')
+            ->add('serieboard', null, [
+                'label' => 'Serie de la Motherboard :',
+                'empty_data' => ''
+            ])
 
-            ->add('tipocpu')
+            ->add('tipocpu', null, [
+                'label' => 'Tipo de CPU :',
+                'empty_data' => ''
+            ])
 
-            ->add('marcacpu')
+            ->add('marcacpu', null, [
+                'label' => 'Marca de la CPU :',
+                'empty_data' => ''
+            ])
 
-            ->add('velicidadcpu')
+            ->add('velicidadcpu', null, [
+                'label' => 'Velocidad de la CPU :',
+                'empty_data' => ''
+            ])
 
-            ->add('seriecpu')
+            ->add('seriecpu', null, [
+                'label' => 'Serie de la CPU :',
+                'empty_data' => ''
+            ])
 
             ->add('hardware', CollectionType::class, [
                 'entry_type' => HardwareType::class,

@@ -40,8 +40,7 @@ class PersonalMedico
     /**
      * @var string
      * @Assert\Regex(pattern="/\w/", match=true, message="Debe contener solo números")
-     * @ORM\Column(name="noregistro", type="string",  nullable=false, length=80)
-     * @Assert\NotBlank(message="No debe estar vacío")
+     * @ORM\Column(name="noregistro", type="string",  nullable=true, length=80)
      * @Assert\Length(min=2, max=30, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $noregistro;
@@ -212,6 +211,11 @@ class PersonalMedico
     protected $fichatecnica2;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\EntradaSalidaEquipo", mappedBy="personal")
+     */
+    protected $entradasalida;
+
+    /**
      * @Vich\UploadableField(mapping="personal_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File|null
@@ -258,6 +262,7 @@ class PersonalMedico
         $this->contratointernet2 = new ArrayCollection();
         $this->fichatecnica1 = new ArrayCollection();
         $this->fichatecnica2 = new ArrayCollection();
+        $this->entradasalida = new ArrayCollection();
     }
 
     public function getNombreCompleto() {
@@ -880,6 +885,36 @@ class PersonalMedico
     public function setEsDenegar(?bool $esDenegar): self
     {
         $this->esDenegar = $esDenegar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, EntradaSalidaEquipo>
+     */
+    public function getEntradasalida(): Collection
+    {
+        return $this->entradasalida;
+    }
+
+    public function addEntradasalida(EntradaSalidaEquipo $entradasalida): self
+    {
+        if (!$this->entradasalida->contains($entradasalida)) {
+            $this->entradasalida[] = $entradasalida;
+            $entradasalida->setPersonal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntradasalida(EntradaSalidaEquipo $entradasalida): self
+    {
+        if ($this->entradasalida->removeElement($entradasalida)) {
+            // set the owning side to null (unless already changed)
+            if ($entradasalida->getPersonal() === $this) {
+                $entradasalida->setPersonal(null);
+            }
+        }
 
         return $this;
     }

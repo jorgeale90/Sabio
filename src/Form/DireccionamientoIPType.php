@@ -2,14 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\FichaTecnica;
+use App\Entity\DireccionamientoIP;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class FichaTecnicaType extends AbstractType
+class DireccionamientoIPType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -35,49 +37,50 @@ class FichaTecnicaType extends AbstractType
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
 
-            ->add('personal1', EntityType::class, array(
-                'label' => 'Responsable :',
-                'placeholder' => 'Seleccione una opción',
-                'class' => 'App\Entity\PersonalMedico',
-                'attr' => array('class' => 'form-control select2', 'required' => 'required')
-            ))
+            ->add('lan')
 
-            ->add('personal2', EntityType::class, array(
-                    'label' => 'Creado por :',
-                'placeholder' => 'Seleccione una opción',
-                'class' => 'App\Entity\PersonalMedico',
-                'attr' => array('class' => 'form-control select2', 'required' => 'required')
-            ))
+            ->add('router')
 
-            ->add('tipoequipo')
+            ->add('dmz')
 
-            ->add('noinventario')
+            ->add('gateways')
 
-            ->add('proyecto')
+            ->add('topologia')
 
-            ->add('area')
+            ->add('bloque')
 
-            ->add('modeloboard')
+            ->add('direccionenlace')
 
-            ->add('socketboard')
+            ->add('prefijo')
 
-            ->add('serieboard')
+            ->add('puertaenlace')
 
-            ->add('tipocpu')
+            ->add('direccionesdisponibles')
 
-            ->add('marcacpu')
-
-            ->add('velicidadcpu')
-
-            ->add('seriecpu')
-
-            ->add('hardware', CollectionType::class, [
-                'entry_type' => HardwareType::class,
+            ->add('tablaip', CollectionType::class, [
+                'entry_type' => TablaIPType::class,
                 'label' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true
+            ])
+
+            ->add('imageFile', VichFileType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '5M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                            'image/gif',
+                            'image/png',
+                        ]
+                    ])
+                ]
             ])
         ;
     }
@@ -85,7 +88,7 @@ class FichaTecnicaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => FichaTecnica::class,
+            'data_class' => DireccionamientoIP::class,
         ]);
     }
 }

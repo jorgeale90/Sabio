@@ -43,10 +43,17 @@
                                 <td>{{ entities.tipoequipo }}</td>
                                 <td>{{ entities.institucion }}</td>
                                 <td>
-                                    <center>
-                                        <button class="btn btn-primary editar" value="{{ path('fichatecnica_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('fichatecnica_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
-                                    </center>
+                                    <div class="dropdown d-inline">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Acción
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item mostrar" value="{{ path('fichatecnica_show', {'id': entities.id}) }}" data-toggle="tooltip" title="Mostrar"><i class="far fa-eye"></i> Mostrar</button>
+                                            <button class="dropdown-item editar" value="{{ path('fichatecnica_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                            <button class="dropdown-item eliminar" value="{{ path('fichatecnica_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-alt"></i> Eliminar</button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}

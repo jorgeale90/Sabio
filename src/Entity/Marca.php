@@ -33,12 +33,12 @@ class Marca
     private $nombre;
 
     /**
-     * @ORM\OneToMany(targetEntity="Modelo", mappedBy="marca")
+     * @ORM\OneToMany(targetEntity="App\Entity\Modelo", mappedBy="marca")
      */
     protected $modelo;
 
     /**
-     * @ORM\OneToMany(targetEntity="MedioTecnologico", mappedBy="marca")
+     * @ORM\OneToMany(targetEntity="App\Entity\MedioTecnologico", mappedBy="marca")
      */
     protected $mediotecnologico;
 
@@ -48,10 +48,9 @@ class Marca
         $this->mediotecnologico = new ArrayCollection();
     }
 
-    public function __toString() {
-
+    public function __toString()
+    {
         return $this->getNombre();
-
     }
 
     public function getId(): ?int

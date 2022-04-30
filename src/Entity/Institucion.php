@@ -91,6 +91,16 @@ class Institucion
      */
     protected $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DireccionamientoIP", mappedBy="institucion")
+     */
+    protected $direccionamiento;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MantenimientoReparacion", mappedBy="institucion")
+     */
+    protected $mantenimiento;
+
     public function __construct()
     {
         $this->contratocorreo = new ArrayCollection();
@@ -98,6 +108,8 @@ class Institucion
         $this->contratointernet = new ArrayCollection();
         $this->fichatecnica = new ArrayCollection();
         $this->user = new ArrayCollection();
+        $this->direccionamiento = new ArrayCollection();
+        $this->mantenimiento = new ArrayCollection();
     }
 
     public function __toString() {
@@ -327,6 +339,66 @@ class Institucion
             // set the owning side to null (unless already changed)
             if ($user->getInstitucion() === $this) {
                 $user->setInstitucion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DireccionamientoIP>
+     */
+    public function getDireccionamiento(): Collection
+    {
+        return $this->direccionamiento;
+    }
+
+    public function addDireccionamiento(DireccionamientoIP $direccionamiento): self
+    {
+        if (!$this->direccionamiento->contains($direccionamiento)) {
+            $this->direccionamiento[] = $direccionamiento;
+            $direccionamiento->setInstitucion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDireccionamiento(DireccionamientoIP $direccionamiento): self
+    {
+        if ($this->direccionamiento->removeElement($direccionamiento)) {
+            // set the owning side to null (unless already changed)
+            if ($direccionamiento->getInstitucion() === $this) {
+                $direccionamiento->setInstitucion(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MantenimientoReparacion>
+     */
+    public function getMantenimiento(): Collection
+    {
+        return $this->mantenimiento;
+    }
+
+    public function addMantenimiento(MantenimientoReparacion $mantenimiento): self
+    {
+        if (!$this->mantenimiento->contains($mantenimiento)) {
+            $this->mantenimiento[] = $mantenimiento;
+            $mantenimiento->setInstitucion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMantenimiento(MantenimientoReparacion $mantenimiento): self
+    {
+        if ($this->mantenimiento->removeElement($mantenimiento)) {
+            // set the owning side to null (unless already changed)
+            if ($mantenimiento->getInstitucion() === $this) {
+                $mantenimiento->setInstitucion(null);
             }
         }
 

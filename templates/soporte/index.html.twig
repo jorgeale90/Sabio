@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Cargo{% endblock %}
+{% block title %}Listado Soporte{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -12,36 +12,38 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Cargos</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Soportes</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> Cargos u Ocupación</h4>
+                <h4><strong>Listado</strong> Registro de Control de los Soportes</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
-                            <th>Cargo</th>
-                            <th>Personal Médico</th>
+                            <th class="text-center">No.</th>
+                            <th>Contenido Fundamental Soporte</th>
+                            <th>Nivel de acceso</th>
+                            <th>Observaciones</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for ca in cargo %}
+                        {% for entities in soporte %}
                             <tr>
-                                <td>{{ ca.id }}</td>
-                                <td>{{ ca.nombre }}</td>
-                                <td>{{ ca.personal | length }}</td>
+                                <td>{{ entities.numero }}</td>
+                                <td>{{ entities.contenidofundamental }}</td>
+                                <td>{{ entities.nivelacceso }}</td>
+                                <td>{{ entities.observaciones }}</td>
                                 <td>
                                     <center>
-                                        <button class="btn btn-primary editar" value="{{ path('cargo_edit', {'id': ca.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('cargo_remove', {'id': ca.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                        <button class="btn btn-primary editar" value="{{ path('soporte_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('soporte_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
                                     </center>
                                 </td>
                             </tr>
@@ -52,8 +54,8 @@
             </div>
 
         </div>
-        <a class="btn btn-primary" type="button" href="{{ path('cargo_new') }}"><i class="fa fa-plus"></i> Añadir Cargo</a>
-        <a class="btn btn-warning" type="button" href="{{ path('cargo_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+        <a class="btn btn-primary" type="button" href="{{ path('soporte_new') }}"><i class="fa fa-plus"></i> Añadir Soporte</a>
+        <a class="btn btn-warning" type="button" href="{{ path('soporte_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
     </div>
 
     <div class="md-modal md-effect-1" id="modal-19">
@@ -132,7 +134,7 @@
                 $('.editar').on('click', function () {
                     var link = $(this).val();
                     $('#modal-19').addClass('md-show');
-                    $('#mensaje').text('¿Estas seguro que quieres editar este Cargo?');
+                    $('#mensaje').text('¿Estas seguro que quieres editar este Registro de Control de Soporte?');
                     $('.aceptar').on('click', function () {
                         window.location = link;
                     });
@@ -141,7 +143,7 @@
                 $('.eliminar').on('click', function () {
                     var link = $(this).val();
                     $('#modal-19').addClass('md-show');
-                    $('#mensaje').text('¿Estas seguro que quieres eliminar este Cargo?');
+                    $('#mensaje').text('¿Estas seguro que quieres eliminar este Registro de Control de Soporte?');
                     $('.aceptar').on('click', function () {
                         window.location = link;
                     });

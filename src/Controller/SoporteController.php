@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Cargo;
-use App\Form\CargoType;
-use App\Repository\CargoRepository;
+use App\Entity\Soporte;
+use App\Form\SoporteType;
+use App\Repository\SoporteRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,29 +12,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/cargo")
+ * @Route("/admin/soporte")
  */
-class CargoController extends AbstractController
+class SoporteController extends AbstractController
 {
     /**
-     * @Route("/", name="cargo_index", methods={"GET"})
+     * @Route("/", name="soporte_index", methods={"GET"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function index(CargoRepository $cargoRepository): Response
+    public function index(SoporteRepository $soporteRepository): Response
     {
-        return $this->render('cargo/index.html.twig', [
-            'cargo' => $cargoRepository->findAll(),
+        return $this->render('soporte/index.html.twig', [
+            'soporte' => $soporteRepository->findAll(),
         ]);
     }
 
     /**
-     * @Route("/new", name="cargo_new", methods={"GET","POST"})
+     * @Route("/new", name="soporte_new", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function new(Request $request): Response
     {
-        $entity = new Cargo();
-        $form = $this->createForm(CargoType::class, $entity);
+        $entity = new Soporte();
+        $form = $this->createForm(SoporteType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,63 +43,63 @@ class CargoController extends AbstractController
             $entityManager->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_success','Se ha creado un Cargo satisfactoriamente!!!');
-            $flashBag->add('app_success', sprintf('Cargo: %s', $entity->getNombre()));
+            $flashBag->add('app_success','Se ha creado un Registro de Conrol de Soporte satisfactoriamente!!!');
+            $flashBag->add('app_success', sprintf('Soporte: %s', $entity->getNumero()));
 
-            return $this->redirectToRoute('cargo_index');
+            return $this->redirectToRoute('soporte_index');
         }
 
-        return $this->render('cargo/new.html.twig', [
-            'carg' => $entity,
+        return $this->render('soporte/new.html.twig', [
+            'soporte' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="cargo_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="soporte_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    public function edit(Request $request, Cargo $entity): Response
+    public function edit(Request $request, Soporte $entity): Response
     {
-        $form = $this->createForm(CargoType::class, $entity);
+        $form = $this->createForm(SoporteType::class, $entity);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','Se ha actualizado un Cargo satisfactoriamente!!!');
-            $flashBag->add('app_warning', sprintf('Cargo: %s', $entity->getNombre()));
+            $flashBag->add('app_warning','Se ha actualizado un Registro de Control de Soporte satisfactoriamente!!!');
+            $flashBag->add('app_warning', sprintf('Soporte: %s', $entity->getNumero()));
 
-            return $this->redirectToRoute('cargo_index');
+            return $this->redirectToRoute('soporte_index');
         }
 
-        return $this->render('cargo/edit.html.twig', [
-            'carg' => $entity,
+        return $this->render('soporte/edit.html.twig', [
+            'soporte' => $entity,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="cargo_remove")
+     * @Route("/{id}", name="soporte_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository(Cargo::class)->find($id);
+        $entity = $em->getRepository(Soporte::class)->find($id);
 
         if (!$entity) {
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_warning','No se encuentra este Cargo!!!');
+            $flashBag->add('app_warning','No se encuentra este Soporte!!!');
         } else {
             $em->remove($entity);
             $em->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add('app_error','Se ha eliminado un Cargo satisfactoriamente!!!');
+            $flashBag->add('app_error','Se ha eliminado un Soporte satisfactoriamente!!!');
         }
 
-        return $this->redirectToRoute('cargo_index');
+        return $this->redirectToRoute('soporte_index');
     }
 }

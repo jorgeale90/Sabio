@@ -1,18 +1,26 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Añadir Nacionalidad{% endblock %}
+{% block title %}Añadir Entrada/Salida Equipo{% endblock %}
+{% block head %}
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
+{% endblock %}
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Nacionalidad</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Entrada/Salida Equipo</li>
         </ol>
     </nav>
 
     <div class="col-12">
        <div class="card">
           <div class="card-header">
-             <h4><strong>Añadir</strong> Nacionalidad</h4>
+             <h4><strong>Añadir</strong> Entrada/Salida Equipo</h4>
            </div>
-           {{ include('nacionalidad/_form.html.twig') }}
+           {{ include('entradasalidaequipo/_form.html.twig') }}
        </div>
     </div>
+{% endblock %}
+{% block javascript %}
+    <!-- Select2 -->
+    <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
 {% endblock %}

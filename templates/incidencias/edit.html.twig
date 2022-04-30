@@ -1,18 +1,18 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Nacionalidad{% endblock %}
+{% block title %}Editar Incidencias{% endblock %}
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Nacionalidad</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Incidencias</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Nacionalidad</h4>
+                <h4><strong>Editar</strong> Incidencias</h4>
             </div>
-            {{ include('nacionalidad/_form.html.twig', {'button_label': 'Editar Nacionalidad'}) }}
+            {{ include('incidencias/_form.html.twig', {'button_label': 'Editar Incidencias'}) }}
         </div>
     </div>
 {% endblock %}

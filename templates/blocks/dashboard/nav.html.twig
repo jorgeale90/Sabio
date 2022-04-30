@@ -135,8 +135,7 @@
                     {% if use.image != null and app.user.email == use.email %}
                         <img alt="image" src="{{ vich_uploader_asset(use, 'imageFile', 'App\\Entity\\User') }}" class="user-img-radious-style">
                     {% elseif use.image == null and app.user.email == use.email %}
-                        <img alt="image" src="{{ asset('page/dashboard/assets/img/user.png') }}"
-                             class="user-img-radious-style">
+                        <img alt="image" src="{{ asset('page/dashboard/assets/img/users/user-0.png') }}" class="user-img-radious-style">
                     {% endif %}
                 {% endfor %}
                 <span class="d-sm-none d-lg-inline-block"></span></a>

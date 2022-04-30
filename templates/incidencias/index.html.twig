@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Nacionalidad{% endblock %}
+{% block title %}Listado Incidencias{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -12,36 +12,40 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Nacionalidad</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Incidencias</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> Nacionalidad</h4>
+                <h4><strong>Listado</strong> Incidencias</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
-                            <th>Nacionalidad</th>
-                            <th>Personal Médico</th>
+                            <th class="text-center">No.</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Área</th>
+                            <th>Descripción</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for entity in nacionalidad %}
+                        {% for entity in incidencias %}
                             <tr>
-                                <td>{{ entity.id }}</td>
-                                <td>{{ entity.nombre }}</td>
-                                <td>{{ entity.personal | length }}</td>
+                                <td>{{ entity.numero }}</td>
+                                <td>{{ entity.fecha | date('d/m/Y') }}</td>
+                                <td>{{ entity.hora | date('H:i:s') }}</td>
+                                <td>{{ entity.area }}</td>
+                                <td>{{ entity.descripcion }}</td>
                                 <td>
                                     <center>
-                                        <button class="btn btn-primary editar" value="{{ path('nacionalidad_edit', {'id': entity.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('nacionalidad_remove', {'id': entity.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
+                                        <button class="btn btn-primary editar" value="{{ path('incidencias_edit', {'id': entity.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                        <button class="btn btn-danger eliminar" value="{{ path('incidencias_remove', {'id': entity.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
                                     </center>
                                 </td>
                             </tr>
@@ -52,8 +56,8 @@
             </div>
 
         </div>
-        <a class="btn btn-primary" type="button" href="{{ path('nacionalidad_new') }}"><i class="fa fa-plus"></i> Añadir Nacionalidad</a>
-        <a class="btn btn-warning" type="button" href="{{ path('nacionalidad_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+        <a class="btn btn-primary" type="button" href="{{ path('incidencias_new') }}"><i class="fa fa-plus"></i> Añadir Incidencia</a>
+        <a class="btn btn-warning" type="button" href="{{ path('incidencias_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
     </div>
 
     <div class="md-modal md-effect-1" id="modal-19">
@@ -132,7 +136,7 @@
                 $('.editar').on('click', function () {
                     var link = $(this).val();
                     $('#modal-19').addClass('md-show');
-                    $('#mensaje').text('¿Estas seguro que quieres editar esta Nacionalidad?');
+                    $('#mensaje').text('¿Estas seguro que quieres editar esta Incidencia?');
                     $('.aceptar').on('click', function () {
                         window.location = link;
                     });
@@ -141,7 +145,7 @@
                 $('.eliminar').on('click', function () {
                     var link = $(this).val();
                     $('#modal-19').addClass('md-show');
-                    $('#mensaje').text('¿Estas seguro que quieres eliminar esta Nacionalidad?');
+                    $('#mensaje').text('¿Estas seguro que quieres eliminar esta Incidencia?');
                     $('.aceptar').on('click', function () {
                         window.location = link;
                     });

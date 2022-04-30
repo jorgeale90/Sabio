@@ -1,148 +1,18 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Direccionamiento IP{% endblock %}
-{% block head %}
-    <!-- Select2 -->
-    <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
-{% endblock %}
+{% block title %}Editar IP{% endblock %}
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Editar Direccionamiento IP</a></li>
+            <li class="breadcrumb-item"><a href="#"><i class="far fa-file"></i> Editar IP</a></li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Direccionamiento IP</h4>
+                <h4><strong>Editar</strong> IP</h4>
             </div>
-            {{ include('direccionamientoip/_form.html.twig', {'button_label': 'Editar Direccionamiento IP'}) }}
+            {{ include('tablaip/_form.html.twig', {'button_label': 'Editar IP'}) }}
         </div>
     </div>
-{% endblock %}
-{% block javascript %}
-    <!-- Select2 -->
-    <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
-    <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
-    <script>
-        // Script para el manejo de Añadir o Eliminar TablaIP
-        var $container = $('ul.tablaip');
-        // botón para agregar un nuevo TablaIP
-        var $addSportParamLink = $('<a href="#" id="tablaip_param" class="btn btn-primary btn-xs">Añadir Elemento</a>');
-        var $newLinkLi = $('<li></li>').append($addSportParamLink);
-
-        $(document).ready(function() {
-            //botón eliminar en cada TablaIP q exista
-            $container.find('li').each(function() {
-                addParamFormDeleteLink($(this));
-            });
-
-            //añadir boton
-            $container.append($newLinkLi);
-
-            // agregando un nuevo formulario al hacer clic en el botón Agregar
-            $addSportParamLink.on('click',function(e) {
-                e.preventDefault();
-                var index = $container.children().length-1;
-
-                addParamForm($container,$newLinkLi);
-
-                var bAffiche;
-
-                return false;
-            });
-
-            // añadir un nuevo formulario TablaIP
-            function addParamForm($container, $newLinkLi) {
-
-                var $prototype = $container.attr('data-prototype');
-
-                var newForm = $prototype.replace(/__name__/g, $container.children().length-1);
-
-                var $newFormLi = $('<li></li>').append(newForm);
-                $newLinkLi.before($newFormLi);
-
-                addParamFormDeleteLink($newFormLi);
-            }
-
-            function addParamFormDeleteLink($paramFormLi){
-                var $removeFormA = $('<a href="#" class="btn btn-danger  btn-xs">Eliminar Elemento</a>');
-                $paramFormLi.append($removeFormA);
-                $removeFormA.on('click', function(e) {
-                    e.preventDefault();
-                    $paramFormLi.remove();
-                });
-            }
-        });
-
-        $('#{{ form.provincia.vars.id }}').on('change', function (e) {
-            var data = {
-                provincia_id: $(this).val()
-            };
-            $('#{{ form.municipio.vars.id }}').html('<option>Cargando...</option>');
-            $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
-            $.ajax({
-                type: 'POST',
-                url: '{{ path('municipioip_x_provinciaip') }}',
-                async: true,
-                data: data,
-                success: function (response) {
-                    if (response.length !== 0){
-                        var option = '<option>Seleccione el Municipio</option>';
-                        $.each(response, function (i, municipio) {
-                            option += '<option value='+ municipio.id +'>'+ municipio.nombre +'</option>'
-                        });
-                        $('#{{ form.municipio.vars.id }}').html(option);
-                        $('#{{ form.municipio.vars.id }}').removeAttr('disabled');
-                    } else {
-                        var option = '<option>No hay Municipios en esta Provincia.</option>';
-                        $('#{{ form.municipio.vars.id }}').html(option);
-                        $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
-                        noty({
-                            text: 'No se encontraron Municipios de la Provincia seleccionada.',
-                            layout: 'topRight', type: 'error', timeout: 5000,
-                        });
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        });
-
-        $('#{{ form.municipio.vars.id }}').on('change', function (e) {
-            var data = {
-                municipio_id: $(this).val()
-            };
-            $('#{{ form.institucion.vars.id }}').html('<option>Cargando...</option>');
-            $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
-            $.ajax({
-                type: 'POST',
-                url: '{{ path('institucionip_x_municipioip') }}',
-                async: true,
-                data: data,
-                success: function (response) {
-                    if (response.length !== 0){
-                        var option = '<option>Seleccione la Institución</option>';
-                        $.each(response, function (i, institucion) {
-                            option += '<option value='+ institucion.id +'>'+ institucion.nombre +'</option>'
-                        });
-                        $('#{{ form.institucion.vars.id }}').html(option);
-                        $('#{{ form.institucion.vars.id }}').removeAttr('disabled');
-                    } else {
-                        var option = '<option>No hay Instituciones en este Municipio.</option>';
-                        $('#{{ form.institucion.vars.id }}').html(option);
-                        $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
-                        noty({
-                            text: 'No se encontraron Instituciones en la Provincia seleccionada.',
-                            layout: 'topRight', type: 'error', timeout: 5000,
-                        });
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-    });
-    </script>
 {% endblock %}

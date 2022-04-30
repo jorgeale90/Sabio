@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Personal Médico{% endblock %}
+{% block title %}Editar Personal Entidad{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -7,16 +7,16 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Personal Médico</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Personal Entidad</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Personal Médico</h4>
+                <h4><strong>Editar</strong> Personal Entidad</h4>
             </div>
-            {{ include('personalmedico/_form.html.twig', {'button_label': 'Editar Personal Médico'}) }}
+            {{ include('personalmedico/_form.html.twig', {'button_label': 'Editar Personal Entidad'}) }}
         </div>
     </div>
 {% endblock %}

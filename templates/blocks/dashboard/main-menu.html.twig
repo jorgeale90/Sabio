@@ -10,8 +10,7 @@
       <li class="dropdown">
         <a href="{{ path('dashboard') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
         <a href="{{ path('user_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Usuarios</span></a>
-        <a href="{{ path('personalmedico_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Personal Médico</span></a>
-        <a href="{{ path('fichatecnica_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Ficha Técnica</span></a>
+        <a href="{{ path('personalmedico_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Personal Entidad</span></a>
         <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Auditoría</span></a>
         <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Manager File</span></a>
       </li>
@@ -67,15 +66,24 @@
         </ul>
       </li>
       <li class="dropdown">
-        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Registros</span></a>
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Registro IP</span></a>
         <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ path('direccionamientoip_index') }}">Direccionamiento IP</a></li>
+          <li><a class="nav-link" href="{{ path('tablaip_index') }}">Tabla IP</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Modelo Técnico</span></a>
+        <ul class="dropdown-menu">
+          <li><a class="nav-link" href="{{ path('fichatecnica_index') }}">Ficha Técnica</a></li>
+          <li><a class="nav-link" href="#">Modelo Expediente</a></li>
           <li><a class="nav-link" href="{{ path('auditoriainterna_index') }}">Auditoría Interna</a></li>
-          <li><a class="nav-link" href="#">Entrada/Salidas Equipos</a></li>
-          <li><a class="nav-link" href="#">Control Soporte</a></li>
-          <li><a class="nav-link" href="#">Incidencias</a></li>
-          <li><a class="nav-link" href="#">Mantenimiento - Reparación</a></li>
-          <li><a class="nav-link" href="#">Memorias</a></li>
-          <li><a class="nav-link" href="#">Salvas</a></li>
+          <li><a class="nav-link" href="#">Registros Salvas</a></li>
+          <li><a class="nav-link" href="{{ path('incidencias_index') }}">Registro Incidencias</a></li>
+          <li><a class="nav-link" href="{{ path('entradasalidaequipo_index') }}">Entrada/Salida Equipos</a></li>
+          <li><a class="nav-link" href="#">Registros Memorias</a></li>
+          <li><a class="nav-link" href="{{ path('mantenimiento_index') }}">Mantenimiento - Reparación</a></li>
+          <li><a class="nav-link" href="{{ path('soporte_index') }}">Control Soporte</a></li>
         </ul>
       </li>
     </ul>

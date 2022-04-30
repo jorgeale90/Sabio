@@ -25,7 +25,7 @@ class Hardware
     /**
      * @var string $accesoredes
      * @ORM\Column(name="componentes", type="string", nullable=false, length=30)
-     * @Assert\Choice(choices={"Memoria RAM","Fuente de alimentación","Módem","Memoria Cache","Disco Duro","Lectora de CD/DVD","Disqueteras","Tarjetas de video","Teclado","Mouse","Bocinas","Tarjeta de Sonido","Otros"},  message="Debe seleccionar una Opción")
+     * @Assert\Choice(choices={"Memoria RAM","Fuente de alimentación","Módem","Memoria Cache","Disco Duro","Lectora de CD/DVD","Disqueteras","Tarjetas de video","Teclado","Mouse","Bocinas","Tarjeta de Sonido","Router","Chasis","Otros"},  message="Debe seleccionar una Opción")
      */
     private $componentes;
 

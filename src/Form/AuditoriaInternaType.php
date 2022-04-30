@@ -26,10 +26,10 @@ class AuditoriaInternaType extends AbstractType
 
             ->add('area')
 
-            ->add('user', EntityType::class, array(
+            ->add('personalmedico', EntityType::class, array(
                 'label' => 'Participantes :',
                 'placeholder' => 'Seleccione una opción',
-                'class' => 'App\Entity\User',
+                'class' => 'App\Entity\PersonalMedico',
                 'multiple' => 'true',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))

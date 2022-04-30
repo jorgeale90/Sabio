@@ -59,6 +59,22 @@ class MunicipioRepository extends ServiceEntityRepository
         return $consulta->getArrayResult();
     }
 
+    public function findByProvinciaip($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciamr($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return Municipio[] Returns an array of Municipio objects
     //  */

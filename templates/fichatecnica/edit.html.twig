@@ -74,5 +74,75 @@
                 });
             }
         });
+
+        $('#{{ form.provincia.vars.id }}').on('change', function (e) {
+            var data = {
+                provincia_id: $(this).val()
+            };
+            $('#{{ form.municipio.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('municipioft_x_provinciaft') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Municipio</option>';
+                        $.each(response, function (i, municipio) {
+                            option += '<option value='+ municipio.id +'>'+ municipio.nombre +'</option>'
+                        });
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Municipios en esta Provincia.</option>';
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Municipios de la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.municipio.vars.id }}').on('change', function (e) {
+            var data = {
+                municipio_id: $(this).val()
+            };
+            $('#{{ form.institucion.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('institucionft_x_municipioft') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione la Institución</option>';
+                        $.each(response, function (i, institucion) {
+                            option += '<option value='+ institucion.id +'>'+ institucion.nombre +'</option>'
+                        });
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Instituciones en este Municipio.</option>';
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Instituciones en la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+    });
     </script>
 {% endblock %}

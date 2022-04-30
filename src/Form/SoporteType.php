@@ -2,24 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\Cargo;
+use App\Entity\Soporte;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CargoType extends AbstractType
+class SoporteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
+            ->add('numero')
+
+            ->add('contenidofundamental')
+
+            ->add('nivelacceso')
+
+            ->add('observaciones')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Cargo::class,
+            'data_class' => Soporte::class,
         ]);
     }
 }

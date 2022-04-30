@@ -1,21 +1,6 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.nombre, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Municipio' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.nombre)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombre)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
         <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
         <div class="col-sm-7">
             {{ form_widget(form.provincia, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
@@ -29,9 +14,129 @@
             {% endif %}
         </div>
     </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.municipio, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.municipio)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.municipio)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Institución <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.institucion, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.institucion)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.institucion)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Ficha Técnica <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.fichatecnica, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.fichatecnica)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.fichatecnica)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">No. Inventario <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.numero, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Número de Inventario' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.numero)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.numero)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Fecha <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.fecha, { 'attr': { 'class': 'form-control', 'type': 'date' }}) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.fecha)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.fecha)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Nombre Técnico <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.nombretecnico, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Nombre del Técnico' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.nombretecnico)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.nombretecnico)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Labor Realizada <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.laborrealizada, { 'attr': { 'class': 'form-control', 'placeholder': 'Labor Realizada por el Técnico' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.laborrealizada)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.laborrealizada)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Observaciones <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.observaciones, { 'attr': { 'class': 'form-control', 'placeholder': 'Observaciones del Mantenimiento' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.observaciones)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.observaciones)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
 <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Municipio') }}</button>
-    <a class="btn btn-light" href="{{ path('municipio_index') }}">Volver al Listado</a>
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Mantenimiento') }}</button>
+    <a class="btn btn-light" href="{{ path('mantenimiento_index') }}">Volver al Listado</a>
 </div>
 {{ form_end(form) }}

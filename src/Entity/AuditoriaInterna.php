@@ -65,13 +65,13 @@ class AuditoriaInterna
     private $area;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User")
-     * @ORM\JoinTable(name="user_auditoriainterna",
-     *           joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     * @ORM\ManyToMany(targetEntity="App\Entity\PersonalMedico")
+     * @ORM\JoinTable(name="personalmedico_auditoriainterna",
+     *           joinColumns={@ORM\JoinColumn(name="personalmedico_id", referencedColumnName="id")},
      *           inverseJoinColumns={@ORM\JoinColumn(name="auditoriainterna_id",referencedColumnName="id")})
      * @Assert\Count(min=1, max=15, minMessage="Debe seleccionar al menos {{ limit }} Organización", maxMessage="Debe seleccionar a lo sumo {{ limit }} Organizaciones")*
      */
-    protected $user;
+    protected $personalmedico;
 
     /**
      * @ORM\Column(type = "text", nullable=true)
@@ -79,14 +79,14 @@ class AuditoriaInterna
      */
     private $situaciones;
 
+    public function __construct()
+    {
+        $this->personalmedico = new ArrayCollection();
+    }
+
     public function __toString()
     {
         return $this->getNoidentificacion();
-    }
-
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -155,25 +155,25 @@ class AuditoriaInterna
     }
 
     /**
-     * @return Collection|User[]
+     * @return Collection<int, PersonalMedico>
      */
-    public function getUser(): Collection
+    public function getPersonalmedico(): Collection
     {
-        return $this->user;
+        return $this->personalmedico;
     }
 
-    public function addUser(User $user): self
+    public function addPersonalmedico(PersonalMedico $personalmedico): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
+        if (!$this->personalmedico->contains($personalmedico)) {
+            $this->personalmedico[] = $personalmedico;
         }
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function removePersonalmedico(PersonalMedico $personalmedico): self
     {
-        $this->user->removeElement($user);
+        $this->personalmedico->removeElement($personalmedico);
 
         return $this;
     }

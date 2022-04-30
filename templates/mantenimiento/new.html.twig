@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Añadir Municipio{% endblock %}
+{% block title %}Añadir Mantenimiento Reparación{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -7,16 +7,16 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Municipio</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Mantenimiento Reparación</li>
         </ol>
     </nav>
 
     <div class="col-12">
        <div class="card">
           <div class="card-header">
-             <h4><strong>Añadir</strong> Municipio</h4>
+             <h4><strong>Añadir</strong> Mantenimiento Reparación</h4>
            </div>
-           {{ include('municipio/_form.html.twig') }}
+           {{ include('mantenimiento/_form.html.twig') }}
        </div>
     </div>
 {% endblock %}

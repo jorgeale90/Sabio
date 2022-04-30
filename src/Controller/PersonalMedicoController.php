@@ -89,6 +89,27 @@ class PersonalMedicoController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/show", name="personalmedico_show", methods={"GET"})
+     */
+    public function show($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('App:PersonalMedico')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Incapaz de encontrar el Personal deseado.');
+        }
+
+        $form = $this->createForm(PersonalMedicoType::class, $entity);
+
+        return $this->render('personalmedico/show.html.twig', array(
+            'entity'      => $entity,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
      * @Route("/delete/{id}", name="personalmedico_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */

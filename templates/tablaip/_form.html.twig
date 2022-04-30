@@ -1,14 +1,14 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Ip :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.provincia, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+            {{ form_widget(form.ip, { 'attr': { 'class': 'form-control', 'placeholder': 'Ip de la Computadora' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.provincia)) %}
+            {% if(form_errors(form.ip)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.provincia)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.ip)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -16,14 +16,14 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Mac :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.municipio, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+            {{ form_widget(form.mac, { 'attr': { 'class': 'form-control', 'placeholder': 'Mac de la Computadora' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.municipio)) %}
+            {% if(form_errors(form.mac)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.municipio)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.mac)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -31,206 +31,14 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Institución <span class="required">*</span> :</label>
+        <label class="col-sm-3 col-form-label">Departamento :</label>
         <div class="col-sm-7">
-            {{ form_widget(form.institucion, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+            {{ form_widget(form.departamento, { 'attr': { 'class': 'form-control', 'placeholder': 'Departamento' } }) }}
         </div>
         <div class="col-2">
-            {% if(form_errors(form.institucion)) %}
+            {% if(form_errors(form.departamento)) %}
                 <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.institucion)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Lan :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.lan, { 'attr': { 'class': 'form-control', 'placeholder': 'Lan de la Entidad' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.lan)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.lan)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Router :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.router, { 'attr': { 'class': 'form-control', 'placeholder': 'Router de la Entidad' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.router)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.router)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">DMZ :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.dmz, { 'attr': { 'class': 'form-control', 'placeholder': 'DMZ de la Entidad' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.dmz)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.dmz)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Gateways :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.gateways, { 'attr': { 'class': 'form-control', 'placeholder': 'Gateways de la Entidad' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.gateways)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.gateways)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Topología <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.topologia, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Topología de la Red' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.topologia)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.topologia)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Bloque <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.bloque, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Bloque del Direccionamiento IP' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.bloque)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.bloque)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Dirección de Enlace <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.direccionenlace, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Dirección del Enlace' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.direccionenlace)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.direccionenlace)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Prefijo <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.prefijo, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Prefijo' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.prefijo)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.prefijo)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Puerta de Enlace <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.puertaenlace, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Puerto de Enlace' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.puertaenlace)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.puertaenlace)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Tabla de Direccrionamiento IP :</label>
-        <div class="col-sm-7">
-            <ul class=tablaip data-prototype="{{ form_widget(form.tablaip.vars.prototype)|e }}" data-widget-tags="{{ '<li></li>'|e }}">
-                {% for param in form.tablaip %}
-                    <li>
-                        {{ form_errors(param) }}
-                        <div class="form-group">
-                            {{ form_row(param.departamento) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form_row(param.ip) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form_row(param.mac) }}
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Dirección Disponibles :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.direccionesdisponibles, { 'attr': { 'class': 'form-control', 'placeholder': 'Dirección del Enlace' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.direccionesdisponibles)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.direccionesdisponibles)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Imagen :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.imageFile) }}
-            {% if direccion.imageName != null %}
-                <img src="{{ vich_uploader_asset(direccion, 'imageFile', 'App\\Entity\\DireccionamientoIP') }}" width="260" height="210">
-            {% endif %}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.imageFile)) %}
-                <div class="buttons">
-                    <a class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.imageFile)  }}"><i
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.departamento)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}
@@ -238,7 +46,7 @@
     </div>
 </div>
 <div class="card-footer text-right">
-    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir Direccionamiento IP') }}</button>
-    <a class="btn btn-light" href="{{ path('direccionamientoip_index') }}">Volver al Listado</a>
+    <button type="submit" class="btn btn-primary mr-2">{{ button_label|default('Añadir IP') }}</button>
+    <a class="btn btn-light" href="{{ path('tablaip_index') }}">Volver al Listado</a>
 </div>
 {{ form_end(form) }}

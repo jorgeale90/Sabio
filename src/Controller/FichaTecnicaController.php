@@ -99,6 +99,27 @@ class FichaTecnicaController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/show", name="fichatecnica_show", methods={"GET"})
+     */
+    public function show($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('App:FichaTecnica')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Incapaz de encontrar la Ficha Técnica deseada.');
+        }
+
+        $form = $this->createForm(FichaTecnicaType::class, $entity);
+
+        return $this->render('fichatecnica/show.html.twig', array(
+            'entity'      => $entity,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
      * @Route("/delete/{id}", name="fichatecnica_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
