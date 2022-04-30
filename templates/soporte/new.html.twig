@@ -1,0 +1,22 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Añadir Cargo{% endblock %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Añadir Cargo</li>
+        </ol>
+    </nav>
+
+    <div class="col-12">
+       <div class="card">
+          <div class="card-header">
+             <h4><strong>Añadir</strong> Cargo u Ocupación</h4>
+           </div>
+           {{ include('cargo/_form.html.twig') }}
+       </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    <!-- Select2 -->
+    <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
+{% endblock %}

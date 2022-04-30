@@ -1,0 +1,18 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Editar Cargo{% endblock %}
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Cargo</li>
+        </ol>
+    </nav>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><strong>Editar</strong> Cargo u Ocupación</h4>
+            </div>
+            {{ include('cargo/_form.html.twig', {'button_label': 'Editar Cargo'}) }}
+        </div>
+    </div>
+{% endblock %}
