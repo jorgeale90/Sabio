@@ -30,6 +30,7 @@
                             <th>Modelo</th>
                             <th>Marca</th>
                             <th>Medio Tecnológico</th>
+                            <th>Modelo Técnico</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
@@ -40,6 +41,7 @@
                                 <td>{{ entities.nombre }}</td>
                                 <td>{{ entities.marca }}</td>
                                 <td>{{ entities.mediotecnologico | length }}</td>
+                                <td>{{ entities.modelotecnico | length }}</td>
                                 <td>
                                     <center>
                                         <button class="btn btn-primary editar" value="{{ path('modelo_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>

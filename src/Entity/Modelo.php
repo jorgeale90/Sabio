@@ -40,19 +40,24 @@ class Modelo
     protected $marca;
 
     /**
-     * @ORM\OneToMany(targetEntity="MedioTecnologico", mappedBy="modelo")
+     * @ORM\OneToMany(targetEntity="App\Entity\MedioTecnologico", mappedBy="modelo")
      */
     protected $mediotecnologico;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="modelo")
+     */
+    protected $modelotecnico;
 
     public function __construct()
     {
         $this->mediotecnologico = new ArrayCollection();
+        $this->modelotecnico = new ArrayCollection();
     }
 
-    public function __toString() {
-
+    public function __toString()
+    {
         return $this->getNombre();
-
     }
 
     public function getId(): ?int
@@ -108,6 +113,36 @@ class Modelo
             // set the owning side to null (unless already changed)
             if ($mediotecnologico->getModelo() === $this) {
                 $mediotecnologico->setModelo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico(): Collection
+    {
+        return $this->modelotecnico;
+    }
+
+    public function addModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if (!$this->modelotecnico->contains($modelotecnico)) {
+            $this->modelotecnico[] = $modelotecnico;
+            $modelotecnico->setModelo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if ($this->modelotecnico->removeElement($modelotecnico)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico->getModelo() === $this) {
+                $modelotecnico->setModelo(null);
             }
         }
 

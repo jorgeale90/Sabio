@@ -26,6 +26,34 @@ class AuditoriaInterna
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "auditoria")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Provincia.")
+     */
+    protected $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Municipio", inversedBy = "auditoria")
+     * @ORM\JoinColumn(name="municipio_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar un Municipio.")
+     */
+    protected $municipio;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Institucion", inversedBy = "auditoria")
+     * @ORM\JoinColumn(name="institucion_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Institución.")
+     */
+    protected $institucion;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\FichaTecnica", inversedBy = "auditoria")
+     * @ORM\JoinColumn(name="fichatecnica_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Ficha Técnica.")
+     */
+    protected $fichatecnica;
+
+    /**
      * @var string
      * @Assert\Regex(pattern="/\w/", match=true, message="Debe contener solo números")
      * @ORM\Column(name="noidentificacion", type="string",  nullable=false, length=80, unique=true)
@@ -78,6 +106,12 @@ class AuditoriaInterna
      * @Assert\Length(min=1, max=1000, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $situaciones;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\User", inversedBy = "auditoria")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete = "CASCADE")
+     */
+    protected $user;
 
     public function __construct()
     {
@@ -174,6 +208,66 @@ class AuditoriaInterna
     public function removePersonalmedico(PersonalMedico $personalmedico): self
     {
         $this->personalmedico->removeElement($personalmedico);
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getMunicipio(): ?Municipio
+    {
+        return $this->municipio;
+    }
+
+    public function setMunicipio(?Municipio $municipio): self
+    {
+        $this->municipio = $municipio;
+
+        return $this;
+    }
+
+    public function getInstitucion(): ?Institucion
+    {
+        return $this->institucion;
+    }
+
+    public function setInstitucion(?Institucion $institucion): self
+    {
+        $this->institucion = $institucion;
+
+        return $this;
+    }
+
+    public function getFichatecnica(): ?FichaTecnica
+    {
+        return $this->fichatecnica;
+    }
+
+    public function setFichatecnica(?FichaTecnica $fichatecnica): self
+    {
+        $this->fichatecnica = $fichatecnica;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

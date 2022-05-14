@@ -37,9 +37,15 @@ class TipoMedio
      */
     protected $mediotecnologico;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="tipomedio")
+     */
+    protected $modelotecnico;
+
     public function __construct()
     {
         $this->mediotecnologico = new ArrayCollection();
+        $this->modelotecnico = new ArrayCollection();
     }
 
     public function __toString() {
@@ -89,6 +95,36 @@ class TipoMedio
             // set the owning side to null (unless already changed)
             if ($mediotecnologico->getTipomedio() === $this) {
                 $mediotecnologico->setTipomedio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico(): Collection
+    {
+        return $this->modelotecnico;
+    }
+
+    public function addModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if (!$this->modelotecnico->contains($modelotecnico)) {
+            $this->modelotecnico[] = $modelotecnico;
+            $modelotecnico->setTipomedio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if ($this->modelotecnico->removeElement($modelotecnico)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico->getTipomedio() === $this) {
+                $modelotecnico->setTipomedio(null);
             }
         }
 

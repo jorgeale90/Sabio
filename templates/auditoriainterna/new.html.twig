@@ -23,4 +23,145 @@
 {% block javascript %}
     <!-- Select2 -->
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
+    <script>
+        $('#{{ form.provincia.vars.id }}').on('change', function (e) {
+            var data = {
+                provincia_id: $(this).val()
+            };
+            $('#{{ form.municipio.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('municipioa_x_provinciaa') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Municipio</option>';
+                        $.each(response, function (i, municipio) {
+                            option += '<option value='+ municipio.id +'>'+ municipio.nombre +'</option>'
+                        });
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Municipios en esta Provincia.</option>';
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Municipios de la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.municipio.vars.id }}').on('change', function (e) {
+            var data = {
+                municipio_id: $(this).val()
+            };
+            $('#{{ form.institucion.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('instituciona_x_municipioa') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione la Institución</option>';
+                        $.each(response, function (i, institucion) {
+                            option += '<option value='+ institucion.id +'>'+ institucion.nombre +'</option>'
+                        });
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Instituciones en este Municipio.</option>';
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Instituciones en la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.institucion.vars.id }}').on('change', function (e) {
+            var data = {
+                institucion_id: $(this).val()
+            };
+            $('#{{ form.fichatecnica.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.fichatecnica.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('fichaa_x_instituciona') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione la Ficha Técnica</option>';
+                        $.each(response, function (i, fichatecnica) {
+                            option += '<option value='+ fichatecnica.id +'>'+ fichatecnica.tipoequipo +' '+ fichatecnica.noinventario +'</option>'
+                        });
+                        $('#{{ form.fichatecnica.vars.id }}').html(option);
+                        $('#{{ form.fichatecnica.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Ficha Técnica en esta Institución.</option>';
+                        $('#{{ form.fichatecnica.vars.id }}').html(option);
+                        $('#{{ form.fichatecnica.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Fichas Técnicas en la Institución seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.institucion.vars.id }}').on('change', function (e) {
+            var data = {
+                institucion_id: $(this).val()
+            };
+            $('#{{ form.personalmedico.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.personalmedico.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('personala_x_instituciona') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Personal</option>';
+                        $.each(response, function (i, personalmedico) {
+                            option += '<option value='+ personalmedico.id +'>'+ personalmedico.nombre +' '+ personalmedico.apellidos +'</option>'
+                        });
+                        $('#{{ form.personalmedico.vars.id }}').html(option);
+                        $('#{{ form.personalmedico.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Personales en esta Institución.</option>';
+                        $('#{{ form.personalmedico.vars.id }}').html(option);
+                        $('#{{ form.personalmedico.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Personales en la Institución seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
 {% endblock %}

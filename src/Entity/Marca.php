@@ -42,10 +42,16 @@ class Marca
      */
     protected $mediotecnologico;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="marca")
+     */
+    protected $modelotecnico;
+
     public function __construct()
     {
         $this->modelo = new ArrayCollection();
         $this->mediotecnologico = new ArrayCollection();
+        $this->modelotecnico = new ArrayCollection();
     }
 
     public function __toString()
@@ -124,6 +130,36 @@ class Marca
             // set the owning side to null (unless already changed)
             if ($mediotecnologico->getMarca() === $this) {
                 $mediotecnologico->setMarca(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico(): Collection
+    {
+        return $this->modelotecnico;
+    }
+
+    public function addModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if (!$this->modelotecnico->contains($modelotecnico)) {
+            $this->modelotecnico[] = $modelotecnico;
+            $modelotecnico->setMarca($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if ($this->modelotecnico->removeElement($modelotecnico)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico->getMarca() === $this) {
+                $modelotecnico->setMarca(null);
             }
         }
 

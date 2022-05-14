@@ -40,6 +40,8 @@ class ContratoCorreoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $entity->setUser($user);
             $entityManager->persist($entity);
             $entityManager->flush();
 
@@ -66,6 +68,8 @@ class ContratoCorreoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $entity->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
@@ -124,5 +128,27 @@ class ContratoCorreoController extends AbstractController
         $municipio_id = $request->get('municipio_id');
         $institucion = $em->getRepository('App:Institucion')->findByMunicipiocc($municipio_id);
         return new JsonResponse($institucion);
+    }
+
+    /**
+     * @Route("/getpersonalmxinstitucionm", name="personalcc_x_institucioncc", methods={"GET","POST"})
+     */
+    public function getPersonalccxInstitucioncc(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $institucion_id = $request->get('institucion_id');
+        $personal = $em->getRepository('App:PersonalMedico')->findByInstitucioncc($institucion_id);
+        return new JsonResponse($personal);
+    }
+
+    /**
+     * @Route("/getpersonalcc2xinstitucioncc2", name="personalcc2_x_institucioncc2", methods={"GET","POST"})
+     */
+    public function getPersonalcc2xInstitucioncc2(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $institucion_id = $request->get('institucion_id');
+        $personal = $em->getRepository('App:PersonalMedico')->findByInstitucioncc2($institucion_id);
+        return new JsonResponse($personal);
     }
 }

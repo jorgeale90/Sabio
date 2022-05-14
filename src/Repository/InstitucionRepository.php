@@ -67,6 +67,54 @@ class InstitucionRepository extends ServiceEntityRepository
         return $consulta->getArrayResult();
     }
 
+    public function findByMunicipiopm($municipio_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Institucion m WHERE m.municipio = :municipio_id');
+        $consulta->setParameter('municipio_id', $municipio_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByMunicipiosc($municipio_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Institucion m WHERE m.municipio = :municipio_id');
+        $consulta->setParameter('municipio_id', $municipio_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByMunicipiou($municipio_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Institucion m WHERE m.municipio = :municipio_id');
+        $consulta->setParameter('municipio_id', $municipio_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByMunicipiomt($municipio_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Institucion m WHERE m.municipio = :municipio_id');
+        $consulta->setParameter('municipio_id', $municipio_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByMunicipiom($municipio_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Institucion m WHERE m.municipio = :municipio_id');
+        $consulta->setParameter('municipio_id', $municipio_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByMunicipioa($municipio_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Institucion m WHERE m.municipio = :municipio_id');
+        $consulta->setParameter('municipio_id', $municipio_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return Institucion[] Returns an array of Institucion objects
     //  */

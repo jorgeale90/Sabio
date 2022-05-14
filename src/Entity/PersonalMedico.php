@@ -14,7 +14,6 @@ use DH\Auditor\Provider\Doctrine\Auditing\Annotation as Audit;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PersonalMedicoRepository")
  * @UniqueEntity(fields={"ci"},message="Ya existe este Personal Médico en nuestra Base de Datos.")
- * @UniqueEntity(fields={"noregistro"},message="Ya existe este No. de Registro en nuestra Base de Datos.")
  * @Vich\Uploadable
  * @Audit\Auditable()
  * @Audit\Security(view={"ROLE_ADMIN"})
@@ -39,9 +38,7 @@ class PersonalMedico
 
     /**
      * @var string
-     * @Assert\Regex(pattern="/\w/", match=true, message="Debe contener solo números")
      * @ORM\Column(name="noregistro", type="string",  nullable=true, length=80)
-     * @Assert\Length(min=2, max=30, minMessage="Debe contener al menos {{ limit }} letras", maxMessage="Debe contener a lo sumo {{ limit }} letras")
      */
     private $noregistro;
 
@@ -119,6 +116,27 @@ class PersonalMedico
      * @Assert\NotBlank(message="Debe seleccionar un Cargo")
      */
     protected $cargo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "personal")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Provincia")
+     */
+    protected $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Municipio", inversedBy = "personal")
+     * @ORM\JoinColumn(name="municipio_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar un Municipio")
+     */
+    protected $municipio;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Institucion", inversedBy = "personal")
+     * @ORM\JoinColumn(name="institucion_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Institución")
+     */
+    protected $institucion;
 
     /**
      * @ORM\ManyToOne(targetEntity = "Nacionalidad", inversedBy = "personal")
@@ -248,6 +266,17 @@ class PersonalMedico
      */
     private $esDenegar;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="personal1")
+     */
+    protected $modelotecnico1;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\User", inversedBy = "personalmed")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete = "CASCADE")
+     */
+    protected $user;
+
     public function __construct()
     {
         $this->organizacionpolitica = new ArrayCollection();
@@ -263,6 +292,7 @@ class PersonalMedico
         $this->fichatecnica1 = new ArrayCollection();
         $this->fichatecnica2 = new ArrayCollection();
         $this->entradasalida = new ArrayCollection();
+        $this->modelotecnico1 = new ArrayCollection();
     }
 
     public function getNombreCompleto() {
@@ -913,6 +943,84 @@ class PersonalMedico
             // set the owning side to null (unless already changed)
             if ($entradasalida->getPersonal() === $this) {
                 $entradasalida->setPersonal(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getMunicipio(): ?Municipio
+    {
+        return $this->municipio;
+    }
+
+    public function setMunicipio(?Municipio $municipio): self
+    {
+        $this->municipio = $municipio;
+
+        return $this;
+    }
+
+    public function getInstitucion(): ?Institucion
+    {
+        return $this->institucion;
+    }
+
+    public function setInstitucion(?Institucion $institucion): self
+    {
+        $this->institucion = $institucion;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico1(): Collection
+    {
+        return $this->modelotecnico1;
+    }
+
+    public function addModelotecnico1(ModeloTecnico $modelotecnico1): self
+    {
+        if (!$this->modelotecnico1->contains($modelotecnico1)) {
+            $this->modelotecnico1[] = $modelotecnico1;
+            $modelotecnico1->setPersonal1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico1(ModeloTecnico $modelotecnico1): self
+    {
+        if ($this->modelotecnico1->removeElement($modelotecnico1)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico1->getPersonal1() === $this) {
+                $modelotecnico1->setPersonal1(null);
             }
         }
 

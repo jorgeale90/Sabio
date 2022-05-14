@@ -34,6 +34,27 @@ class SistemaContableType extends AbstractType
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
 
+            ->add('provincia', EntityType::class, array(
+                'label' => 'Provincia :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Provincia',
+                'attr' => array('class' => 'form-control', 'required' => 'required')
+            ))
+
+            ->add('municipio', EntityType::class, array(
+                'label' => 'Municipio :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Municipio',
+                'attr' => array('class' => 'form-control', 'required' => 'required')
+            ))
+
+            ->add('institucion', EntityType::class, array(
+                'label' => 'Institución :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Institucion',
+                'attr' => array('class' => 'form-control', 'required' => 'required')
+            ))
+
             ->add('personal', EntityType::class, array(
                 'label' => 'Personal :',
                 'placeholder' => 'Seleccione una opción',

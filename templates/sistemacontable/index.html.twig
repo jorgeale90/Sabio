@@ -26,8 +26,8 @@
                     <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
-                            <th class="text-center">#</th>
                             <th>Código</th>
+                            <th>Institución</th>
                             <th>Personal</th>
                             <th>Permiso</th>
                             <th>Sistema Módulo</th>
@@ -37,8 +37,8 @@
                         <tbody>
                         {% for sis in sistemacontable %}
                             <tr>
-                                <td>{{ sis.id }}</td>
                                 <td>{{ sis.codigo }}</td>
+                                <td>{{ sis.institucion }}</td>
                                 <td>{{ sis.personal }}</td>
                                 <td>{{ sis.permisos }}</td>
                                 <td>{{ sis.sistemamodulo }}</td>

@@ -108,6 +108,12 @@ class ContratoCorreo
      */
     protected $municipio;
 
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\User", inversedBy = "contratocorreo")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete = "CASCADE")
+     */
+    protected $user;
+
     public function getNombreCompleto() {
 
         return $this->getCodigo() . " para el solicitante " . $this->getPersonal2();
@@ -265,6 +271,18 @@ class ContratoCorreo
     public function setMunicipio(?Municipio $municipio): self
     {
         $this->municipio = $municipio;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

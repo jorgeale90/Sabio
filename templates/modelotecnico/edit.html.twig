@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Editar Control Medio Tecnológico{% endblock %}
+{% block title %}Editar Control Modelo Expediente Técnico{% endblock %}
 {% block head %}
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('page/dashboard/assets/bundles/select2/dist/css/select2.min.css') }}">
@@ -7,16 +7,16 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Control Medio Tecnológico</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Editar Modelo del Expediente Técnico</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Editar</strong> Control Medio Tecnológico</h4>
+                <h4><strong>Editar</strong> Modelo del Expediente Técnico</h4>
             </div>
-            {{ include('mediotecnologico/_form.html.twig', {'button_label': 'Editar Medio Tecnológico'}) }}
+            {{ include('modelotecnico/_form.html.twig', {'button_label': 'Editar Modelo Técnico'}) }}
         </div>
     </div>
 {% endblock %}
@@ -25,7 +25,7 @@
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
     <script>
-    $('#{{ form.provincia.vars.id }}').on('change', function (e) {
+        $('#{{ form.provincia.vars.id }}').on('change', function (e) {
             var data = {
                 provincia_id: $(this).val()
             };
@@ -33,7 +33,7 @@
             $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
-                url: '{{ path('municipiomt_x_provinciamt') }}',
+                url: '{{ path('municipiom_x_provinciam') }}',
                 async: true,
                 data: data,
                 success: function (response) {
@@ -68,7 +68,7 @@
             $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
-                url: '{{ path('institucionmt_x_municipiomt') }}',
+                url: '{{ path('institucionm_x_municipiom') }}',
                 async: true,
                 data: data,
                 success: function (response) {
@@ -99,11 +99,46 @@
             var data = {
                 institucion_id: $(this).val()
             };
+            $('#{{ form.fichatecnica.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.fichatecnica.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('ficham_x_institucionm') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione la Ficha Técnica</option>';
+                        $.each(response, function (i, fichatecnica) {
+                            option += '<option value='+ fichatecnica.id +'>'+ fichatecnica.tipoequipo +' '+ fichatecnica.noinventario +'</option>'
+                        });
+                        $('#{{ form.fichatecnica.vars.id }}').html(option);
+                        $('#{{ form.fichatecnica.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Ficha Técnica en esta Institución.</option>';
+                        $('#{{ form.fichatecnica.vars.id }}').html(option);
+                        $('#{{ form.fichatecnica.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Fichas Técnicas en la Institución seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.institucion.vars.id }}').on('change', function (e) {
+            var data = {
+                institucion_id: $(this).val()
+            };
             $('#{{ form.personal1.vars.id }}').html('<option>Cargando...</option>');
             $('#{{ form.personal1.vars.id }}').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
-                url: '{{ path('personalmt_x_institucionmt') }}',
+                url: '{{ path('personalm_x_institucionm') }}',
                 async: true,
                 data: data,
                 success: function (response) {
@@ -138,7 +173,7 @@
             $('#{{ form.personal2.vars.id }}').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
-                url: '{{ path('personalmt2_x_institucionmt2') }}',
+                url: '{{ path('personalm2_x_institucionm2') }}',
                 async: true,
                 data: data,
                 success: function (response) {
@@ -173,7 +208,7 @@
                 $('#{{ form.modelo.vars.id }}').attr('disabled', 'disabled');
                 $.ajax({
                     type: 'POST',
-                    url: '{{ path('modelo_x_marca') }}',
+                    url: '{{ path('modelom_x_marcam') }}',
                     async: true,
                     data: data,
                     success: function (response) {

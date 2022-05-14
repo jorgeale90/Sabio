@@ -75,6 +75,54 @@ class MunicipioRepository extends ServiceEntityRepository
         return $consulta->getArrayResult();
     }
 
+    public function findByProvinciapm($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciasc($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciau($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciamt($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciam($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByProvinciaa($provincia_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Municipio m WHERE m.provincia = :provincia_id');
+        $consulta->setParameter('provincia_id', $provincia_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return Municipio[] Returns an array of Municipio objects
     //  */

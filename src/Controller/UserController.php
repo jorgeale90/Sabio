@@ -97,7 +97,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_remove")
+     * @Route("/delete/{id}", name="user_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
@@ -163,5 +163,27 @@ class UserController extends AbstractController
             'user'    => $user,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/getmunicipiouxprovinciau", name="municipiou_x_provinciau", methods={"GET","POST"})
+     */
+    public function getMunicipiouxProvinciau(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $provincia_id = $request->get('provincia_id');
+        $municipio = $em->getRepository('App:Municipio')->findByProvinciau($provincia_id);
+        return new JsonResponse($municipio);
+    }
+
+    /**
+     * @Route("/getinstitucionuxmunicipiou", name="institucionu_x_municipiou", methods={"GET","POST"})
+     */
+    public function getInstitucionuxMunicipiou(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $municipio_id = $request->get('municipio_id');
+        $institucion = $em->getRepository('App:Institucion')->findByMunicipiou($municipio_id);
+        return new JsonResponse($institucion);
     }
 }

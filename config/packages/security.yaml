@@ -38,6 +38,4 @@ security:
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_MODERATOR] }
-#        - { path: ^/blog, roles: [ROLE_ADMIN, ROLE_MODERATOR, ROLE_CLIENT] }
-        # - { path: ^/profile, roles: ROLE_CLIENT }
+        - { path: ^/admin, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN, ROLE_MODERATOR] }

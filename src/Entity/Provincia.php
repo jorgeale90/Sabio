@@ -83,6 +83,36 @@ class Provincia
      */
     protected $mantenimiento;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PersonalMedico", mappedBy="provincia")
+     */
+    protected $personal;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SistemaContable", mappedBy="provincia")
+     */
+    protected $sistemacontable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MedioTecnologico", mappedBy="provincia")
+     */
+    protected $medio;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="provincia")
+     */
+    protected $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="provincia")
+     */
+    protected $modelotecnico;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AuditoriaInterna", mappedBy="provincia")
+     */
+    protected $auditoria;
+
     public function __construct()
     {
         $this->municipio = new ArrayCollection();
@@ -93,6 +123,12 @@ class Provincia
         $this->contratointernet = new ArrayCollection();
         $this->direccionamiento = new ArrayCollection();
         $this->mantenimiento = new ArrayCollection();
+        $this->personal = new ArrayCollection();
+        $this->sistemacontable = new ArrayCollection();
+        $this->user = new ArrayCollection();
+        $this->medio = new ArrayCollection();
+        $this->modelotecnico = new ArrayCollection();
+        $this->auditoria = new ArrayCollection();
     }
 
     public function __toString() {
@@ -364,6 +400,186 @@ class Provincia
             // set the owning side to null (unless already changed)
             if ($mantenimiento->getProvincia() === $this) {
                 $mantenimiento->setProvincia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PersonalMedico>
+     */
+    public function getPersonal(): Collection
+    {
+        return $this->personal;
+    }
+
+    public function addPersonal(PersonalMedico $personal): self
+    {
+        if (!$this->personal->contains($personal)) {
+            $this->personal[] = $personal;
+            $personal->setProvincia($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonal(PersonalMedico $personal): self
+    {
+        if ($this->personal->removeElement($personal)) {
+            // set the owning side to null (unless already changed)
+            if ($personal->getProvincia() === $this) {
+                $personal->setProvincia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SistemaContable>
+     */
+    public function getSistemacontable(): Collection
+    {
+        return $this->sistemacontable;
+    }
+
+    public function addSistemacontable(SistemaContable $sistemacontable): self
+    {
+        if (!$this->sistemacontable->contains($sistemacontable)) {
+            $this->sistemacontable[] = $sistemacontable;
+            $sistemacontable->setProvincia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSistemacontable(SistemaContable $sistemacontable): self
+    {
+        if ($this->sistemacontable->removeElement($sistemacontable)) {
+            // set the owning side to null (unless already changed)
+            if ($sistemacontable->getProvincia() === $this) {
+                $sistemacontable->setProvincia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setProvincia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getProvincia() === $this) {
+                $user->setProvincia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MedioTecnologico>
+     */
+    public function getMedio(): Collection
+    {
+        return $this->medio;
+    }
+
+    public function addMedio(MedioTecnologico $medio): self
+    {
+        if (!$this->medio->contains($medio)) {
+            $this->medio[] = $medio;
+            $medio->setProvincia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedio(MedioTecnologico $medio): self
+    {
+        if ($this->medio->removeElement($medio)) {
+            // set the owning side to null (unless already changed)
+            if ($medio->getProvincia() === $this) {
+                $medio->setProvincia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico(): Collection
+    {
+        return $this->modelotecnico;
+    }
+
+    public function addModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if (!$this->modelotecnico->contains($modelotecnico)) {
+            $this->modelotecnico[] = $modelotecnico;
+            $modelotecnico->setProvincia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if ($this->modelotecnico->removeElement($modelotecnico)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico->getProvincia() === $this) {
+                $modelotecnico->setProvincia(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AuditoriaInterna>
+     */
+    public function getAuditoria(): Collection
+    {
+        return $this->auditoria;
+    }
+
+    public function addAuditorium(AuditoriaInterna $auditorium): self
+    {
+        if (!$this->auditoria->contains($auditorium)) {
+            $this->auditoria[] = $auditorium;
+            $auditorium->setProvincia($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuditorium(AuditoriaInterna $auditorium): self
+    {
+        if ($this->auditoria->removeElement($auditorium)) {
+            // set the owning side to null (unless already changed)
+            if ($auditorium->getProvincia() === $this) {
+                $auditorium->setProvincia(null);
             }
         }
 

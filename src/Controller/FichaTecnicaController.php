@@ -42,6 +42,8 @@ class FichaTecnicaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $entities->setUser($user);
             $entityManager->persist($entities);
             $entityManager->flush();
 
@@ -82,6 +84,8 @@ class FichaTecnicaController extends AbstractController
                     $entityManager->remove($hardware);
                 }
             }
+            $user = $this->getUser();
+            $fichaTecnica->setUser($user);
 
             $this->getDoctrine()->getManager()->flush();
 

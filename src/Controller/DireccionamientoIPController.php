@@ -42,6 +42,8 @@ class DireccionamientoIPController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $entities->setUser($user);
             $entityManager->persist($entities);
             $entityManager->flush();
 
@@ -82,6 +84,8 @@ class DireccionamientoIPController extends AbstractController
                     $entityManager->remove($tabla);
                 }
             }
+            $user = $this->getUser();
+            $direccionamientoIP->setUser($user);
 
             $this->getDoctrine()->getManager()->flush();
 

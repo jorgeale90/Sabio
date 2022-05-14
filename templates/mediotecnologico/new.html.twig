@@ -25,31 +25,31 @@
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
     <script>
-    $('#{{ form.marca.vars.id }}').on('change', function (e) {
+    $('#{{ form.provincia.vars.id }}').on('change', function (e) {
             var data = {
-                marca_id: $(this).val()
+                provincia_id: $(this).val()
             };
-            $('#{{ form.modelo.vars.id }}').html('<option>Cargando...</option>');
-            $('#{{ form.modelo.vars.id }}').attr('disabled', 'disabled');
+            $('#{{ form.municipio.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
-                url: '{{ path('modelo_x_marca') }}',
+                url: '{{ path('municipiomt_x_provinciamt') }}',
                 async: true,
                 data: data,
                 success: function (response) {
                     if (response.length !== 0){
-                        var option = '<option>Seleccione el Modelo</option>';
-                        $.each(response, function (i, modelo) {
-                            option += '<option value='+ modelo.id +'>'+ modelo.nombre +'</option>'
+                        var option = '<option>Seleccione el Municipio</option>';
+                        $.each(response, function (i, municipio) {
+                            option += '<option value='+ municipio.id +'>'+ municipio.nombre +'</option>'
                         });
-                        $('#{{ form.modelo.vars.id }}').html(option);
-                        $('#{{ form.modelo.vars.id }}').removeAttr('disabled');
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').removeAttr('disabled');
                     } else {
-                        var option = '<option>No hay Modelos en esta Marca.</option>';
-                        $('#{{ form.modelo.vars.id }}').html(option);
-                        $('#{{ form.modelo.vars.id }}').attr('disabled', 'disabled');
+                        var option = '<option>No hay Municipios en esta Provincia.</option>';
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
                         noty({
-                            text: 'No se encontraron Modelos en la Marca seleccionada.',
+                            text: 'No se encontraron Municipios de la Provincia seleccionada.',
                             layout: 'topRight', type: 'error', timeout: 5000,
                         });
                     }
@@ -58,6 +58,146 @@
                     console.log(error);
                 }
             });
-    });
+        });
+
+        $('#{{ form.municipio.vars.id }}').on('change', function (e) {
+            var data = {
+                municipio_id: $(this).val()
+            };
+            $('#{{ form.institucion.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('institucionmt_x_municipiomt') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione la Institución</option>';
+                        $.each(response, function (i, institucion) {
+                            option += '<option value='+ institucion.id +'>'+ institucion.nombre +'</option>'
+                        });
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Instituciones en este Municipio.</option>';
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Instituciones en la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.institucion.vars.id }}').on('change', function (e) {
+            var data = {
+                institucion_id: $(this).val()
+            };
+            $('#{{ form.personal1.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.personal1.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('personalmt_x_institucionmt') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Personal</option>';
+                        $.each(response, function (i, personal1) {
+                            option += '<option value='+ personal1.id +'>'+ personal1.nombre +' '+ personal1.apellidos +'</option>'
+                        });
+                        $('#{{ form.personal1.vars.id }}').html(option);
+                        $('#{{ form.personal1.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Personales en esta Institución.</option>';
+                        $('#{{ form.personal1.vars.id }}').html(option);
+                        $('#{{ form.personal1.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Personales en la Institución seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.institucion.vars.id }}').on('change', function (e) {
+            var data = {
+                institucion_id: $(this).val()
+            };
+            $('#{{ form.personal2.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.personal2.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('personalmt2_x_institucionmt2') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione el Personal</option>';
+                        $.each(response, function (i, personal2) {
+                            option += '<option value='+ personal2.id +'>'+ personal2.nombre +' '+ personal2.apellidos +'</option>'
+                        });
+                        $('#{{ form.personal2.vars.id }}').html(option);
+                        $('#{{ form.personal2.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Personales en esta Institución.</option>';
+                        $('#{{ form.personal2.vars.id }}').html(option);
+                        $('#{{ form.personal2.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Personales en la Institución seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#{{ form.marca.vars.id }}').on('change', function (e) {
+                var data = {
+                    marca_id: $(this).val()
+                };
+                $('#{{ form.modelo.vars.id }}').html('<option>Cargando...</option>');
+                $('#{{ form.modelo.vars.id }}').attr('disabled', 'disabled');
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ path('modelo_x_marca') }}',
+                    async: true,
+                    data: data,
+                    success: function (response) {
+                        if (response.length !== 0){
+                            var option = '<option>Seleccione el Modelo</option>';
+                            $.each(response, function (i, modelo) {
+                                option += '<option value='+ modelo.id +'>'+ modelo.nombre +'</option>'
+                            });
+                            $('#{{ form.modelo.vars.id }}').html(option);
+                            $('#{{ form.modelo.vars.id }}').removeAttr('disabled');
+                        } else {
+                            var option = '<option>No hay Modelos en esta Marca.</option>';
+                            $('#{{ form.modelo.vars.id }}').html(option);
+                            $('#{{ form.modelo.vars.id }}').attr('disabled', 'disabled');
+                            noty({
+                                text: 'No se encontraron Modelos en la Marca seleccionada.',
+                                layout: 'topRight', type: 'error', timeout: 5000,
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+        });
     </script>
 {% endblock %}

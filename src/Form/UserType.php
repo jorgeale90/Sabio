@@ -33,6 +33,20 @@ class UserType extends AbstractType
 
             ->add('email')
 
+            ->add('provincia', EntityType::class, array(
+                'label' => 'Provincia :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Provincia',
+                'attr' => array('class' => 'form-control', 'required' => 'required')
+            ))
+
+            ->add('municipio', EntityType::class, array(
+                'label' => 'Municipio :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Municipio',
+                'attr' => array('class' => 'form-control', 'required' => 'required')
+            ))
+
             ->add('institucion', EntityType::class, array(
                 'label' => 'Institución :',
                 'placeholder' => 'Seleccione una opción',
@@ -76,7 +90,7 @@ class UserType extends AbstractType
                 ]
             ]);
 
-        if ($this->security->isGranted('IS_AUTHENTICATED_FULLY') ) {
+        if ($this->security->isGranted('ROLE_SUPER_ADMIN') ) {
             $builder               
                 ->add('roles',ChoiceType::class,[
                     'required'=>true,
@@ -84,9 +98,55 @@ class UserType extends AbstractType
                     'expanded'=>false,
                     'attr' => array('class' => 'form-control select2'),
                     'choices'=>[
-                        'Usuario'=>'ROLE_CLIENT',
-                        'Moderador'=>'ROLE_MODERATOR',
+                        'Super Administrador'=>'ROLE_SUPER_ADMIN',
                         'Administrador'=>'ROLE_ADMIN',
+                        'Moderador'=>'ROLE_MODERATOR',
+
+                    ],
+                ]);
+
+            $builder->get('roles')
+                ->addModelTransformer(new CallbackTransformer(
+                    function ($rolesArray) {
+                        return count($rolesArray) ? $rolesArray[0] : null;
+                    },
+                    function ($roleString){
+                        return [$roleString];
+                    }
+                ));
+        }elseif ($this->security->isGranted('ROLE_ADMIN') ) {
+            $builder
+                ->add('roles',ChoiceType::class,[
+                    'required'=>true,
+                    'multiple'=>false,
+                    'expanded'=>false,
+                    'attr' => array('class' => 'form-control select2'),
+                    'choices'=>[
+                        'Administrador'=>'ROLE_ADMIN',
+                        'Moderador'=>'ROLE_MODERATOR',
+
+                    ],
+                ]);
+
+            $builder->get('roles')
+                ->addModelTransformer(new CallbackTransformer(
+                    function ($rolesArray) {
+                        return count($rolesArray) ? $rolesArray[0] : null;
+                    },
+                    function ($roleString){
+                        return [$roleString];
+                    }
+                ));
+        }elseif ($this->security->isGranted('ROLE_MODERATOR') ) {
+            $builder
+                ->add('roles',ChoiceType::class,[
+                    'required'=>true,
+                    'multiple'=>false,
+                    'expanded'=>false,
+                    'attr' => array('class' => 'form-control select2'),
+                    'choices'=>[
+                        'Moderador'=>'ROLE_MODERATOR',
+
                     ],
                 ]);
 

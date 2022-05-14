@@ -32,11 +32,23 @@ class DashboardController extends AbstractController
         $personm = $this->em->getRepository('App:PersonalMedico')->findBy([], ['id' => 'DESC'], 10);
         $contratc = $this->em->getRepository('App:ContratoCorreo')->findBy([], ['id' => 'DESC'], 10);
         $contrata = $this->em->getRepository('App:ContratoAnclaje')->findBy([], ['id' => 'DESC'], 10);
+        $sistemac = $this->em->getRepository('App:SistemaContable')->findAll();
+        $mediot = $this->em->getRepository('App:MedioTecnologico')->findAll();
+        $persona = $this->em->getRepository('App:PersonalMedico')->findAll();
+        $direccion = $this->em->getRepository('App:DireccionamientoIP')->findAll();
+        $modelot = $this->em->getRepository('App:ModeloTecnico')->findAll();
+        $contratoco = $this->em->getRepository('App:ContratoCorreo')->findAll();
 
         return $this->render('dashboard/index.html.twig', [
             'personalm' => $personm,
-            'contratatoc' => $contratc,
-            'contratatoa' => $contrata,
+            'contratoc' => $contratc,
+            'contratoa' => $contrata,
+            'sistemac' => $sistemac,
+            'mediot' => $mediot,
+            'persona' => $persona,
+            'direccion' => $direccion,
+            'modelot' => $modelot,
+            'contratoco' => $contratoco,
             'controller_name' => 'Dashboard',
         ]);
     }

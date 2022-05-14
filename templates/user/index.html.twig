@@ -43,6 +43,7 @@
                             <th>Imagen</th>
                             <th>Fullname</th>
                             <th>Email</th>
+                            <th>Institución</th>
 {#                            <th>Role</th>#}
                             <th><center>Denegar Acceso</center></th>
                             <th class="nosort">&nbsp;</th>
@@ -50,6 +51,7 @@
                         </thead>
                         <tbody>
                         {% for use in user %}
+                            {% if use.institucion == app.user.institucion %}
                             <tr>
                                 <td>
                                     {% if use.image != null %}
@@ -60,21 +62,29 @@
                                 </td>
                                 <td>{{ use.fullname }}</td>
                                 <td>{{ use.email }}</td>
+                                <td>{{ use.institucion }}</td>
 {#                                <td>{{ use.roles ? use.roles|json_encode : '' }}</td>#}
                                 <td>
                                     <center><input type="checkbox" data-value="{{ use.id }}"
                                                    class="js-small-portero" {% if use.esDenegar %} checked {% endif %}></center>
                                 </td>
                                 <td>
-                                    <center>
-                                        <button class="btn btn-primary mostrar" value="#" data-toggle="tooltip" title="Mostrar"><i class="fa fa-eye"></i> Mostrar</button>
-                                        <button class="btn btn-primary editar" value="{{ path('user_edit', {'id': use.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        {% if app.user.username != use.username %}
-                                        <button class="btn btn-danger eliminar" value="{{ path('user_remove', {'id': use.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
-                                        {% endif %}
-                                    </center>
+                                    <div class="dropdown d-inline">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Acción
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item mostrar" value="#" data-toggle="tooltip" title="Mostrar"><i class="far fa-eye"></i> Mostrar</button>
+                                            <button class="dropdown-item editar" value="{{ path('user_edit', {'id': use.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                            {% if app.user.username != use.username %}
+                                            <button class="dropdown-item eliminar" value="{{ path('user_remove', {'id': use.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-alt"></i> Eliminar</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
+                            {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>

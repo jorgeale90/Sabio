@@ -27,6 +27,14 @@ class ModeloRepository extends ServiceEntityRepository
         return $consulta->getArrayResult();
     }
 
+    public function findByMarcam($marca_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:Modelo m WHERE m.marca = :marca_id');
+        $consulta->setParameter('marca_id', $marca_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return Modelo[] Returns an array of Modelo objects
     //  */

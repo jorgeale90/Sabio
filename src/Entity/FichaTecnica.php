@@ -166,12 +166,30 @@ class FichaTecnica
      */
     protected $mantenimiento;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="fichatecnica")
+     */
+    protected $modelotecnico;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AuditoriaInterna", mappedBy="fichatecnica")
+     */
+    protected $auditoria;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\User", inversedBy = "fichatecnica")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete = "CASCADE")
+     */
+    protected $user;
+
     public function __construct()
     {
         $this->ram = new ArrayCollection();
         $this->discoduro = new ArrayCollection();
         $this->hardware = new ArrayCollection();
         $this->mantenimiento = new ArrayCollection();
+        $this->modelotecnico = new ArrayCollection();
+        $this->auditoria = new ArrayCollection();
     }
 
     public function getNombreCompleto() {
@@ -437,6 +455,78 @@ class FichaTecnica
             // set the owning side to null (unless already changed)
             if ($mantenimiento->getFichatecnica() === $this) {
                 $mantenimiento->setFichatecnica(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico(): Collection
+    {
+        return $this->modelotecnico;
+    }
+
+    public function addModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if (!$this->modelotecnico->contains($modelotecnico)) {
+            $this->modelotecnico[] = $modelotecnico;
+            $modelotecnico->setFichatecnica($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if ($this->modelotecnico->removeElement($modelotecnico)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico->getFichatecnica() === $this) {
+                $modelotecnico->setFichatecnica(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AuditoriaInterna>
+     */
+    public function getAuditoria(): Collection
+    {
+        return $this->auditoria;
+    }
+
+    public function addAuditorium(AuditoriaInterna $auditorium): self
+    {
+        if (!$this->auditoria->contains($auditorium)) {
+            $this->auditoria[] = $auditorium;
+            $auditorium->setFichatecnica($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuditorium(AuditoriaInterna $auditorium): self
+    {
+        if ($this->auditoria->removeElement($auditorium)) {
+            // set the owning side to null (unless already changed)
+            if ($auditorium->getFichatecnica() === $this) {
+                $auditorium->setFichatecnica(null);
             }
         }
 

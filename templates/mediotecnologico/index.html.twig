@@ -27,10 +27,11 @@
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
+                            <th>Institución</th>
+                            <th>Cliente</th>
                             <th>Tipo Medio</th>
                             <th>Marca</th>
                             <th>Modelo</th>
-                            <th>Cliente</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
@@ -38,15 +39,23 @@
                         {% for entities in mediotecn %}
                             <tr>
                                 <td>{{ entities.id }}</td>
+                                <td>{{ entities.institucion }}</td>
+                                <td>{{ entities.personal2 }}</td>
                                 <td>{{ entities.tipomedio }}</td>
                                 <td>{{ entities.marca }}</td>
                                 <td>{{ entities.modelo }}</td>
-                                <td>{{ entities.personal2 }}</td>
                                 <td>
-                                    <center>
-                                        <button class="btn btn-primary editar" value="{{ path('mediotecnologico_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                        <button class="btn btn-danger eliminar" value="{{ path('mediotecnologico_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>
-                                    </center>
+                                    <div class="dropdown d-inline">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Acción
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item mostrar" value="#" data-toggle="tooltip" title="Mostrar"><i class="far fa-eye"></i> Mostrar</button>
+                                            <button class="dropdown-item editar" value="{{ path('mediotecnologico_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                            <button class="dropdown-item eliminar" value="{{ path('mediotecnologico_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-alt"></i> Eliminar</button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}

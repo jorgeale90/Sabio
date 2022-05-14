@@ -36,6 +36,7 @@
                         </thead>
                         <tbody>
                         {% for entities in ficha %}
+                            {% if entities.user.institucion == app.user.institucion %}
                             <tr>
                                 <td>{{ entities.noinventario }}</td>
                                 <td>{{ entities.personal1 }}</td>
@@ -56,12 +57,12 @@
                                     </div>
                                 </td>
                             </tr>
+                            {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
         <a class="btn btn-primary" type="button" href="{{ path('fichatecnica_new') }}"><i class="fa fa-plus"></i> Añadir Ficha Técnica</a>
         <a class="btn btn-warning" type="button" href="{{ path('fichatecnica_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>

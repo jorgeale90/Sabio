@@ -2,54 +2,17 @@
 
 namespace App\Form;
 
-use App\Entity\MedioTecnologico;
+use App\Entity\ModeloTecnico;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
-class MedioTecnologicoType extends AbstractType
+class ModeloTecnicoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mac')
-
-            ->add('serie', null, [
-                'label' => 'Serie :',
-                'empty_data' => ''
-            ])
-
-            ->add('fecha', DateType::class, array(
-                'html5' => true,
-                'widget' => 'single_text',
-                'required' => true
-            ))
-
-            ->add('descripcion')
-
-            ->add('tipomedio', EntityType::class, array(
-                'label' => 'Tipo Medio :',
-                'placeholder' => 'Seleccione una opción',
-                'class' => 'App\Entity\TipoMedio',
-                'attr' => array('class' => 'form-control select2', 'required' => 'required')
-            ))
-
-            ->add('marca', EntityType::class, array(
-                'label' => 'Marca :',
-                'placeholder' => 'Seleccione una opción',
-                'class' => 'App\Entity\Marca',
-                'attr' => array('class' => 'form-control select2', 'required' => 'required')
-            ))
-
-            ->add('modelo', EntityType::class, array(
-                'label' => 'Modelo :',
-                'placeholder' => 'Seleccione una opción',
-                'class' => 'App\Entity\Modelo',
-                'attr' => array('class' => 'form-control select2', 'required' => 'required')
-            ))
-
             ->add('provincia', EntityType::class, array(
                 'label' => 'Provincia :',
                 'placeholder' => 'Seleccione una opción',
@@ -84,13 +47,61 @@ class MedioTecnologicoType extends AbstractType
                 'class' => 'App\Entity\PersonalMedico',
                 'attr' => array('class' => 'form-control select2', 'required' => 'required')
             ))
+
+            ->add('fichatecnica', EntityType::class, array(
+                'label' => 'Ficha Técnica :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\FichaTecnica',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
+
+            ->add('tipomedio', EntityType::class, array(
+                'label' => 'Tipo de Medio :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\TipoMedio',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
+
+            ->add('noinventario', null, [
+                'label' => 'No. Inventario :',
+                'empty_data' => ''
+            ])
+
+            ->add('proyecto', null, [
+                'label' => 'Proyecto :',
+                'empty_data' => ''
+            ])
+
+            ->add('area', null, [
+                'label' => 'Area :',
+                'empty_data' => ''
+            ])
+
+            ->add('marca', EntityType::class, array(
+                'label' => 'Marca :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Marca',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
+
+            ->add('modelo', EntityType::class, array(
+                'label' => 'Modelo :',
+                'placeholder' => 'Seleccione una opción',
+                'class' => 'App\Entity\Modelo',
+                'attr' => array('class' => 'form-control select2', 'required' => 'required')
+            ))
+
+            ->add('serie', null, [
+                'label' => 'Serie :',
+                'empty_data' => ''
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MedioTecnologico::class,
+            'data_class' => ModeloTecnico::class,
         ]);
     }
 }

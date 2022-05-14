@@ -24,6 +24,27 @@ class SistemaContable
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "sistemacontable")
+     * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Provincia")
+     */
+    protected $provincia;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Municipio", inversedBy = "sistemacontable")
+     * @ORM\JoinColumn(name="municipio_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar un Municipio")
+     */
+    protected $municipio;
+
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Institucion", inversedBy = "sistemacontable")
+     * @ORM\JoinColumn(name="institucion_id", referencedColumnName="id", onDelete = "CASCADE")
+     * @Assert\NotBlank(message="Debe seleccionar una Institución")
+     */
+    protected $institucion;
+
+    /**
      * @var string
      * @ORM\Column(name="codigo", type="string",  nullable=false, length=50, unique=true)
      * @Assert\NotBlank(message="No debe estar vacío")
@@ -39,23 +60,28 @@ class SistemaContable
     private $permisos;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "SistemaModulo", inversedBy = "sistemacontable")
+     * @ORM\ManyToOne(targetEntity = "App\Entity\SistemaModulo", inversedBy = "sistemacontable")
      * @ORM\JoinColumn(name="sistemamodulo_id", referencedColumnName="id", onDelete = "CASCADE")
      * @Assert\NotBlank(message="Debe seleccionar un Sistema de Mòdulo")
      */
     protected $sistemamodulo;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "PersonalMedico", inversedBy = "sistemacontable")
+     * @ORM\ManyToOne(targetEntity = "App\Entity\PersonalMedico", inversedBy = "sistemacontable")
      * @ORM\JoinColumn(name="personal_id", referencedColumnName="id", onDelete = "CASCADE")
      * @Assert\NotBlank(message="Debe seleccionar un Personal")
      */
     protected $personal;
 
-    public function __toString() {
+    /**
+     * @ORM\ManyToOne(targetEntity = "App\Entity\User", inversedBy = "sistemacontable")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete = "CASCADE")
+     */
+    protected $user;
 
-        return $this->getSistemamodulo();
-
+    public function __toString()
+    {
+        return $this->getCodigo();
     }
 
     public function getId(): ?int
@@ -107,6 +133,54 @@ class SistemaContable
     public function setCodigo(string $codigo): self
     {
         $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
+
+        return $this;
+    }
+
+    public function getMunicipio(): ?Municipio
+    {
+        return $this->municipio;
+    }
+
+    public function setMunicipio(?Municipio $municipio): self
+    {
+        $this->municipio = $municipio;
+
+        return $this;
+    }
+
+    public function getInstitucion(): ?Institucion
+    {
+        return $this->institucion;
+    }
+
+    public function setInstitucion(?Institucion $institucion): self
+    {
+        $this->institucion = $institucion;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

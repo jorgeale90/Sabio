@@ -19,6 +19,70 @@ class PersonalMedicoRepository extends ServiceEntityRepository
         parent::__construct($registry, PersonalMedico::class);
     }
 
+    public function findByInstitucionsc($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstitucionmt($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstitucionmt2($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstitucionPm($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstitucionPm2($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstitucionPa($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstitucioncc($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstitucioncc2($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:PersonalMedico m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return PersonalMedico[] Returns an array of PersonalMedico objects
     //  */

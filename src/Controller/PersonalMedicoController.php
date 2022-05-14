@@ -47,6 +47,8 @@ class PersonalMedicoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $entity->setUser($user);
             $entityManager->persist($entity);
             $entityManager->flush();
 
@@ -73,6 +75,8 @@ class PersonalMedicoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $entity->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
@@ -147,6 +151,28 @@ class PersonalMedicoController extends AbstractController
         $entityManager->flush();
 
         return new JsonResponse(array('response' => $action));
+    }
+
+    /**
+     * @Route("/getmunicipiopmxprovinciapm", name="municipiopm_x_provinciapm", methods={"GET","POST"})
+     */
+    public function getMunicipiopmxProvinciapm(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $provincia_id = $request->get('provincia_id');
+        $municipio = $em->getRepository('App:Municipio')->findByProvinciapm($provincia_id);
+        return new JsonResponse($municipio);
+    }
+
+    /**
+     * @Route("/getinstitucionpmxmunicipiopm", name="institucionpm_x_municipiopm", methods={"GET","POST"})
+     */
+    public function getInstitucionpmxMunicipiopm(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $municipio_id = $request->get('municipio_id');
+        $institucion = $em->getRepository('App:Institucion')->findByMunicipiopm($municipio_id);
+        return new JsonResponse($institucion);
     }
 
     /**

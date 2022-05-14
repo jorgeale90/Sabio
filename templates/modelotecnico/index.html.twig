@@ -1,5 +1,5 @@
 {% extends 'base-dashboard.html.twig' %}
-{% block title %}Listado Medio Tecnológico{% endblock %}
+{% block title %}Listado Modelo Expediente Técnico{% endblock %}
 {% block head %}
     <!-- modal efect css -->
     <link href="{{ asset('page/dashboard/modal/css/component.css') }}" rel="stylesheet">
@@ -12,14 +12,14 @@
 {% block body %}
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Control Medios Tecnológicos</li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-list"></i> Listado Modelo del Expediente Técnico</li>
         </ol>
     </nav>
 
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><strong>Listado</strong> Control Medio Tecnológico</h4>
+                <h4><strong>Listado</strong> Modelo del Expediente Técnico</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -29,14 +29,15 @@
                             <th class="text-center">#</th>
                             <th>Institución</th>
                             <th>Cliente</th>
-                            <th>Tipo Medio</th>
+                            <th>Tipo Equipo</th>
                             <th>Marca</th>
                             <th>Modelo</th>
                             <th class="nosort">&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for entities in mediotecn %}
+                        {% for entities in modelo %}
+                            {% if entities.user.institucion == app.user.institucion %}
                             <tr>
                                 <td>{{ entities.id }}</td>
                                 <td>{{ entities.institucion }}</td>
@@ -52,12 +53,13 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <button class="dropdown-item mostrar" value="#" data-toggle="tooltip" title="Mostrar"><i class="far fa-eye"></i> Mostrar</button>
-                                            <button class="dropdown-item editar" value="{{ path('mediotecnologico_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
-                                            <button class="dropdown-item eliminar" value="{{ path('mediotecnologico_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-alt"></i> Eliminar</button>
+                                            <button class="dropdown-item editar" value="{{ path('modelotecnico_edit', {'id': entities.id}) }}" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i> Editar</button>
+                                            <button class="dropdown-item eliminar" value="{{ path('modelotecnico_remove', {'id': entities.id}) }}" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-alt"></i> Eliminar</button>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
+                            {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
@@ -65,8 +67,8 @@
             </div>
 
         </div>
-        <a class="btn btn-primary" type="button" href="{{ path('mediotecnologico_new') }}"><i class="fa fa-plus"></i> Añadir Medio Tecnológico</a>
-        <a class="btn btn-warning" type="button" href="{{ path('mediotecnologico_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
+        <a class="btn btn-primary" type="button" href="{{ path('modelotecnico_new') }}"><i class="fa fa-plus"></i> Añadir Modelo Técnico</a>
+        <a class="btn btn-warning" type="button" href="{{ path('modelotecnico_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>
     </div>
 
     <div class="md-modal md-effect-1" id="modal-19">
@@ -145,7 +147,7 @@
                 $('.editar').on('click', function () {
                     var link = $(this).val();
                     $('#modal-19').addClass('md-show');
-                    $('#mensaje').text('¿Estas seguro que quieres editar este Medio Tecnológico?');
+                    $('#mensaje').text('¿Estas seguro que quieres editar este Modelo del Expediente Técnico?');
                     $('.aceptar').on('click', function () {
                         window.location = link;
                     });
@@ -154,7 +156,7 @@
                 $('.eliminar').on('click', function () {
                     var link = $(this).val();
                     $('#modal-19').addClass('md-show');
-                    $('#mensaje').text('¿Estas seguro que quieres eliminar este Medio Tecnológico?');
+                    $('#mensaje').text('¿Estas seguro que quieres eliminar este Modelo del Expediente Técnico?');
                     $('.aceptar').on('click', function () {
                         window.location = link;
                     });

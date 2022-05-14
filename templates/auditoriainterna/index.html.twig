@@ -27,6 +27,7 @@
                         <thead>
                         <tr>
                             <th>No. Identificación</th>
+                            <th>Institución</th>
                             <th>Acción Realizada</th>
                             <th>Fecha</th>
                             <th>Area</th>
@@ -35,8 +36,10 @@
                         </thead>
                         <tbody>
                         {% for entity in auditoria %}
+                            {% if entity.user.institucion == app.user.institucion %}
                             <tr>
                                 <td>{{ entity.noidentificacion }}</td>
+                                <td>{{ entity.institucion }}</td>
                                 <td>{{ entity.accionrealizada }}</td>
                                 <td>{{ entity.fecha | date('d/m/Y') }}</td>
                                 <td>{{ entity.area }}</td>
@@ -47,12 +50,12 @@
                                     </center>
                                 </td>
                             </tr>
+                            {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
         <a class="btn btn-primary" type="button" href="{{ path('auditoriainterna_new') }}"><i class="fa fa-plus"></i> Añadir Auditoría Interna</a>
         <a class="btn btn-warning" type="button" href="{{ path('auditoriainterna_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>

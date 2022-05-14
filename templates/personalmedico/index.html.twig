@@ -38,6 +38,7 @@
                         </thead>
                         <tbody>
                         {% for ca in personalmedico %}
+                            {% if ca.user.institucion == app.user.institucion %}
                             <tr>
                                 <td>{{ ca.noregistro }}</td>
                                 <td>{{ ca.ci }}</td>
@@ -61,12 +62,12 @@
                                     </div>
                                 </td>
                             </tr>
+                            {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
         <a class="btn btn-primary" type="button" href="{{ path('personalmedico_new') }}"><i class="fa fa-plus"></i> Añadir Personal</a>
         <a class="btn btn-warning" type="button" href="{{ path('personalmedico_index') }}"><i class="fa fa-cloud"></i> Actualizar</a>

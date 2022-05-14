@@ -1,6 +1,66 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.provincia, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.provincia)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.provincia)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.municipio, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.municipio)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.municipio)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Institución <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.institucion, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.institucion)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.institucion)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Personal <span class="required">*</span> :</label>
+        <div class="col-sm-7">
+            {{ form_widget(form.personal, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
+        </div>
+        <div class="col-2">
+            {% if(form_errors(form.personal)) %}
+                <div class="buttons">
+                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.personal)  }}"><i
+                                class="fas fa-exclamation-triangle"></i></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="form-group row">
         <label class="col-sm-3 col-form-label">Código <span class="required">*</span> :</label>
         <div class="col-sm-7">
             {{ form_widget(form.codigo, { 'attr': { 'class': 'form-control', 'required': 'required', 'placeholder': 'Código del Sistema Contable' } }) }}
@@ -39,21 +99,6 @@
             {% if(form_errors(form.sistemamodulo)) %}
                 <div class="buttons">
                     <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.sistemamodulo)  }}"><i
-                                class="fas fa-exclamation-triangle"></i></a>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-3 col-form-label">Personal <span class="required">*</span> :</label>
-        <div class="col-sm-7">
-            {{ form_widget(form.personal, { 'attr': { 'class': 'form-control select2', 'required': 'required' } }) }}
-        </div>
-        <div class="col-2">
-            {% if(form_errors(form.personal)) %}
-                <div class="buttons">
-                    <a href="#" class="btn btn-icon btn-warning" data-container="body" data-toggle="popover" data-placement="top" data-content="{{ form_errors(form.personal)  }}"><i
                                 class="fas fa-exclamation-triangle"></i></a>
                 </div>
             {% endif %}

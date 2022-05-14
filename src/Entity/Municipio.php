@@ -78,6 +78,36 @@ class Municipio
      */
     protected $mantenimiento;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PersonalMedico", mappedBy="municipio")
+     */
+    protected $personal;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\SistemaContable", mappedBy="municipio")
+     */
+    protected $sistemacontable;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MedioTecnologico", mappedBy="municipio")
+     */
+    protected $medio;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="municipio")
+     */
+    protected $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="municipio")
+     */
+    protected $modelotecnico;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AuditoriaInterna", mappedBy="municipio")
+     */
+    protected $auditoria;
+
     public function __construct()
     {
         $this->institucion = new ArrayCollection();
@@ -87,6 +117,12 @@ class Municipio
         $this->contratointernet = new ArrayCollection();
         $this->direccionamiento = new ArrayCollection();
         $this->mantenimiento = new ArrayCollection();
+        $this->personal = new ArrayCollection();
+        $this->sistemacontable = new ArrayCollection();
+        $this->user = new ArrayCollection();
+        $this->medio = new ArrayCollection();
+        $this->modelotecnico = new ArrayCollection();
+        $this->auditoria = new ArrayCollection();
     }
 
     public function __toString() {
@@ -328,6 +364,186 @@ class Municipio
             // set the owning side to null (unless already changed)
             if ($mantenimiento->getMunicipio() === $this) {
                 $mantenimiento->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PersonalMedico>
+     */
+    public function getPersonal(): Collection
+    {
+        return $this->personal;
+    }
+
+    public function addPersonal(PersonalMedico $personal): self
+    {
+        if (!$this->personal->contains($personal)) {
+            $this->personal[] = $personal;
+            $personal->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removePersonal(PersonalMedico $personal): self
+    {
+        if ($this->personal->removeElement($personal)) {
+            // set the owning side to null (unless already changed)
+            if ($personal->getMunicipio() === $this) {
+                $personal->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SistemaContable>
+     */
+    public function getSistemacontable(): Collection
+    {
+        return $this->sistemacontable;
+    }
+
+    public function addSistemacontable(SistemaContable $sistemacontable): self
+    {
+        if (!$this->sistemacontable->contains($sistemacontable)) {
+            $this->sistemacontable[] = $sistemacontable;
+            $sistemacontable->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSistemacontable(SistemaContable $sistemacontable): self
+    {
+        if ($this->sistemacontable->removeElement($sistemacontable)) {
+            // set the owning side to null (unless already changed)
+            if ($sistemacontable->getMunicipio() === $this) {
+                $sistemacontable->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getMunicipio() === $this) {
+                $user->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MedioTecnologico>
+     */
+    public function getMedio(): Collection
+    {
+        return $this->medio;
+    }
+
+    public function addMedio(MedioTecnologico $medio): self
+    {
+        if (!$this->medio->contains($medio)) {
+            $this->medio[] = $medio;
+            $medio->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedio(MedioTecnologico $medio): self
+    {
+        if ($this->medio->removeElement($medio)) {
+            // set the owning side to null (unless already changed)
+            if ($medio->getMunicipio() === $this) {
+                $medio->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico(): Collection
+    {
+        return $this->modelotecnico;
+    }
+
+    public function addModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if (!$this->modelotecnico->contains($modelotecnico)) {
+            $this->modelotecnico[] = $modelotecnico;
+            $modelotecnico->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico(ModeloTecnico $modelotecnico): self
+    {
+        if ($this->modelotecnico->removeElement($modelotecnico)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico->getMunicipio() === $this) {
+                $modelotecnico->setMunicipio(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, AuditoriaInterna>
+     */
+    public function getAuditoria(): Collection
+    {
+        return $this->auditoria;
+    }
+
+    public function addAuditorium(AuditoriaInterna $auditorium): self
+    {
+        if (!$this->auditoria->contains($auditorium)) {
+            $this->auditoria[] = $auditorium;
+            $auditorium->setMunicipio($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuditorium(AuditoriaInterna $auditorium): self
+    {
+        if ($this->auditoria->removeElement($auditorium)) {
+            // set the owning side to null (unless already changed)
+            if ($auditorium->getMunicipio() === $this) {
+                $auditorium->setMunicipio(null);
             }
         }
 

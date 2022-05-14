@@ -40,6 +40,8 @@ class MedioTecnologicoController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $entity->setUser($user);
             $entityManager->persist($entity);
             $entityManager->flush();
 
@@ -66,6 +68,8 @@ class MedioTecnologicoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $entity->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
@@ -82,7 +86,7 @@ class MedioTecnologicoController extends AbstractController
     }
 
     /**
-     * @Route("/mediotecnologico/{id}", name="mediotecnologico_remove")
+     * @Route("/delete/{id}", name="mediotecnologico_remove")
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function remove(Request $request, $id)
@@ -102,6 +106,50 @@ class MedioTecnologicoController extends AbstractController
         }
 
         return $this->redirectToRoute('mediotecnologico_index');
+    }
+
+    /**
+     * @Route("/getmunicipiomtxprovinciamt", name="municipiomt_x_provinciamt", methods={"GET","POST"})
+     */
+    public function getMunicipiomtxProvinciamt(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $provincia_id = $request->get('provincia_id');
+        $municipio = $em->getRepository('App:Municipio')->findByProvinciamt($provincia_id);
+        return new JsonResponse($municipio);
+    }
+
+    /**
+     * @Route("/getinstitucionmtxmunicipiomt", name="institucionmt_x_municipiomt", methods={"GET","POST"})
+     */
+    public function getInstitucionmtxMunicipiomt(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $municipio_id = $request->get('municipio_id');
+        $institucion = $em->getRepository('App:Institucion')->findByMunicipiomt($municipio_id);
+        return new JsonResponse($institucion);
+    }
+
+    /**
+     * @Route("/getpersonalmtxinstitucionmt", name="personalmt_x_institucionmt", methods={"GET","POST"})
+     */
+    public function getPersonalmtxInstitucionmt(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $institucion_id = $request->get('institucion_id');
+        $personal = $em->getRepository('App:PersonalMedico')->findByInstitucionmt($institucion_id);
+        return new JsonResponse($personal);
+    }
+
+    /**
+     * @Route("/getpersonalmt2xinstitucionmt2", name="personalmt2_x_institucionmt2", methods={"GET","POST"})
+     */
+    public function getPersonalmt2xInstitucionmt2(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $institucion_id = $request->get('institucion_id');
+        $personal = $em->getRepository('App:PersonalMedico')->findByInstitucionmt2($institucion_id);
+        return new JsonResponse($personal);
     }
 
     /**

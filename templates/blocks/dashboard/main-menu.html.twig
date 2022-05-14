@@ -7,77 +7,84 @@
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">Menú</li>
-      <li class="dropdown">
+      {% set route_name = app.request.attributes.get('_route') %}
+      <li {% if route_name == "dashboard" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="{{ path('dashboard') }}" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
+      </li>
+      <li {% if route_name == "user_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="{{ path('user_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Usuarios</span></a>
+      </li>
+      <li {% if route_name == "personalmedico_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="{{ path('personalmedico_index') }}" class="nav-link"><i data-feather="monitor"></i><span>Personal Entidad</span></a>
+      </li>
+      <li class="dropdown">
         <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Auditoría</span></a>
-        <a href="#" class="nav-link"><i data-feather="monitor"></i><span>Manager File</span></a>
+        <a href="{{ path('file_manager', {'conf': 'default' }) }}" class="nav-link"><i data-feather="monitor"></i><span>Manager File</span></a>
       </li>
       <li class="menu-header">Datos Generales</li>
-      <li class="dropdown">
+      <li {% if route_name == "pais_index" or route_name == "provincia_index" or route_name == "municipio_index" or route_name == "institucion_index" or route_name == "nacionalidad_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Localización</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('pais_index') }}">País</a></li>
-          <li><a class="nav-link" href="{{ path('provincia_index') }}">Provincia</a></li>
-          <li><a class="nav-link" href="{{ path('municipio_index') }}">Municipio</a></li>
-          <li><a class="nav-link" href="{{ path('institucion_index') }}">Institución</a></li>
-          <li><a class="nav-link" href="{{ path('nacionalidad_index') }}">Nacionalidad</a></li>
+          <li {% if route_name == "pais_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('pais_index') }}">País</a></li>
+          <li {% if route_name == "provincia_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('provincia_index') }}">Provincia</a></li>
+          <li {% if route_name == "municipio_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('municipio_index') }}">Municipio</a></li>
+          <li {% if route_name == "institucion_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('institucion_index') }}">Institución</a></li>
+          <li {% if route_name == "nacionalidad_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('nacionalidad_index') }}">Nacionalidad</a></li>
         </ul>
       </li>
-      <li class="dropdown">
+      <li {% if route_name == "categoriadocente_index" or route_name == "categoriacientifica_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Categorías</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('categoriadocente_index') }}">Categoría Docente</a></li>
-          <li><a class="nav-link" href="{{ path('categoriacientifica_index') }}">Categoría Científica</a></li>
+          <li {% if route_name == "categoriadocente_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('categoriadocente_index') }}">Categoría Docente</a></li>
+          <li {% if route_name == "categoriacientifica_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('categoriacientifica_index') }}">Categoría Científica</a></li>
         </ul>
       </li>
-      <li class="dropdown">
+      <li {% if route_name == "sexo_index" or route_name == "cargo_index" or route_name == "especialidad_index" or route_name == "organizacionpolitica_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Generales</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('sexo_index') }}">Sexo</a></li>
-          <li><a class="nav-link" href="{{ path('cargo_index') }}">Cargo u Ocupación</a></li>
-          <li><a class="nav-link" href="{{ path('especialidad_index') }}">Especialidad</a></li>
-          <li><a class="nav-link" href="{{ path('organizacionpolitica_index') }}">Organización Política</a></li>
+          <li {% if route_name == "sexo_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('sexo_index') }}">Sexo</a></li>
+          <li {% if route_name == "cargo_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('cargo_index') }}">Cargo u Ocupación</a></li>
+          <li {% if route_name == "especialidad_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('especialidad_index') }}">Especialidad</a></li>
+          <li {% if route_name == "organizacionpolitica_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('organizacionpolitica_index') }}">Organización Política</a></li>
         </ul>
       </li>
-      <li class="dropdown">
+      <li {% if route_name == "sistemacontable_index" or route_name == "sistemamodulo_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Sistema Contabilidad</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('sistemacontable_index') }}">Control Sistema Contable</a></li>
-          <li><a class="nav-link" href="{{ path('sistemamodulo_index') }}">Sistema Módulo</a></li>
+          <li {% if route_name == "sistemacontable_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('sistemacontable_index') }}">Control Sistema Contable</a></li>
+          <li {% if route_name == "sistemamodulo_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('sistemamodulo_index') }}">Sistema Módulo</a></li>
         </ul>
       </li>
-      <li class="dropdown">
+      <li {% if route_name == "marca_index" or route_name == "modelo_index" or route_name == "tipomedio_index" or route_name == "mediotecnologico_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Medios Tecnológicos</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('marca_index') }}">Marca</a></li>
-          <li><a class="nav-link" href="{{ path('modelo_index') }}">Modelo</a></li>
-          <li><a class="nav-link" href="{{ path('tipomedio_index') }}">Tipo Medio</a></li>
-          <li><a class="nav-link" href="{{ path('mediotecnologico_index') }}">Control Medio Tecnológico</a></li>
+          <li {% if route_name == "marca_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('marca_index') }}">Marca</a></li>
+          <li {% if route_name == "modelo_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('modelo_index') }}">Modelo</a></li>
+          <li {% if route_name == "tipomedio_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('tipomedio_index') }}">Tipo Medio</a></li>
+          <li {% if route_name == "mediotecnologico_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('mediotecnologico_index') }}">Control Medio Tecnológico</a></li>
         </ul>
       </li>
-      <li class="dropdown">
+      <li {% if route_name == "contratocorreo_index" or route_name == "contratoanclaje_index" or route_name == "contratointernet_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Contratos</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('contratocorreo_index') }}">Contrato Correo</a></li>
-          <li><a class="nav-link" href="{{ path('contratoanclaje_index') }}">Contrato Anclaje</a></li>
-          <li><a class="nav-link" href="{{ path('contratointernet_index') }}">Contrato Internet</a></li>
+          <li {% if route_name == "contratocorreo_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('contratocorreo_index') }}">Contrato Correo</a></li>
+          <li {% if route_name == "contratoanclaje_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('contratoanclaje_index') }}">Contrato Anclaje</a></li>
+          <li {% if route_name == "contratointernet_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('contratointernet_index') }}">Contrato Internet</a></li>
         </ul>
       </li>
-      <li class="dropdown">
+      <li {% if route_name == "direccionamientoip_index" or route_name == "tablaip_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Registro IP</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('direccionamientoip_index') }}">Direccionamiento IP</a></li>
-          <li><a class="nav-link" href="{{ path('tablaip_index') }}">Tabla IP</a></li>
+          <li {% if route_name == "direccionamientoip_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('direccionamientoip_index') }}">Direccionamiento IP</a></li>
+          <li {% if route_name == "tablaip_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('tablaip_index') }}">Tabla IP</a></li>
         </ul>
       </li>
-      <li class="dropdown">
+      <li {% if route_name == "fichatecnica_index" or route_name == "modelotecnico_index" or route_name == "auditoriainterna_index" %} class="dropdown active" {% else %} class="dropdown" {% endif %}>
         <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="copy"></i><span>Modelo Técnico</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ path('fichatecnica_index') }}">Ficha Técnica</a></li>
-          <li><a class="nav-link" href="#">Modelo Expediente</a></li>
-          <li><a class="nav-link" href="{{ path('auditoriainterna_index') }}">Auditoría Interna</a></li>
+          <li {% if route_name == "fichatecnica_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('fichatecnica_index') }}">Ficha Técnica</a></li>
+          <li {% if route_name == "modelotecnico_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('modelotecnico_index') }}">Modelo Expediente</a></li>
+          <li {% if route_name == "auditoriainterna_index" %} class="active" {% endif %}><a class="nav-link" href="{{ path('auditoriainterna_index') }}">Auditoría Interna</a></li>
           <li><a class="nav-link" href="#">Registros Salvas</a></li>
           <li><a class="nav-link" href="{{ path('incidencias_index') }}">Registro Incidencias</a></li>
           <li><a class="nav-link" href="{{ path('entradasalidaequipo_index') }}">Entrada/Salida Equipos</a></li>

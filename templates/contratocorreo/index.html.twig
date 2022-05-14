@@ -36,6 +36,7 @@
                         </thead>
                         <tbody>
                         {% for entities in contrato %}
+                            {% if entities.user.institucion == app.user.institucion %}
                             <tr>
                                 <td>{{ entities.codigo }}</td>
                                 <td>{{ entities.fecha | date('d/m/Y') }}</td>
@@ -49,6 +50,7 @@
                                     </center>
                                 </td>
                             </tr>
+                            {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>

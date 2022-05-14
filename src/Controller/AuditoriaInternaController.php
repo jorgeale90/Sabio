@@ -7,6 +7,7 @@ use App\Form\AuditoriaInternaType;
 use App\Repository\AuditoriaInternaRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,6 +40,8 @@ class AuditoriaInternaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $entity->setUser($user);
             $entityManager->persist($entity);
             $entityManager->flush();
 
@@ -65,6 +68,8 @@ class AuditoriaInternaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $entity->setUser($user);
             $this->getDoctrine()->getManager()->flush();
 
             $flashBag = $this->get('session')->getFlashBag();
@@ -101,5 +106,49 @@ class AuditoriaInternaController extends AbstractController
         }
 
         return $this->redirectToRoute('auditoriainterna_index');
+    }
+
+    /**
+     * @Route("/getmunicipioaxprovinciaa", name="municipioa_x_provinciaa", methods={"GET","POST"})
+     */
+    public function getMunicipioaxProvinciaa(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $provincia_id = $request->get('provincia_id');
+        $municipio = $em->getRepository('App:Municipio')->findByProvinciaa($provincia_id);
+        return new JsonResponse($municipio);
+    }
+
+    /**
+     * @Route("/getinstitucionaxmunicipioa", name="instituciona_x_municipioa", methods={"GET","POST"})
+     */
+    public function getInstitucionaxMunicipioa(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $municipio_id = $request->get('municipio_id');
+        $institucion = $em->getRepository('App:Institucion')->findByMunicipioa($municipio_id);
+        return new JsonResponse($institucion);
+    }
+
+    /**
+     * @Route("/getfichaaxinstituciona", name="fichaa_x_instituciona", methods={"GET","POST"})
+     */
+    public function getFichaaxInstituciona(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $institucion_id = $request->get('institucion_id');
+        $ficha= $em->getRepository('App:FichaTecnica')->findByInstituciona($institucion_id);
+        return new JsonResponse($ficha);
+    }
+
+    /**
+     * @Route("/getpersonalaxinstituciona", name="personala_x_instituciona", methods={"GET","POST"})
+     */
+    public function getPersonalaxInstituciona(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $institucion_id = $request->get('institucion_id');
+        $personal = $em->getRepository('App:PersonalMedico')->findByInstitucionPa($institucion_id);
+        return new JsonResponse($personal);
     }
 }

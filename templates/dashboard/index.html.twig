@@ -76,7 +76,15 @@
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                 <div class="card-content">
                   <h5 class="font-15">Contrato Correo</h5>
-                  <h2 class="mb-3 font-18">{{ contratoscorreo | length }}</h2>
+                  <h2 class="mb-3 font-18">
+                    {% for entities in contratoco %}
+                      {% if entities.user.institucion == app.user.institucion %}
+                        {{ contratoco | length }}
+                      {% else %}
+                        0
+                      {% endif %}
+                    {% endfor %}
+                  </h2>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
@@ -101,7 +109,14 @@
           <div class="padding-20">
             <div class="text-right">
               <h3 class="font-light mb-0">
-                <i class="ti-arrow-up text-success"></i> {{ sistemacontabless | length }}
+                <i class="ti-arrow-up text-success"></i>
+                {% for sistema in sistemac %}
+                  {% if sistema.getUser().getInstitucion() == app.user.institucion %}
+                    {{ sistemac | length }}
+                  {% else %}
+                    0
+                  {% endif %}
+                {% endfor %}
               </h3>
               <span class="text-muted">Sistema Contable</span>
             </div>
@@ -119,7 +134,14 @@
           <div class="padding-20">
             <div class="text-right">
               <h3 class="font-light mb-0">
-                <i class="ti-arrow-up text-success"></i> {{ mediotecnologicoss | length }}
+                <i class="ti-arrow-up text-success"></i>
+                {% for medio in mediot %}
+                  {% if medio.getUser().getInstitucion() == app.user.institucion %}
+                    {{ mediot | length }}
+                  {% else %}
+                    0
+                  {% endif %}
+                {% endfor %}
               </h3>
               <span class="text-muted">Control Medios</span>
             </div>
@@ -137,9 +159,16 @@
           <div class="padding-20">
             <div class="text-right">
               <h3 class="font-light mb-0">
-                <i class="ti-arrow-up text-success"></i> {{ personalmedicoss | length }}
+                <i class="ti-arrow-up text-success"></i>
+                {% for entities in direccion %}
+                  {% if entities.getUser().getInstitucion() == app.user.institucion %}
+                    {{ direccion | length }}
+                  {% else %}
+                    0
+                  {% endif %}
+                {% endfor %}
               </h3>
-              <span class="text-muted">Personal Médico</span>
+              <span class="text-muted">Registro Ip</span>
             </div>
           </div>
         </div>
@@ -155,9 +184,16 @@
           <div class="padding-20">
             <div class="text-right">
               <h3 class="font-light mb-0">
-                <i class="ti-arrow-up text-success"></i> {{ usuarios | length }}
+                <i class="ti-arrow-up text-success"></i>
+                {% for entities in modelot %}
+                  {% if entities.getInstitucion().getId() == app.user.institucion.id %}
+                    {{ modelot | length }}
+                  {% else %}
+                    0
+                  {% endif %}
+                {% endfor %}
               </h3>
-              <span class="text-muted">Usuarios Sitema</span>
+              <span class="text-muted">Modelo Expe.</span>
             </div>
           </div>
         </div>
@@ -183,14 +219,16 @@
                 <th>Acción</th>
               </tr>
               {% for pm in personalm %}
-              <tr>
-                <td>{{ pm.noregistro }}</td>
-                <td>{{ pm.ci }}</td>
-                <td>{{ pm.NombreCompleto }}</td>
-                <td>{{ pm.cargo }}</td>
-                <td>{{ pm.especialidad }}</td>
-                <td><a href="#" class="btn btn-outline-primary">Detalles</a></td>
-              </tr>
+                {% if pm.getUser().getInstitucion() == app.user.institucion %}
+                  <tr>
+                    <td>{{ pm.noregistro }}</td>
+                    <td>{{ pm.ci }}</td>
+                    <td>{{ pm.NombreCompleto }}</td>
+                    <td>{{ pm.cargo }}</td>
+                    <td>{{ pm.especialidad }}</td>
+                    <td><a href="{{ path('personalmedico_show', {'id': pm.id}) }}" class="btn btn-outline-primary">Detalles</a></td>
+                  </tr>
+                {% endif %}
               {% endfor %}
             </table>
           </div>
@@ -218,7 +256,8 @@
               </tr>
               </thead>
               <tbody>
-              {% for entities in contratatoc %}
+              {% for entities in contratoc %}
+                {% if entities.getUser().getInstitucion() == app.user.institucion %}
                 <tr>
                   <td>{{ entities.codigo }}</td>
                   <td>{{ entities.fecha | date('d/m/Y') }}</td>
@@ -226,12 +265,15 @@
                   <td>{{ entities.login }}</td>
                   <td>{{ entities.institucion }}</td>
                 </tr>
+                {% endif %}
               {% endfor %}
               </tbody>
             </table>
           </div>
         </div>
-        <a href="javascript:void(0)" class="card-footer card-link text-center small ">Ver todo</a>
+        {% if contratoco %}
+        <a href="{{ path('contratocorreo_index') }}" class="card-footer card-link text-center small ">Ver todo</a>
+        {% endif %}
       </div>
     </div>
 
@@ -253,7 +295,7 @@
               </tr>
               </thead>
               <tbody>
-              {% for entities in contratatoa %}
+              {% for entities in contratoa %}
                 <tr>
                   <td>{{ entities.codigo }}</td>
                   <td>{{ entities.fecha | date('d/m/Y') }}</td>

@@ -19,6 +19,22 @@ class FichaTecnicaRepository extends ServiceEntityRepository
         parent::__construct($registry, FichaTecnica::class);
     }
 
+    public function findByInstitucionm($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:FichaTecnica m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
+    public function findByInstituciona($institucion_id)
+    {
+        $em = $this->getEntityManager();
+        $consulta = $em->createQuery('SELECT m FROM App:FichaTecnica m WHERE m.institucion = :institucion_id');
+        $consulta->setParameter('institucion_id', $institucion_id);
+        return $consulta->getArrayResult();
+    }
+
     // /**
     //  * @return FichaTecnica[] Returns an array of FichaTecnica objects
     //  */

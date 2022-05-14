@@ -25,31 +25,66 @@
     <script src="{{ asset('page/dashboard/assets/bundles/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="{{ asset('page/dashboard/assets/js/page/forms-advanced-forms.js') }}"></script>
     <script>
-    $('#{{ form.cargo.vars.id }}').on('change', function (e) {
+        $('#{{ form.cargo.vars.id }}').on('change', function (e) {
+                var data = {
+                    cargo_id: $(this).val()
+                };
+                $('#{{ form.especialidad.vars.id }}').html('<option>Cargando...</option>');
+                $('#{{ form.especialidad.vars.id }}').attr('disabled', 'disabled');
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ path('especialidad_x_cargo') }}',
+                    async: true,
+                    data: data,
+                    success: function (response) {
+                        if (response.length !== 0){
+                            var option = '<option>Seleccione la Especialidad</option>';
+                            $.each(response, function (i, especialidad) {
+                                option += '<option value='+ especialidad.id +'>'+ especialidad.nombre +'</option>'
+                            });
+                            $('#{{ form.especialidad.vars.id }}').html(option);
+                            $('#{{ form.especialidad.vars.id }}').removeAttr('disabled');
+                        } else {
+                            var option = '<option>No hay Especialidades en este Cargo.</option>';
+                            $('#{{ form.especialidad.vars.id }}').html(option);
+                            $('#{{ form.especialidad.vars.id }}').attr('disabled', 'disabled');
+                            noty({
+                                text: 'No se encontraron Especialidades en el Cargo seleccionado.',
+                                layout: 'topRight', type: 'error', timeout: 5000,
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+        });
+
+        $('#{{ form.provincia.vars.id }}').on('change', function (e) {
             var data = {
-                cargo_id: $(this).val()
+                provincia_id: $(this).val()
             };
-            $('#{{ form.especialidad.vars.id }}').html('<option>Cargando...</option>');
-            $('#{{ form.especialidad.vars.id }}').attr('disabled', 'disabled');
+            $('#{{ form.municipio.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
             $.ajax({
                 type: 'POST',
-                url: '{{ path('especialidad_x_cargo') }}',
+                url: '{{ path('municipiopm_x_provinciapm') }}',
                 async: true,
                 data: data,
                 success: function (response) {
                     if (response.length !== 0){
-                        var option = '<option>Seleccione la Especialidad</option>';
-                        $.each(response, function (i, especialidad) {
-                            option += '<option value='+ especialidad.id +'>'+ especialidad.nombre +'</option>'
+                        var option = '<option>Seleccione el Municipio</option>';
+                        $.each(response, function (i, municipio) {
+                            option += '<option value='+ municipio.id +'>'+ municipio.nombre +'</option>'
                         });
-                        $('#{{ form.especialidad.vars.id }}').html(option);
-                        $('#{{ form.especialidad.vars.id }}').removeAttr('disabled');
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').removeAttr('disabled');
                     } else {
-                        var option = '<option>No hay Especialidades en este Cargo.</option>';
-                        $('#{{ form.especialidad.vars.id }}').html(option);
-                        $('#{{ form.especialidad.vars.id }}').attr('disabled', 'disabled');
+                        var option = '<option>No hay Municipios en esta Provincia.</option>';
+                        $('#{{ form.municipio.vars.id }}').html(option);
+                        $('#{{ form.municipio.vars.id }}').attr('disabled', 'disabled');
                         noty({
-                            text: 'No se encontraron Especialidades en el Cargo seleccionado.',
+                            text: 'No se encontraron Municipios de la Provincia seleccionada.',
                             layout: 'topRight', type: 'error', timeout: 5000,
                         });
                     }
@@ -58,6 +93,41 @@
                     console.log(error);
                 }
             });
-    });
+        });
+
+        $('#{{ form.municipio.vars.id }}').on('change', function (e) {
+            var data = {
+                municipio_id: $(this).val()
+            };
+            $('#{{ form.institucion.vars.id }}').html('<option>Cargando...</option>');
+            $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('institucionpm_x_municipiopm') }}',
+                async: true,
+                data: data,
+                success: function (response) {
+                    if (response.length !== 0){
+                        var option = '<option>Seleccione la Institución</option>';
+                        $.each(response, function (i, institucion) {
+                            option += '<option value='+ institucion.id +'>'+ institucion.nombre +'</option>'
+                        });
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').removeAttr('disabled');
+                    } else {
+                        var option = '<option>No hay Instituciones en este Municipio.</option>';
+                        $('#{{ form.institucion.vars.id }}').html(option);
+                        $('#{{ form.institucion.vars.id }}').attr('disabled', 'disabled');
+                        noty({
+                            text: 'No se encontraron Instituciones en la Provincia seleccionada.',
+                            layout: 'topRight', type: 'error', timeout: 5000,
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
     </script>
 {% endblock %}
