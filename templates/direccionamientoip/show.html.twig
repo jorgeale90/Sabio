@@ -1,0 +1,171 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Mostrar Ficha Técnica{% endblock %}
+{% block body %}
+    <div class="col-12">
+    <div class="card">
+            <div class="card-header">
+                <h4><strong>Mostrar</strong> Ficha Técnica</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.provincia, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.municipio, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Institución <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.institucion, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Responsable <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.personal1, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Creado por <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.personal2, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Tipo de Equipo <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.tipoequipo, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">No. Inventario <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.noinventario, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Proyecto <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.proyecto, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Area <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.area, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Modelo Motherboard <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.modeloboard, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Socket Motherboard <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.socketboard, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Serie Motherboard <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.serieboard, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Tipo CPU <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.tipocpu, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Marca CPU <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.marcacpu, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Velocidad CPU :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.velicidadcpu, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Serie CPU <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.seriecpu, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Hardware o Periférico :</label>
+                    <div class="col-sm-7">
+                        <ul class=hardware data-prototype="{{ form_widget(form.hardware.vars.prototype)|e }}" data-widget-tags="{{ '<li></li>'|e }}">
+                            {% for param in form.hardware %}
+                                <li>
+                                    {{ form_errors(param) }}
+                                    <div class="form-group">
+                                        {{ form_row(param.componentes, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.numero, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.clasificacion, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.capacidad, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.marca, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.modelo, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.velocidad, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.serie, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <a class="btn btn-light" href="{{ path('fichatecnica_index') }}">Volver al Listado</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
