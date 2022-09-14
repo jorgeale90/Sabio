@@ -61,6 +61,27 @@ class DireccionamientoIPController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/show", name="direccionamientoip_show", methods={"GET"})
+     */
+    public function show($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('App:DireccionamientoIP')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Incapaz de encontrar el Direccionamiento IP deseado.');
+        }
+
+        $form = $this->createForm(DireccionamientoIPType::class, $entity);
+
+        return $this->render('direccionamientoip/show.html.twig', array(
+            'entity'      => $entity,
+            'form' => $form->createView()
+        ));
+    }
+
+    /**
      * @Route("/{id}/edit", name="direccionamientoip_edit", methods={"GET","POST"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */

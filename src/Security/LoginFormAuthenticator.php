@@ -102,7 +102,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         }
 
         $loggedUser = $token->getUser();
-        if (in_array(CUser::USER_ROLE_ADMIN, $loggedUser->getRoles()) or in_array(CUser::USER_ROLE_MODERATOR, $loggedUser->getRoles())) {
+        if (in_array(CUser::USER_ROLE_SUPER_ADMIN, $loggedUser->getRoles()) or in_array(CUser::USER_ROLE_ADMIN, $loggedUser->getRoles()) or in_array(CUser::USER_ROLE_MODERATOR, $loggedUser->getRoles())) {
             return new RedirectResponse($this->urlGenerator->generate('dashboard'));
         } else {
             return new RedirectResponse($this->urlGenerator->generate('home'));

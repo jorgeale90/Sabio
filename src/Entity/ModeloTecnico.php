@@ -22,7 +22,7 @@ class ModeloTecnico
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "modelotecnologico")
+     * @ORM\ManyToOne(targetEntity = "App\Entity\Provincia", inversedBy = "modelotecnico")
      * @ORM\JoinColumn(name="provincia_id", referencedColumnName="id", onDelete = "CASCADE")
      * @Assert\NotBlank(message="Debe seleccionar una Provincia")
      */
@@ -43,14 +43,14 @@ class ModeloTecnico
     protected $institucion;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "App\Entity\PersonalMedico", inversedBy = "mediotecnologico1")
+     * @ORM\ManyToOne(targetEntity = "App\Entity\PersonalMedico", inversedBy = "modelotecnico1")
      * @ORM\JoinColumn(name="personal1_id", referencedColumnName="id", onDelete = "CASCADE")
      * @Assert\NotBlank(message="Debe seleccionar un Personal.")
      */
     protected $personal1;
 
     /**
-     * @ORM\ManyToOne(targetEntity = "App\Entity\PersonalMedico", inversedBy = "mediotecnologico2")
+     * @ORM\ManyToOne(targetEntity = "App\Entity\PersonalMedico", inversedBy = "modelotecnico2")
      * @ORM\JoinColumn(name="personal2_id", referencedColumnName="id", onDelete = "CASCADE")
      * @Assert\NotBlank(message="Debe seleccionar un Personal.")
      */

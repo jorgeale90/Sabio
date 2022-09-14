@@ -11,7 +11,7 @@
         "ext-iconv": "*",
         "artgris/filemanager-bundle": "^2.2",
         "composer/package-versions-deprecated": "1.11.99.4",
-        "damienharper/auditor-bundle": "^4.2",
+        "damienharper/auditor-bundle": "5.0.3",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-migrations-bundle": "^3.1",
@@ -65,7 +65,13 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        }
     },
     "autoload": {
         "psr-4": {
