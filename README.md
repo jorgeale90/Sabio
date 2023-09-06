@@ -46,10 +46,9 @@ Ejecutar el servidor
 ```
 
 ## Screenshot
-
-![](https://github.com/jorgeale90/Sabio/blob/develop/public/screenshot/1.png)
-![](https://github.com/jorgeale90/Sabio/blob/develop/public/screenshot/2.png)
-![](https://github.com/jorgeale90/Sabio/blob/develop/public/screenshot/3.png)
-![](https://github.com/jorgeale90/Sabio/blob/develop/public/screenshot/4.png)
-![](https://github.com/jorgeale90/Sabio/blob/develop/public/screenshot/5.png)
-![](https://github.com/jorgeale90/Sabio/blob/develop/public/screenshot/6.png)
+![](https://github.com/jorgeale90/Sabio/blob/main/public/screenshot/1.png)
+![](https://github.com/jorgeale90/Sabio/blob/main/public/screenshot/2.png)
+![](https://github.com/jorgeale90/Sabio/blob/main/public/screenshot/3.png)
+![](https://github.com/jorgeale90/Sabio/blob/main/public/screenshot/4.png)
+![](https://github.com/jorgeale90/Sabio/blob/main/public/screenshot/5.png)
+![](https://github.com/jorgeale90/Sabio/blob/main/public/screenshot/6.png)
