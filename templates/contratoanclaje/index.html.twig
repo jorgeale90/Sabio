@@ -26,10 +26,10 @@
                     <table class="table table-striped" id="simpletablet">
                         <thead>
                         <tr>
-                            <th>Nombre y Apellidos</th>
-                            <th>SCU</th>
                             <th>CI</th>
                             <th>Reg. Prof.</th>
+                            <th>Nombre y Apellidos</th>
+                            <th>SCU</th>
                             <th>Cat. Docente</th>
                             <th>Cat. Científica</th>
                             <th>Teléfono</th>
@@ -39,13 +39,13 @@
                         <tbody>
                         {% for entities in contrato %}
                             <tr>
-                                <td>{{ entities.personal1 }}</td>
-                                <td>{{ entities.login }}</td>
                                 <td>{{ entities.personal1.ci }}</td>
                                 <td>{{ entities.personal1.noregistro }}</td>
+                                <td>{{ entities.personal1 }}</td>
+                                <td>{{ entities.login }}</td>
                                 <td>{{ entities.personal1.categoriadocente }}</td>
                                 <td>{{ entities.personal1.categoriacientifica }}</td>
-                                <td>{{ entities.personal1.telefonofijo }}</td>
+                                <td>{{ entities.accesotelefonico }}</td>
                                 <td>
                                     <div class="dropdown d-inline">
                                         <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2"
@@ -53,8 +53,8 @@
                                             Acción
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item has-icon" href="{{ path('contratoanclaje_edit', {'id': entities.id}) }}"><i class="far fa-edit"></i> Editar</a>
-                                            <a class="dropdown-item has-icon" href="{{ path('contratoanclaje_remove', {'id': entities.id}) }}"><i class="far fa-trash"></i> Eliminar</a>
+                                            <button class="dropdown-item has-icon editar" href="{{ path('contratoanclaje_edit', {'id': entities.id}) }}"><i class="far fa-edit"></i> Editar</button>
+                                            <button class="dropdown-item has-icon eliminar" href="{{ path('contratoanclaje_remove', {'id': entities.id}) }}"><i class="far fa-trash-alt"></i> Eliminar</button>
                                         </div>
                                     </div>
                                 </td>

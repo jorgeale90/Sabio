@@ -1,0 +1,123 @@
+{% extends 'base-dashboard.html.twig' %}
+{% block title %}Mostrar Direccionamiento IP{% endblock %}
+{% block body %}
+    <div class="col-12">
+    <div class="card">
+            <div class="card-header">
+                <h4><strong>Mostrar</strong> Direccionamiento IP</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Provincia <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.provincia, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Municipio <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.municipio, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Institución <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.institucion, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Lan <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.lan, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Router <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.router, { 'attr': { 'class': 'form-control select2', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">DMZ <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.dmz, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Gateways <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.gateways, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Topología <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.topologia, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Bloque <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.bloque, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Dirección de Enlace <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.direccionenlace, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Prefijo <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.prefijo, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Puerta de Enlace <span class="required">*</span> :</label>
+                    <div class="col-sm-7">
+                        {{ form_widget(form.puertaenlace, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Tabla Ip :</label>
+                    <div class="col-sm-7">
+                        <ul class=tablaip data-prototype="{{ form_widget(form.tablaip.vars.prototype)|e }}" data-widget-tags="{{ '<li></li>'|e }}">
+                            {% for param in form.tablaip %}
+                                <li>
+                                    {{ form_errors(param) }}
+                                    <div class="form-group">
+                                        {{ form_row(param.departamento, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.ip, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_row(param.mac, { 'attr': { 'class': 'form-control', 'readonly': 'readonly', 'disabled': 'disabled' } }) }}
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <a class="btn btn-light" href="{{ path('direccionamientoip_index') }}">Volver al Listado</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

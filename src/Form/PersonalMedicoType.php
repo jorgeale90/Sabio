@@ -109,15 +109,16 @@ class PersonalMedicoType extends AbstractType
             ))
 
            ->add('mision',ChoiceType::class,[
-                    'required'=>false,
-                    'multiple'=>false,
-                    'expanded'=>false,
-                    'attr' => array('class' => 'form-control select2'),
-                    'choices'=>[
-                        'Si'=>'Si',
-                        'No'=>'No',
-                    ],
-                ])
+               'required'=>false,
+               'multiple'=>false,
+               'expanded'=>false,
+               'placeholder' => 'Seleccione una opción',
+               'attr' => array('class' => 'form-control select2'),
+               'choices'=>[
+                   'Si'=>'Si',
+                   'No'=>'No',
+               ],
+           ])
 
            ->add('imageFile', VichFileType::class, [
                 'required' => false,

@@ -272,6 +272,11 @@ class PersonalMedico
     protected $modelotecnico1;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ModeloTecnico", mappedBy="personal2")
+     */
+    protected $modelotecnico2;
+
+    /**
      * @ORM\ManyToOne(targetEntity = "App\Entity\User", inversedBy = "personalmed")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete = "CASCADE")
      */
@@ -293,6 +298,7 @@ class PersonalMedico
         $this->fichatecnica2 = new ArrayCollection();
         $this->entradasalida = new ArrayCollection();
         $this->modelotecnico1 = new ArrayCollection();
+        $this->modelotecnico2 = new ArrayCollection();
     }
 
     public function getNombreCompleto() {
@@ -1021,6 +1027,36 @@ class PersonalMedico
             // set the owning side to null (unless already changed)
             if ($modelotecnico1->getPersonal1() === $this) {
                 $modelotecnico1->setPersonal1(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeloTecnico>
+     */
+    public function getModelotecnico2(): Collection
+    {
+        return $this->modelotecnico2;
+    }
+
+    public function addModelotecnico2(ModeloTecnico $modelotecnico2): self
+    {
+        if (!$this->modelotecnico2->contains($modelotecnico2)) {
+            $this->modelotecnico2[] = $modelotecnico2;
+            $modelotecnico2->setPersonal2($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModelotecnico2(ModeloTecnico $modelotecnico2): self
+    {
+        if ($this->modelotecnico2->removeElement($modelotecnico2)) {
+            // set the owning side to null (unless already changed)
+            if ($modelotecnico2->getPersonal2() === $this) {
+                $modelotecnico2->setPersonal2(null);
             }
         }
 

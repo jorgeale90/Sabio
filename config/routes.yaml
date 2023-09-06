@@ -1,6 +1,6 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+dh_auditor:
+  resource: "@DHAuditorBundle/Controller/"
+  type: annotation
 
 artgris_bundle_file_manager:
   resource: "@ArtgrisFileManagerBundle/Controller"

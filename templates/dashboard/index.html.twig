@@ -161,11 +161,7 @@
               <h3 class="font-light mb-0">
                 <i class="ti-arrow-up text-success"></i>
                 {% for entities in direccion %}
-                  {% if entities.getUser().getInstitucion() == app.user.institucion %}
                     {{ direccion | length }}
-                  {% else %}
-                    0
-                  {% endif %}
                 {% endfor %}
               </h3>
               <span class="text-muted">Registro Ip</span>
@@ -219,7 +215,6 @@
                 <th>Acción</th>
               </tr>
               {% for pm in personalm %}
-                {% if pm.getUser().getInstitucion() == app.user.institucion %}
                   <tr>
                     <td>{{ pm.noregistro }}</td>
                     <td>{{ pm.ci }}</td>
@@ -228,7 +223,6 @@
                     <td>{{ pm.especialidad }}</td>
                     <td><a href="{{ path('personalmedico_show', {'id': pm.id}) }}" class="btn btn-outline-primary">Detalles</a></td>
                   </tr>
-                {% endif %}
               {% endfor %}
             </table>
           </div>
